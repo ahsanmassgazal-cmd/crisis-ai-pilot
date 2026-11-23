@@ -11,6 +11,25 @@ const withNextIntl = createNextIntlPlugin();
 const nextConfig = {
   reactStrictMode: true,
   outputFileTracingRoot: __dirname,
+  async redirects() {
+    return [
+      {
+        source: '/access',
+        destination: '/en/app',
+        permanent: false,
+      },
+      {
+        source: '/:locale/access',
+        destination: '/:locale/app',
+        permanent: false,
+      },
+      {
+        source: '/',
+        destination: '/en/app',
+        permanent: false,
+      },
+    ];
+  },
 };
 
 export default withNextIntl(nextConfig);

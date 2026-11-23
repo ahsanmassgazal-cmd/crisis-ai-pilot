@@ -179,5 +179,10 @@
     "liveIncidents": "Live Incidents",
     "deliveryFunnel": "Delivery Funnel",
     "quickActivate": "Quick Activate Incident"
+  },
+  "notFound": {
+    "title": "404 — Page Not Found",
+    "subtitle": "The requested incident resource or screen could not be located.",
+    "goToCommand": "Go to Command Center"
   }
 }
