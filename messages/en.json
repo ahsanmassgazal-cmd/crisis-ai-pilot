@@ -179,5 +179,13 @@
     "liveIncidents": "Live Incidents",
     "deliveryFunnel": "Delivery Funnel",
     "quickActivate": "Quick Activate Incident"
+  },
+  "accessGate": {
+    "title": "Pilot Access Code Required",
+    "subtitle": "Access to Crisis AI Pilot is restricted to invited evaluators and partners.",
+    "placeholder": "Enter access code",
+    "submit": "Access Platform",
+    "error": "Incorrect access code. Please try again.",
+    "hint": "Contact SigmaMax AI Solutions team if you require an invitation code."
   }
 }
