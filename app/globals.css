@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Brand & Neutrals (Light) */
+  --brand-600: #6D28D9;
+  --brand-hover: #5B21B6;
+  --brand-50: #F5F3FF;
+  --ai-gradient: linear-gradient(135deg, #7C3AED 0%, #C026D3 100%);
+  --bg: #F8FAFC;
+  --surface: #FFFFFF;
+  --surface-subtle: #F1F5F9;
+  --border: #E2E8F0;
+  --text: #0F172A;
+  --text-muted: #64748B;
+
+  /* Severity (Strong & Tint) */
+  --sev-critical: #DC2626;
+  --sev-critical-tint: #FEE2E2;
+  --sev-high: #EA580C;
+  --sev-high-tint: #FFEDD5;
+  --sev-medium: #D97706;
+  --sev-medium-tint: #FEF3C7;
+  --sev-low: #2563EB;
+  --sev-low-tint: #DBEAFE;
+  --sev-info: #64748B;
+  --sev-info-tint: #F1F5F9;
+
+  /* Status */
+  --status-draft: #94A3B8;
+  --status-active: #0284C7;
+  --status-inprogress: #4F46E5;
+  --status-monitoring: #0D9488;
+  --status-blocked: #BE123C;
+  --status-resolved: #16A34A;
+  --status-closed: #475569;
+
+  /* Priority */
+  --priority-p1: #DC2626;
+  --priority-p2: #EA580C;
+  --priority-p3: #D97706;
+  --priority-p4: #64748B;
+
+  /* Channels */
+  --channel-sms: #0891B2;
+  --channel-email: #4F46E5;
+  --channel-teams: #5B5FC7;
+  --channel-whatsapp: #16A34A;
+  --channel-voice: #DB2777;
+  --channel-push: #7C3AED;
+
+  /* Categories */
+  --category-cyber: #4338CA;
+  --category-fire: #B91C1C;
+  --category-power: #B45309;
+  --category-weather: #0369A1;
+  --category-health: #BE185D;
+  --category-supply: #C2410C;
+  --category-security: #334155;
+  --category-reputation: #A21CAF;
+  --category-it: #0E7490;
+  --category-environmental: #047857;
+
+  /* Highlights */
+  --highlight-attention: #FEF08A;
+}
+
+.dark {
+  /* Brand & Neutrals (Dark) */
+  --brand-600: #8B5CF6;
+  --brand-hover: #A78BFA;
+  --brand-50: #1E1533;
+  --ai-gradient: linear-gradient(135deg, #8B5CF6 0%, #D946EF 100%);
+  --bg: #0B0F19;
+  --surface: #111827;
+  --surface-subtle: #1F2937;
+  --border: #1F2937;
+  --text: #F1F5F9;
+  --text-muted: #94A3B8;
+
+  /* Severity (Dark tints) */
+  --sev-critical: #EF4444;
+  --sev-critical-tint: #450A0A;
+  --sev-high: #F97316;
+  --sev-high-tint: #431407;
+  --sev-medium: #F59E0B;
+  --sev-medium-tint: #451A03;
+  --sev-low: #3B82F6;
+  --sev-low-tint: #172554;
+  --sev-info: #94A3B8;
+  --sev-info-tint: #1E293B;
+
+  --highlight-attention: #713F12;
+}
+
+.command {
+  /* Command Dark Mode (High-contrast control room) */
+  --brand-600: #A78BFA;
+  --brand-hover: #C4B5FD;
+  --brand-50: #251B42;
+  --ai-gradient: linear-gradient(135deg, #A78BFA 0%, #F472B6 100%);
+  --bg: #030712;
+  --surface: #0F172A;
+  --surface-subtle: #1E293B;
+  --border: #334155;
+  --text: #FFFFFF;
+  --text-muted: #CBD5E1;
+
+  --sev-critical: #FF3B30;
+  --sev-critical-tint: #581C1C;
+  --sev-high: #FF9500;
+  --sev-high-tint: #54280C;
+  --sev-medium: #FFCC00;
+  --sev-medium-tint: #523906;
+  --sev-low: #007AFF;
+  --sev-low-tint: #0F3268;
+  --sev-info: #A0AEC0;
+  --sev-info-tint: #2D3748;
+
+  --highlight-attention: #854D0E;
+}
+
+/* Sandbox diagonal stripes background pattern */
+.sandbox-stripes {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(148, 163, 184, 0.12),
+    rgba(148, 163, 184, 0.12) 10px,
+    transparent 10px,
+    transparent 20px
+  );
+}
+
+/* Direction-aware icon flipping */
+[dir="rtl"] .dir-aware-flip {
+  transform: scaleX(-1);
+}
+
+/* Tabular nums for all data tables & timers */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
