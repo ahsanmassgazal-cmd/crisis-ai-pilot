@@ -3,8 +3,28 @@ import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { DirectionProvider } from "@radix-ui/react-direction";
+import { Inter, IBM_Plex_Sans_Arabic, JetBrains_Mono } from "next/font/google";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
+  subsets: ["arabic"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-arabic",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Crisis AI Pilot — Bilingual Command Platform",
@@ -31,21 +51,16 @@ export default async function LocaleLayout({
 
   const messages = await getMessages();
   const dir = locale === "ar" ? "rtl" : "ltr";
+  const fontVariables = `${inter.variable} ${ibmPlexSansArabic.variable} ${jetbrainsMono.variable}`;
+  const activeFontClass = dir === "rtl" ? ibmPlexSansArabic.className : inter.className;
 
   return (
-    <html lang={locale} dir={dir} suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html
+      lang={locale}
+      dir={dir}
+      className={`${fontVariables} ${activeFontClass}`}
+      suppressHydrationWarning
+    >
       <body className="antialiased min-h-screen">
         <DirectionProvider dir={dir}>
           <NextIntlClientProvider locale={locale} messages={messages}>

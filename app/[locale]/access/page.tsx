@@ -46,19 +46,21 @@ export default function AccessGatePage() {
   };
 
   return (
-    <div className="min-h-screen bg-app-bg text-app-text flex flex-col items-center justify-center p-4">
-      {/* Language Switcher at Top */}
-      <div className="absolute top-6 end-6">
+    <div className="min-h-screen w-full bg-app-bg text-app-text flex flex-col items-center justify-center p-4 sm:p-6 relative">
+      {/* Language Switcher at Top Corner */}
+      <div className="absolute top-6 end-6 z-10">
         <button
           onClick={toggleLocale}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-input border border-app-border bg-app-surface hover:bg-brand-50 hover:text-brand-600 transition-colors text-xs font-semibold"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-input border border-app-border bg-app-surface hover:bg-brand-50 hover:text-brand-600 transition-colors text-xs font-semibold shadow-sm"
+          aria-label={t("topbar.language")}
         >
           <Globe className="w-3.5 h-3.5 text-brand-600 shrink-0" />
           <span>{locale === "en" ? "عربي" : "English"}</span>
         </button>
       </div>
 
-      <div className="w-full max-w-md bg-app-surface border border-app-border rounded-card p-8 shadow-xl space-y-6">
+      {/* Perfectly Centred Card */}
+      <div className="w-full max-w-md bg-app-surface border border-app-border rounded-card p-6 sm:p-8 shadow-xl space-y-6 my-auto">
         <div className="text-center space-y-2">
           <div className="w-12 h-12 rounded-card bg-brand-600 text-white flex items-center justify-center mx-auto shadow-md">
             <Shield className="w-6 h-6 fill-current" />
@@ -72,20 +74,21 @@ export default function AccessGatePage() {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-1.5">
+          <div className="space-y-1.5 text-start">
             <label className="text-xs font-semibold text-app-text flex items-center gap-1.5">
-              <KeyRound className="w-3.5 h-3.5 text-brand-600" />
+              <KeyRound className="w-3.5 h-3.5 text-brand-600 shrink-0" />
               <span>{t("accessGate.title")}</span>
             </label>
             <input
               type="password"
+              dir="auto"
               value={code}
               onChange={(e) => {
                 setCode(e.target.value);
                 if (error) setError(false);
               }}
               placeholder={t("accessGate.placeholder")}
-              className={`w-full px-3 py-2.5 rounded-input border bg-app-surface text-sm outline-none transition-colors ${
+              className={`w-full px-3.5 py-2.5 rounded-input border bg-app-surface text-sm outline-none transition-colors text-start placeholder:text-app-muted ${
                 error
                   ? "border-severity-critical focus:border-severity-critical"
                   : "border-app-border focus:border-brand-600"
@@ -95,7 +98,7 @@ export default function AccessGatePage() {
           </div>
 
           {error && (
-            <div className="p-2.5 rounded-input bg-severity-critical-tint text-severity-critical text-xs flex items-center gap-2">
+            <div className="p-2.5 rounded-input bg-severity-critical-tint text-severity-critical text-xs flex items-center gap-2 text-start">
               <AlertCircle className="w-4 h-4 shrink-0" />
               <span>{t("accessGate.error")}</span>
             </div>
@@ -107,7 +110,7 @@ export default function AccessGatePage() {
             className="w-full py-2.5 px-4 rounded-input bg-brand-600 hover:bg-brand-hover disabled:opacity-50 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition-all"
           >
             <span>{loading ? "Verifying..." : t("accessGate.submit")}</span>
-            <ArrowRight className="w-3.5 h-3.5 dir-aware-flip" />
+            <ArrowRight className="w-3.5 h-3.5 dir-aware-flip shrink-0" />
           </button>
         </form>
 
