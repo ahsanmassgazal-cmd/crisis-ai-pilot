@@ -105,7 +105,7 @@ export default function OwnerConsoleOverview() {
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <Link href="/app" className="text-app-muted hover:text-brand-600 transition-colors">
+              <Link href="/app" aria-label={t("common.back")} className="text-app-muted hover:text-brand-600 transition-colors">
                 <ArrowLeft className="w-4 h-4 dir-aware-flip" />
               </Link>
               <h1 className="text-xl sm:text-2xl font-black text-app-text flex items-center gap-2">

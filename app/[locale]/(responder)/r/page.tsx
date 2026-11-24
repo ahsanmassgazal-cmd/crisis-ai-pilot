@@ -119,7 +119,7 @@ export default function ResponderAppPage() {
         {/* Top Header */}
         <div className="flex items-center justify-between border-b border-app-border pb-3">
           <div className="flex items-center gap-2">
-            <Link href="/app" className="text-app-muted hover:text-brand-600 transition-colors">
+            <Link href="/app" aria-label={t("common.back")} className="text-app-muted hover:text-brand-600 transition-colors">
               <ArrowLeft className="w-4 h-4 dir-aware-flip" />
             </Link>
             <div className="flex items-center gap-1.5 font-bold text-sm">

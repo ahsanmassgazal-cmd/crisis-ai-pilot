@@ -64,7 +64,7 @@ export default function AutomationCenterPage() {
       id: "RULE-003",
       name: "Secondary SMS Provider Failover on Gateway Timeout",
       trigger: "delivery.failed (Provider A)",
-      action: "Re-route failed message batch to Provider B (Ooredoo)",
+      action: "Re-route failed message batch to SMS Route B",
       approval: "None (Direct)",
       mode: "auto",
       enabled: true,

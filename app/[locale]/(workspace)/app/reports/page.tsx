@@ -32,7 +32,7 @@ export default function ReportsPage() {
   ];
 
   const channelDeliveryData: ChartDataPoint[] = [
-    { label: "SMS Gateways (OmanTel/Ooredoo)", value: 1420, colorClass: "bg-brand-600" },
+    { label: "SMS Gateways (Route A/Route B)", value: 1420, colorClass: "bg-brand-600" },
     { label: "Microsoft Teams Bot Alerts", value: 890, colorClass: "bg-indigo-600" },
     { label: "High-Priority SMTP Email", value: 2150, colorClass: "bg-emerald-600" },
     { label: "Public Status Page Hits", value: 4800, colorClass: "bg-blue-600" },

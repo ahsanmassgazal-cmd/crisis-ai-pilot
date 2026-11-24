@@ -24,6 +24,7 @@ export interface Incident {
   severity: "critical" | "high" | "medium" | "low" | "info";
   status: "draft" | "active" | "inprogress" | "monitoring" | "blocked" | "resolved" | "closed";
   plan_id?: string;
+  site_id?: string;
   commander_id: string;
   sla_minutes: number;
   started_at: string;
@@ -102,6 +103,10 @@ export interface Message {
 
 export interface Delivery {
   id: string;
+  incident_id?: string;
+  tenant_id?: string;
+  status?: string;
+  created_at?: string;
   message_id: string;
   person_id: string;
   channel: "sms" | "email" | "teams" | "whatsapp" | "voice" | "push";

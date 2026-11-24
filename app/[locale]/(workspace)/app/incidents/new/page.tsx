@@ -53,11 +53,20 @@ export default function ActivateIncidentPage() {
 
   const [isActivating, setIsActivating] = useState(false);
 
-  const handleActivate = () => {
+  const handleActivate = async () => {
     setIsActivating(true);
-    setTimeout(() => {
-      router.push(`/${locale}/app/incidents/inc-1`);
-    }, 800);
+    try {
+      const inc = await mockRepository.incidents.activate({
+        title_en: title,
+        title_ar: title,
+        category,
+        severity,
+        site_id: "site-1",
+      });
+      router.push(`/${locale}/app/incidents/${inc.id}`);
+    } catch {
+      router.push(`/${locale}/app/incidents`);
+    }
   };
 
   return (

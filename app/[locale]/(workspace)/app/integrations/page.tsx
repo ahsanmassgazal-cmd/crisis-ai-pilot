@@ -47,7 +47,7 @@ export default function IntegrationsPage() {
     },
     {
       id: "int-3",
-      name: "SMS Provider A (Omantel Telecom)",
+      name: "SMS Route A (Primary Gateway)",
       category: "Cellular SMS",
       icon: Smartphone,
       status: "connected" as const,
@@ -56,7 +56,7 @@ export default function IntegrationsPage() {
     },
     {
       id: "int-4",
-      name: "SMS Provider B (Ooredoo Backup)",
+      name: "SMS Route B (Secondary Hot Standby)",
       category: "Cellular SMS",
       icon: Smartphone,
       status: "connected" as const,

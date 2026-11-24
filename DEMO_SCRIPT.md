@@ -11,7 +11,7 @@ This script walks through the complete, unscripted 8-minute sales demonstration.
 |---|---|---|---|
 | **0:00 - 1:15** | **Executive Overview** | `/en/app` (Command Center) | Active SEV1 alert banner, Attention Queue, Critical Functions status. Toggle Arabic (`/ar/app`) to demonstrate native RTL, logical typography, and zero layout shift. |
 | **1:15 - 2:30** | **Incident Deep Dive** | `/en/app/incidents/inc-2026-001` | Incident Room: SLA countdown ring, affected sites (Sohar Plant), containment tasks, live timeline. |
-| **2:30 - 3:45** | **Failure Injection & Failover** | Floating Presenter Panel (`Bottom-Start`) | Click **"Break SMS A (Failover)"** (`تعطيل مسار SMS الرئيسي`). Double-click **"Send Broadcast"**. Worker enforces idempotency (1 delivery created), primary route errors, delivery status switches to violet **"Failed Over"** to SMS B (Ooredoo). |
+| **2:30 - 3:45** | **Failure Injection & Failover** | Floating Presenter Panel (`Bottom-Start`) | Click **"Break SMS A (Failover)"** (`تعطيل مسار SMS الرئيسي`). Double-click **"Send Broadcast"**. Worker enforces idempotency (1 delivery created), primary route errors, delivery status switches to violet **"Failed Over"** to SMS Route B. |
 | **3:45 - 4:45** | **Approval Gate & AI Copilot** | `/en/app/approvals` | Review pending bilingual broadcast. Attempting to dispatch unapproved message is refused by gate. Edit message resets approval to `pending`. Click **"Approve Broadcast"** (`اعتماد الإرسال`). |
 | **4:45 - 5:45** | **Responder Experience (PWA)** | `/en/r` | Switch to mobile viewport. Active emergency card with Fitts's law touch targets. Click **"I'm Safe & Acknowledged"** (`أنا بأمان وتم تأكيد الاستلام`). Delivery status updates to `acknowledged` with timestamp and transmits to Command Center. |
 | **5:45 - 6:30** | **Stakeholder Portal & Evidence Pack** | `/en/portal` | Calm, executive-facing portal. Shows approved update. Click **"Download Official Evidence ZIP"** (`تحميل حزمة الأدلة الرسمية`). Generates real ZIP containing `incident_summary.json`, `audit_ledger.csv` (UTF-8 BOM), and `manifest.json` with SHA-256 checksums. |
@@ -49,7 +49,7 @@ This script walks through the complete, unscripted 8-minute sales demonstration.
 3. Navigate to `/en/app/notifications`:
    - Click **"Send Emergency Notification"** twice rapidly (simulating nervous double-click).
    - Observe: Exactly one delivery is registered due to SHA-256 idempotency key `sha256(incident:person:channel:version)`.
-   - Observe Delivery State: Shows **"Failed Over"** in violet tone (`SMS B - Ooredoo Route`), proving resilient multi-provider failover.
+   - Observe Delivery State: Shows **"Failed Over"** in violet tone (`SMS Route B`), proving resilient multi-provider failover.
 
 ### Minute 3:45 — Approval Gate & AI Copilot
 1. Navigate to `/en/app/approvals`.

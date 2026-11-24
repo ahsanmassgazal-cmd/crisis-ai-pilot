@@ -13,7 +13,7 @@ export class SmsPrimaryAdapter implements ChannelAdapter {
       return {
         success: false,
         provider: "sms_a",
-        error: "OmanTel SMPP Gateway 503 Provider Unavailable",
+        error: "SMS Route A SMPP Gateway 503 Provider Unavailable",
       };
     }
 

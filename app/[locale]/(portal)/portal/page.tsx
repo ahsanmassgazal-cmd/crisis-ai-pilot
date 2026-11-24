@@ -69,7 +69,7 @@ export default function StakeholderPortalPage() {
       {/* Calm, branded header */}
       <header className="border-b border-app-border bg-app-surface px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <Link href="/app" className="text-app-muted hover:text-brand-600 transition-colors">
+          <Link href="/app" aria-label={t("common.back")} className="text-app-muted hover:text-brand-600 transition-colors">
             <ArrowLeft className="w-4 h-4 dir-aware-flip" />
           </Link>
           <div className="flex items-center gap-2">

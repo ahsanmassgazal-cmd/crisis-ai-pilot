@@ -396,7 +396,27 @@ export default function DocumentsHubPage() {
                     {idx !== 0 && (
                       <button
                         type="button"
-                        onClick={() => {
+                        onClick={async () => {
+                          if (activeDocForVersion) {
+                            const newVersion = ver.v.replace("v", "");
+                            await repo.documents.update(activeDocForVersion.id, {
+                              version: newVersion,
+                              updated_at: new Date().toISOString(),
+                            });
+                            await repo.audit.append({
+                              tenant_id: "gulf_water",
+                              actor_id: "usr-001",
+                              actor_role: "commander",
+                              action: "DOCUMENT_RESTORED",
+                              entity: "document",
+                              entity_id: activeDocForVersion.id,
+                              after_json: { version: newVersion },
+                              reason: `Restored document version ${ver.v}`,
+                              ip_hint: "10.200.4.1",
+                              created_at: new Date().toISOString(),
+                            });
+                            await loadDocs();
+                          }
                           showToast({
                             title: t("documentsCenter.restoreVersion"),
                             description: `Restored version ${ver.v} as current active document.`,

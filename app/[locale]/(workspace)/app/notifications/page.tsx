@@ -35,7 +35,7 @@ export default function NotificationsCenterPage() {
       channel: "sms" as const,
       recipient: "+968 9123 4567 (Eng. Salem Al-Harthy)",
       status: "delivered" as const,
-      provider: "SMS Provider A (Omantel)",
+      provider: "SMS Route A",
       latency: "1.2s",
       time: "10:14:02 AM",
       text: "CRITICAL ALERT: SCADA containment active at Sohar Plant. On-call engineers report to Command Room immediately."
@@ -45,7 +45,7 @@ export default function NotificationsCenterPage() {
       channel: "sms" as const,
       recipient: "+968 9234 5678 (Tariq Al-Lawati)",
       status: "delivered" as const,
-      provider: "SMS Provider A (Omantel)",
+      provider: "SMS Route A",
       latency: "1.8s",
       time: "10:14:03 AM",
       text: "CRITICAL ALERT: SCADA containment active at Sohar Plant. On-call engineers report to Command Room immediately."
@@ -55,7 +55,7 @@ export default function NotificationsCenterPage() {
       channel: "sms" as const,
       recipient: "+968 9345 6789 (Fatima Al-Balushi)",
       status: "failed" as const,
-      provider: "SMS Provider A -> Auto Failover Provider B (Ooredoo)",
+      provider: "SMS Route A -> Auto Failover SMS Route B",
       latency: "4.5s",
       time: "10:14:06 AM",
       text: "CRITICAL ALERT: SCADA containment active at Sohar Plant. On-call engineers report to Command Room immediately."

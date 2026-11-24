@@ -45,7 +45,7 @@ export const PresenterSimulationPanel: React.FC = () => {
     showToast({
       title: newState ? "SMS A Primary Broken" : "SMS A Restored",
       description: newState
-        ? "OmanTel SMPP gateway error simulated. Next SMS will fail over to SMS B (Ooredoo)."
+        ? "SMS Route A SMPP gateway error simulated. Next SMS will fail over to SMS Route B."
         : "Primary SMS route restored to healthy.",
       tone: newState ? "rose" : "emerald",
     });

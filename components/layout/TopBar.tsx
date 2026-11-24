@@ -68,7 +68,6 @@ export const TopBar: React.FC = () => {
             onClick={() => setTenantDropdownOpen(!tenantDropdownOpen)}
             className="flex items-center gap-2 px-3 py-1.5 rounded-input border border-app-border bg-app-surface-subtle hover:bg-app-border/40 transition-colors text-xs font-semibold text-app-text"
             aria-expanded={tenantDropdownOpen}
-            aria-label={t("topbar.tenant")}
           >
             <Building2 className="w-3.5 h-3.5 text-brand-600 shrink-0" />
             <span className="truncate max-w-[160px] sm:max-w-[200px]">
@@ -107,7 +106,6 @@ export const TopBar: React.FC = () => {
         <button
           onClick={() => setCommandPaletteOpen(true)}
           className="flex items-center gap-2 px-3 py-1.5 rounded-input border border-app-border bg-app-surface-subtle text-app-muted hover:text-app-text hover:border-brand-600/50 transition-all text-xs w-52 sm:w-64 md:w-80 justify-between"
-          aria-label={t("topbar.searchPlaceholder")}
         >
           <div className="flex items-center gap-2 truncate">
             <Search className="w-3.5 h-3.5 shrink-0" />
@@ -165,7 +163,6 @@ export const TopBar: React.FC = () => {
         <button
           onClick={toggleLocale}
           className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-input border border-app-border bg-app-surface-subtle hover:bg-brand-50 hover:text-brand-600 transition-colors text-xs font-bold text-app-text"
-          aria-label={t("topbar.language")}
         >
           <Globe className="w-3.5 h-3.5 text-brand-600 shrink-0" />
           <span>{locale === "en" ? "عربي" : "English"}</span>

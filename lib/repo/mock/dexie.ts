@@ -202,6 +202,34 @@ export class DexieCrisisRepo implements CrisisRepository {
         await db.incidents.put(inc);
       }
       mem.incidents.unshift(inc);
+
+      // Queue initial deliveries for on-call responders
+      const onCall = (await this.people.getAll()).filter((p) => p.on_call);
+      const targets = onCall.length > 0 ? onCall.slice(0, 5) : (await this.people.getAll()).slice(0, 3);
+      for (const person of targets) {
+        await this.deliveries.create({
+          tenant_id: inc.tenant_id,
+          incident_id: inc.id,
+          message_id: `msg-${inc.id}`,
+          person_id: person.id,
+          channel: ((person.channel_pref && person.channel_pref[0]) || "sms") as
+            | "email"
+            | "sms"
+            | "teams"
+            | "whatsapp"
+            | "voice"
+            | "push",
+          provider: "sms_a",
+          state: "queued",
+          status: "queued",
+          idempotency_key: `activate:${inc.id}:${person.id}:${(person.channel_pref && person.channel_pref[0]) || "sms"}:1`,
+          attempts: 0,
+          sent_at: new Date().toISOString(),
+          created_at: new Date().toISOString(),
+          simulated: false,
+        });
+      }
+
       return inc;
     },
     close: async (id: string, reason: string): Promise<void> => {
