@@ -10,7 +10,11 @@ import {
   EXPANDED_DRILLS,
   EXPANDED_DOCUMENTS,
   EXPANDED_AUDIT_ROWS,
+  EXPANDED_DELIVERIES,
+  SEED_COMPLIANCE_ROWS,
+  SEED_IMPORT_BATCHES,
 } from "@/seed/expanded";
+import { SEED_RULES, SEED_APPROVALS } from "@/seed/data";
 
 describe("Spec 23 Exact Seed Data Counts & Formats", () => {
   it("contains exactly 4 tenants with required GCC properties", () => {
@@ -96,6 +100,50 @@ describe("Spec 23 Exact Seed Data Counts & Formats", () => {
     expect(EXPANDED_AUDIT_ROWS.length).toBe(1248);
     for (let i = 1; i < 20; i++) {
       expect(EXPANDED_AUDIT_ROWS[i].prev_hash).toBe(EXPANDED_AUDIT_ROWS[i - 1].hash);
+    }
+  });
+
+  it("contains exactly 1,800 delivery attempts covering failover and retries", () => {
+    expect(EXPANDED_DELIVERIES.length).toBe(1800);
+    const states = new Set(EXPANDED_DELIVERIES.map((d) => d.state));
+    expect(states.has("acknowledged")).toBe(true);
+    expect(states.has("failed_over")).toBe(true);
+  });
+
+  it("contains exactly 3 pending approvals with priority scores and subjects", () => {
+    expect(SEED_APPROVALS.length).toBe(3);
+    for (const appr of SEED_APPROVALS) {
+      expect(appr.status).toBe("pending");
+      expect(appr.priority_score).toBeGreaterThan(70);
+      expect(appr.subject_en).toBeTruthy();
+      expect(appr.subject_ar).toBeTruthy();
+    }
+  });
+
+  it("contains exactly 12 automation rules with execution run history", () => {
+    expect(SEED_RULES.length).toBe(12);
+    for (const rule of SEED_RULES) {
+      expect(rule.name_en).toBeTruthy();
+      expect(rule.name_ar).toBeTruthy();
+      expect(rule.last_run_at).toBeTruthy();
+      expect(rule.success_rate).toBeGreaterThan(90);
+    }
+  });
+
+  it("contains 3 import batches including 1 rolled back batch", () => {
+    expect(SEED_IMPORT_BATCHES.length).toBe(3);
+    const rolledBack = SEED_IMPORT_BATCHES.filter((b) => b.status === "rolled_back");
+    expect(rolledBack.length).toBe(1);
+    const completed = SEED_IMPORT_BATCHES.filter((b) => b.status === "completed");
+    expect(completed.length).toBe(2);
+  });
+
+  it("contains 10 compliance controls all initialized with verified=false", () => {
+    expect(SEED_COMPLIANCE_ROWS.length).toBe(10);
+    for (const row of SEED_COMPLIANCE_ROWS) {
+      expect(row.verified).toBe(false);
+      expect(row.standard).toBeTruthy();
+      expect(row.clause).toBeTruthy();
     }
   });
 });

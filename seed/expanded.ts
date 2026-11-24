@@ -793,3 +793,39 @@ export const EXPANDED_AUDIT_ROWS: AuditRow[] = (() => {
 
   return rows;
 })();
+
+export interface ComplianceItem {
+  id: string;
+  standard: string;
+  clause: string;
+  description_en: string;
+  description_ar: string;
+  verified: boolean;
+}
+
+export const SEED_COMPLIANCE_ROWS: ComplianceItem[] = [
+  { id: "comp-1", standard: "ISO 22301", clause: "8.2.2", description_en: "Business impact analysis", description_ar: "تحليل الأثر على الأعمال", verified: false },
+  { id: "comp-2", standard: "ISO 22301", clause: "8.4.2", description_en: "Documented continuity procedures", description_ar: "إجراءات استمرارية موثقة", verified: false },
+  { id: "comp-3", standard: "NCEMA 7000", clause: "5.3", description_en: "Emergency broadcast protocols", description_ar: "بروتوكولات البث في الطوارئ", verified: false },
+  { id: "comp-4", standard: "GCC-UTIL", clause: "9.1", description_en: "Regulatory reporting SLA", description_ar: "اتفاقية التقارير التنظيمية", verified: false },
+  { id: "comp-5", standard: "ISO 27001", clause: "A.12.1", description_en: "Operational audit logging", description_ar: "تسجيل التدقيق التشغيلي", verified: false },
+  { id: "comp-6", standard: "ISO 27001", clause: "A.17.1", description_en: "Information security continuity", description_ar: "استمرارية أمن المعلومات", verified: false },
+  { id: "comp-7", standard: "NCEMA 7000", clause: "6.1", description_en: "Incident management structure", description_ar: "هيكل إدارة الحوادث", verified: false },
+  { id: "comp-8", standard: "NCEMA 7000", clause: "7.4", description_en: "Drills and training program", description_ar: "برنامج التمارين والتدريب", verified: false },
+  { id: "comp-9", standard: "ISO 22301", clause: "8.3", description_en: "Business continuity strategies", description_ar: "استراتيجيات استمرارية الأعمال", verified: false },
+  { id: "comp-10", standard: "GCC-WATER", clause: "3.2", description_en: "Emergency potable water reserve", description_ar: "الاحتياطي الاستراتيجي لمياه الشرب", verified: false },
+];
+
+export interface ImportBatch {
+  id: string;
+  name: string;
+  records_count: number;
+  status: "completed" | "rolled_back";
+  created_at: string;
+}
+
+export const SEED_IMPORT_BATCHES: ImportBatch[] = [
+  { id: "batch-01", name: "Q1 People Roster HR Sync", records_count: 248, status: "completed", created_at: "2026-11-01T08:00:00Z" },
+  { id: "batch-02", name: "Sohar Plant SCADA Assets Import", records_count: 52, status: "completed", created_at: "2026-11-10T14:30:00Z" },
+  { id: "batch-03", name: "Legacy Emergency Contact Rollback", records_count: 85, status: "rolled_back", created_at: "2026-11-15T11:15:00Z" },
+];

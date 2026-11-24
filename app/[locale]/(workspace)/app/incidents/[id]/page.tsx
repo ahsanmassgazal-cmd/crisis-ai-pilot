@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useRouter, usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Ltr } from "@/components/common/Ltr";
 import { mockRepository } from "@/lib/repo";
+import { demoSync } from "@/lib/engine/sync";
 import { SeverityBadge } from "@/components/crisis/atoms/SeverityBadge";
 import { StatusBadge } from "@/components/crisis/atoms/StatusBadge";
 import { PriorityChip } from "@/components/crisis/atoms/PriorityChip";
@@ -39,7 +40,8 @@ import {
   Flame,
   LayoutGrid,
   List,
-  CalendarDays
+  CalendarDays,
+  Smartphone
 } from "lucide-react";
 
 export default function IncidentRoomPage() {
@@ -62,6 +64,49 @@ export default function IncidentRoomPage() {
   const [isCopilotOpen, setIsCopilotOpen] = useState(false);
   const [tasksView, setTasksView] = useState<"kanban" | "table" | "gantt">("kanban");
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [ackedResponders, setAckedResponders] = useState(14);
+  const [totalResponders, setTotalResponders] = useState(16);
+  const [showPhonePreview, setShowPhonePreview] = useState(false);
+
+  useEffect(() => {
+    async function loadAckStats() {
+      try {
+        const deliveries = await mockRepository.deliveries.getAll();
+        const incidentDeliveries = deliveries.filter(
+          (d) => d.incident_id === "inc-2026-001"
+        );
+        if (incidentDeliveries.length > 0) {
+          const acked = incidentDeliveries.filter(
+            (d) => d.state === "acknowledged" || (d as any).status === "safe"
+          ).length;
+          setAckedResponders(acked || 14);
+          setTotalResponders(incidentDeliveries.length);
+        } else {
+          setAckedResponders(14);
+          setTotalResponders(16);
+        }
+      } catch {
+        setAckedResponders(14);
+        setTotalResponders(16);
+      }
+    }
+    loadAckStats();
+
+    const unsubscribe = demoSync.subscribe((msg) => {
+      if (msg.type === "DELIVERY_ACKNOWLEDGED") {
+        setAckedResponders((prev) => Math.min(prev + 1, 16));
+        showToast(
+          locale === "ar"
+            ? "تم استلام تأكيد استجابة جديد في غرفة العمليات"
+            : "Live update: Responder acknowledged in Incident Room."
+        );
+      } else if (msg.type === "RESET_DEMO") {
+        setAckedResponders(14);
+      }
+    });
+
+    return () => unsubscribe();
+  }, [locale]);
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
@@ -321,6 +366,16 @@ export default function IncidentRoomPage() {
             <div className="flex items-center gap-2">
               <button
                 type="button"
+                onClick={() => setShowPhonePreview(!showPhonePreview)}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-brand-500/30 bg-brand-500/10 px-3 py-1.5 text-xs font-semibold text-brand-400 hover:bg-brand-500/20 transition"
+                data-testid="responder-phone-preview-btn"
+              >
+                <Smartphone className="h-3.5 w-3.5" />
+                <span>{locale === "ar" ? "معاينة هاتف المستجيب" : "Responder Phone Preview"}</span>
+              </button>
+
+              <button
+                type="button"
                 onClick={() => setShowSevModal(true)}
                 className="rounded-lg border border-border-subtle bg-surface-base px-2.5 py-1.5 text-xs font-medium text-text-main hover:bg-surface-elevated transition"
               >
@@ -426,7 +481,9 @@ export default function IncidentRoomPage() {
                 </div>
                 <div className="rounded-lg bg-surface-base p-3 border border-border-subtle text-xs">
                   <span className="text-text-muted block text-[10px] uppercase">{t("incidentRoom.dispatchedResponders")}</span>
-                  <p className="text-lg font-bold text-text-main mt-0.5"><Ltr>14 / 16</Ltr></p>
+                  <p className="text-lg font-bold text-text-main mt-0.5" data-testid="responder-ack-count">
+                    <Ltr>{ackedResponders} / {totalResponders}</Ltr>
+                  </p>
                   <span className="text-[10px] text-brand-400 font-medium">{t("incidentRoom.ackRate")}</span>
                 </div>
               </div>
@@ -1014,6 +1071,41 @@ export default function IncidentRoomPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      )}
+      {/* Responder Phone Preview Split Modal */}
+      {showPhonePreview && (
+        <div
+          className="fixed end-4 bottom-4 z-50 rounded-2xl border-2 border-brand-500 bg-surface-elevated p-3 shadow-2xl animate-fade-in"
+          data-testid="phone-preview-modal"
+        >
+          <div className="flex items-center justify-between pb-2 border-b border-border-subtle mb-2">
+            <span className="font-bold text-xs text-text-main flex items-center gap-1.5">
+              <Smartphone className="h-4 w-4 text-brand-500" />
+              {locale === "ar"
+                ? "معاينة هاتف المستجيب (390×844)"
+                : "Responder Live Phone Preview (390×844)"}
+            </span>
+            <button
+              type="button"
+              onClick={() => setShowPhonePreview(false)}
+              className="text-text-muted hover:text-text-main font-bold text-sm px-1.5"
+              aria-label={t("common.close")}
+            >
+              ✕
+            </button>
+          </div>
+          <div
+            data-testid="responder-phone-preview-frame"
+            className="w-[360px] h-[600px] sm:w-[390px] sm:h-[680px] rounded-xl overflow-hidden border border-border-subtle bg-black"
+          >
+            <iframe
+              src={`/${locale}/r`}
+              title={t("incidentRoom.responderPreviewTitle")}
+              className="w-full h-full border-0"
+              data-testid="responder-preview-iframe"
+            />
           </div>
         </div>
       )}

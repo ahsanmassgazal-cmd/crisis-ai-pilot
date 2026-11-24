@@ -43,6 +43,8 @@ interface AppState {
   sidebarCollapsed: boolean;
   copilotOpen: boolean;
   presenterPanelOpen: boolean;
+  guidedDemoOpen: boolean;
+  whiteLabelPoweredBy: boolean;
   simSpeed: 1 | 5 | 60 | 300;
   failures: PresenterFailures;
 
@@ -59,6 +61,9 @@ interface AppState {
   toggleCopilot: () => void;
   setPresenterPanelOpen: (open: boolean) => void;
   togglePresenterPanel: () => void;
+  setGuidedDemoOpen: (open: boolean) => void;
+  toggleGuidedDemo: () => void;
+  setWhiteLabelPoweredBy: (val: boolean) => void;
   setSimSpeed: (speed: 1 | 5 | 60 | 300) => void;
   toggleFailure: (failureKey: keyof PresenterFailures) => void;
   setFailure: (failureKey: keyof PresenterFailures, value: boolean) => void;
@@ -78,6 +83,8 @@ export const useAppStore = create<AppState>((set) => ({
   sidebarCollapsed: false,
   copilotOpen: false,
   presenterPanelOpen: false,
+  guidedDemoOpen: false,
+  whiteLabelPoweredBy: true,
   simSpeed: 1,
   failures: {
     smsABroken: false,
@@ -104,6 +111,10 @@ export const useAppStore = create<AppState>((set) => ({
   setPresenterPanelOpen: (presenterPanelOpen) => set({ presenterPanelOpen }),
   togglePresenterPanel: () =>
     set((state) => ({ presenterPanelOpen: !state.presenterPanelOpen })),
+  setGuidedDemoOpen: (guidedDemoOpen) => set({ guidedDemoOpen }),
+  toggleGuidedDemo: () =>
+    set((state) => ({ guidedDemoOpen: !state.guidedDemoOpen })),
+  setWhiteLabelPoweredBy: (whiteLabelPoweredBy) => set({ whiteLabelPoweredBy }),
   setSimSpeed: (simSpeed) => set({ simSpeed }),
   toggleFailure: (key) =>
     set((state) => ({

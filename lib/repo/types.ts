@@ -266,6 +266,7 @@ export interface TenantConfig {
   package: "Enterprise" | "Professional" | "Pilot";
   brand_color: string;
   logo_url: string;
+  powered_by?: boolean;
   active_incidents_count: number;
   responders_count: number;
   readiness_percent: number;

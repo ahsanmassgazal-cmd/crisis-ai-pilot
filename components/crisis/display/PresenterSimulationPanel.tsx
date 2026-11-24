@@ -17,6 +17,8 @@ import {
   AlertTriangle,
 } from "lucide-react";
 import { Ltr } from "@/components/layout/Ltr";
+import { GuidedDemoCoachCard } from "./GuidedDemoCoachCard";
+import { Compass } from "lucide-react";
 import { useAppStore } from "@/lib/store/useAppStore";
 import { useRepo } from "@/lib/repo";
 import { showToast } from "@/lib/toast";
@@ -35,6 +37,9 @@ export const PresenterSimulationPanel: React.FC = () => {
     failures,
     toggleFailure,
     resetFailures,
+    guidedDemoOpen,
+    setGuidedDemoOpen,
+    toggleGuidedDemo,
   } = useAppStore();
 
   const speeds: Array<1 | 5 | 60 | 300> = [1, 5, 60, 300];
@@ -122,23 +127,36 @@ export const PresenterSimulationPanel: React.FC = () => {
       description: "Sandbox seed state successfully restored to baseline in IndexedDB.",
       tone: "brand",
     });
+    window.location.href = "/en/app";
   };
 
   return (
     <>
       {/* Floating launcher button for Presenter Persona */}
       {currentRole === "presenter" && (
-        <button
-          onClick={togglePresenterPanel}
-          className="fixed bottom-6 start-6 z-40 flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white shadow-xl text-xs font-bold transition-all border border-indigo-400"
-          aria-label={t("presenterPanel.title")}
-        >
-          <Presentation className="w-4 h-4 animate-pulse" />
-          <span>{t("presenterPanel.title")}</span>
-          <span className="bg-white/20 px-1.5 py-0.5 rounded text-[10px]">
-            <Ltr>{simSpeed}x</Ltr>
-          </span>
-        </button>
+        <div className="fixed bottom-6 start-6 z-40 flex items-center gap-2">
+          <button
+            onClick={() => toggleGuidedDemo()}
+            data-testid="start-guided-demo-btn"
+            className="flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-brand-600 hover:bg-brand-700 text-white shadow-xl text-xs font-bold transition-all border border-brand-400"
+            aria-label={t("guidedDemo.start")}
+          >
+            <Compass className="w-4 h-4 animate-spin-slow" />
+            <span>{t("guidedDemo.start")}</span>
+          </button>
+
+          <button
+            onClick={togglePresenterPanel}
+            className="flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white shadow-xl text-xs font-bold transition-all border border-indigo-400"
+            aria-label={t("presenterPanel.title")}
+          >
+            <Presentation className="w-4 h-4 animate-pulse" />
+            <span>{t("presenterPanel.title")}</span>
+            <span className="bg-white/20 px-1.5 py-0.5 rounded text-[10px]">
+              <Ltr>{simSpeed}x</Ltr>
+            </span>
+          </button>
+        </div>
       )}
 
       {/* Drawer Overlay */}
@@ -320,6 +338,12 @@ export const PresenterSimulationPanel: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* Guided 8-Minute Executive Demo Coach Card */}
+      <GuidedDemoCoachCard
+        isOpen={guidedDemoOpen}
+        onClose={() => setGuidedDemoOpen(false)}
+      />
     </>
   );
 };

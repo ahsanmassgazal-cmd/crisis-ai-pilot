@@ -10,8 +10,11 @@ const TOP_10_ROUTES = [
   "/en/app/approvals",
   "/en/owner",
   "/en/r",
+  "/ar/r",
   "/en/portal",
+  "/ar/portal",
   "/en/app/audit",
+  "/en/app/reports/print/inc-2026-001",
 ];
 
 test.describe("WCAG & Axe Accessibility Audit (Top 10 Routes)", () => {

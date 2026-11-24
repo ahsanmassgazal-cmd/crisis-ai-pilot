@@ -17,6 +17,7 @@ import {
 import { Ltr } from "@/components/layout/Ltr";
 import { useRepo, Task, Delivery } from "@/lib/repo";
 import { showToast } from "@/lib/toast";
+import { demoSync } from "@/lib/engine/sync";
 
 export default function ResponderAppPage() {
   const t = useTranslations();
@@ -68,6 +69,13 @@ export default function ResponderAppPage() {
       title: t("responder.imSafeAcked"),
       description: "Acknowledgment securely transmitted to Incident Room.",
       tone: "emerald",
+    });
+
+    demoSync.broadcast({
+      type: "DELIVERY_ACKNOWLEDGED",
+      deliveryId: activeDelivery?.id || "deliv-active",
+      status: "safe",
+      timestamp: new Date().toISOString(),
     });
   };
 
@@ -162,6 +170,7 @@ export default function ResponderAppPage() {
           <div className="pt-2 space-y-2">
             <button
               onClick={handleAcknowledgeSafe}
+              data-testid="responder-im-safe-btn"
               className={`w-full py-3.5 px-4 rounded-input font-bold text-sm flex items-center justify-center gap-2 shadow transition-all ${
                 responseStatus === "safe"
                   ? "bg-emerald-600 text-white ring-2 ring-emerald-400"

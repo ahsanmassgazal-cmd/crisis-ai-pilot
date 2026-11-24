@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
+import { useRouter } from "next/navigation";
 import {
   PieChart,
   Download,
@@ -22,6 +23,7 @@ export default function ReportsPage() {
   const t = useTranslations();
   const locale = useLocale();
 
+  const router = useRouter();
   const [dateRange, setDateRange] = useState("last30");
 
   const severityChartData: ChartDataPoint[] = [
@@ -46,11 +48,7 @@ export default function ReportsPage() {
   ];
 
   const handleExportPdf = () => {
-    showToast({
-      title: t("reportsCenter.exportReport"),
-      description: "Executive PDF summary report generated successfully.",
-      tone: "brand",
-    });
+    router.push(`/${locale}/app/reports/print/executive-summary`);
   };
 
   return (

@@ -28,6 +28,51 @@ export function exportToJson(data: any): string {
   return JSON.stringify(data, null, 2);
 }
 
+export function exportToIcs(event: {
+  title: string;
+  description: string;
+  start: Date;
+  end: Date;
+  location?: string;
+}): string {
+  const formatDate = (d: Date) =>
+    d.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+  return [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//SigmaMax AI//Crisis AI Pilot//EN",
+    "BEGIN:VEVENT",
+    `SUMMARY:${event.title}`,
+    `DESCRIPTION:${event.description}`,
+    `DTSTART:${formatDate(event.start)}`,
+    `DTEND:${formatDate(event.end)}`,
+    event.location ? `LOCATION:${event.location}` : "",
+    "STATUS:CONFIRMED",
+    "END:VEVENT",
+    "END:VCALENDAR",
+  ]
+    .filter(Boolean)
+    .join("\r\n");
+}
+
+export function exportToDocxXml(content: {
+  title: string;
+  sections: Array<{ heading: string; body: string }>;
+}): string {
+  return [
+    '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>',
+    '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">',
+    "<w:body>",
+    `<w:p><w:pPr><w:pStyle w:val="Title"/></w:pPr><w:r><w:t>${content.title}</w:t></w:r></w:p>`,
+    ...content.sections.map(
+      (s) =>
+        `<w:p><w:pPr><w:pStyle w:val="Heading1"/></w:pPr><w:r><w:t>${s.heading}</w:t></w:r></w:p><w:p><w:r><w:t>${s.body}</w:t></w:r></w:p>`
+    ),
+    "</w:body>",
+    "</w:document>",
+  ].join("");
+}
+
 export interface EvidenceZipResult {
   zipBlob: Blob | Buffer;
   manifest: Record<string, string>;

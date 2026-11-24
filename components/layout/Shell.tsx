@@ -10,6 +10,7 @@ import { RolePickerModal } from "./RolePickerModal";
 import { AiCopilotDrawer } from "@/components/crisis/ai/AiCopilotDrawer";
 import { PresenterSimulationPanel } from "@/components/crisis/display/PresenterSimulationPanel";
 import { useAppStore } from "@/lib/store/useAppStore";
+import { useRepo } from "@/lib/repo";
 
 interface ShellProps {
   children: React.ReactNode;
@@ -17,7 +18,8 @@ interface ShellProps {
 
 export const Shell: React.FC<ShellProps> = ({ children }) => {
   const t = useTranslations();
-  const { theme, copilotOpen, setCopilotOpen } = useAppStore();
+  const repo = useRepo();
+  const { theme, copilotOpen, setCopilotOpen, whiteLabelPoweredBy } = useAppStore();
 
   // Apply theme class to document element
   useEffect(() => {
@@ -25,6 +27,17 @@ export const Shell: React.FC<ShellProps> = ({ children }) => {
     root.classList.remove("light", "dark", "command");
     root.classList.add(theme);
   }, [theme]);
+
+  // Handle ?demo=fresh auto-reset
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.location.search.includes("demo=fresh")) {
+      repo.resetToSeed().then(() => {
+        const url = new URL(window.location.href);
+        url.searchParams.delete("demo");
+        window.history.replaceState({}, "", url.pathname + (url.search ? url.search : ""));
+      });
+    }
+  }, [repo]);
 
   return (
     <div className="min-h-screen bg-app-bg text-app-text flex flex-col font-sans transition-colors duration-200">
@@ -52,9 +65,11 @@ export const Shell: React.FC<ShellProps> = ({ children }) => {
               <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
               <span>{t("app.demoDataNotice")}</span>
             </div>
-            <div className="font-medium text-app-muted/90">
-              {t("app.poweredBy")}
-            </div>
+            {whiteLabelPoweredBy && (
+              <div className="font-medium text-app-muted/90">
+                {t("app.poweredBy")}
+              </div>
+            )}
           </footer>
         </div>
       </div>

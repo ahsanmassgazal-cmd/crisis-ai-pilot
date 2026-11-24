@@ -864,6 +864,14 @@ export class DexieCrisisRepo implements CrisisRepository {
   };
 
   tenants = {
+    list: async () => {
+      await ensureDbInit();
+      if (this.isBrowser()) {
+        const rows = await db.tenants.toArray();
+        if (rows.length > 0) return rows;
+      }
+      return [...mem.tenants];
+    },
     getAll: async () => {
       await ensureDbInit();
       if (this.isBrowser()) {
@@ -871,6 +879,11 @@ export class DexieCrisisRepo implements CrisisRepository {
         if (rows.length > 0) return rows;
       }
       return [...mem.tenants];
+    },
+    get: async (id: string) => {
+      await ensureDbInit();
+      if (this.isBrowser()) return (await db.tenants.get(id)) || null;
+      return mem.tenants.find((t) => t.id === id) || null;
     },
     getById: async (id: string) => {
       await ensureDbInit();
@@ -981,6 +994,10 @@ export class DexieCrisisRepo implements CrisisRepository {
     if (this.isBrowser()) {
       await populateSeedData(db, true);
     }
+    try {
+      const { demoSync } = await import("@/lib/engine/sync");
+      demoSync.broadcast({ type: "RESET_DEMO" });
+    } catch {}
   }
 }
 
