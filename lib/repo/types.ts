@@ -314,6 +314,6 @@ export interface CrisisRepository {
   documents: Crud<DocumentItem>;
   approvals: Crud<ApprovalItem>;
   tenants: Crud<TenantConfig>;
-  getAttentionQueue(): Promise<AttentionQueueItem[]>;
+  getAttentionQueue(): AttentionQueueItem[];
   resetToSeed(): Promise<void>;
 }

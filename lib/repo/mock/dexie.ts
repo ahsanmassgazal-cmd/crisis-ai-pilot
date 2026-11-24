@@ -871,7 +871,7 @@ export class DexieCrisisRepo implements CrisisRepository {
     },
   };
 
-  async getAttentionQueue(): Promise<AttentionQueueItem[]> {
+  getAttentionQueue(): AttentionQueueItem[] {
     return [
       {
         id: "Q-1",
