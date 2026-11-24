@@ -120,8 +120,8 @@ function isExempt(str) {
     return true;
   }
 
-  // ID and Code patterns (e.g. INC-2026-001, CP-DESAL-04, SEV1_COMM_..., RULE-01, etc.)
-  if (/^(INC|RULE|TPL|DOC|UPD|APP|DLV|HIST|DEC|Q|CP|task|site|usr|grp|f|int|SEV\d+)[-_A-Za-z0-9]+$/i.test(trimmed)) {
+  // ID and Code patterns (e.g. INC-2026-001, CP-DESAL-04, SEV1_COMM_..., RULE-01, SOHAR-DESAL-01, DRL-2026-04, CAPA-01, etc.)
+  if (/^(INC|RULE|TPL|DOC|UPD|APP|DLV|HIST|DEC|Q|CP|DRL|CAPA|CF|SOHAR|NIZWA|MUSCAT|SALALAH|task|site|usr|grp|f|int|SEV\d+)[-_A-Za-z0-9]+$/i.test(trimmed)) {
     return true;
   }
 

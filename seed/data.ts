@@ -632,3 +632,133 @@ export const SEED_PEOPLE: Person[] = [
     verified_channels: ["sms", "push"],
   },
 ];
+
+export interface SeedRisk {
+  id: string;
+  code: string;
+  title_en: string;
+  title_ar: string;
+  likelihood: number; // 1-5
+  impact: number; // 1-5
+  score: number;
+  mitigation: string;
+  controls: string;
+  owner: string;
+  linked_plan_id: string;
+  planId: string;
+}
+
+export const SEED_RISKS: SeedRisk[] = [
+  {
+    id: "RSK-01",
+    code: "RSK-01",
+    title_en: "OT SCADA Telemetry Network Ransomware & Isolation",
+    title_ar: "هجوم فدية واختراق شبكات التحكم الإشرافي SCADA",
+    likelihood: 4,
+    impact: 5,
+    score: 20,
+    mitigation: "Dual-firewall segmentation, unidirectional data diodes",
+    controls: "Dual-firewall segmentation, unidirectional data diodes",
+    owner: "Head of Industrial OT Security",
+    linked_plan_id: "CP-DESAL-04",
+    planId: "CP-DESAL-04",
+  },
+  {
+    id: "RSK-02",
+    code: "RSK-02",
+    title_en: "Chlorine Gas Containment Valve Failure",
+    title_ar: "فشل صمامات احتواء غاز الكلور في محطة التحلية",
+    likelihood: 2,
+    impact: 5,
+    score: 10,
+    mitigation: "Automated scrubber vacuum extraction & perimeter sirens",
+    controls: "Automated scrubber vacuum extraction & perimeter sirens",
+    owner: "HSE Director & Lead Responder",
+    linked_plan_id: "CP-HAZMAT-03",
+    planId: "CP-HAZMAT-03",
+  },
+  {
+    id: "RSK-03",
+    code: "RSK-03",
+    title_en: "Total National Grid Power Blackout (33kV Loss)",
+    title_ar: "انقطاع شامل للكهرباء عن الشبكة الوطنية (فقدان 33 ك.ف)",
+    likelihood: 3,
+    impact: 4,
+    score: 12,
+    mitigation: "Auxiliary diesel turbines with 72h fuel reservoir",
+    controls: "Auxiliary diesel turbines with 72h fuel reservoir",
+    owner: "Chief Incident Commander",
+    linked_plan_id: "CP-POWER-01",
+    planId: "CP-POWER-01",
+  },
+  {
+    id: "RSK-04",
+    code: "RSK-04",
+    title_en: "Coastal Tropical Cyclone Sea Surge & Flooding",
+    title_ar: "أمواج المد البحري المدارية والفيضانات الساحلية",
+    likelihood: 3,
+    impact: 4,
+    score: 12,
+    mitigation: "Sea defense barrier gates and reinforced pump culverts",
+    controls: "Sea defense barrier gates and reinforced pump culverts",
+    owner: "Security Operations Supervisor",
+    linked_plan_id: "CP-FLOOD-02",
+    planId: "CP-FLOOD-02",
+  },
+  {
+    id: "RSK-05",
+    code: "RSK-05",
+    title_en: "Desalination RO Membrane Bio-fouling Contamination",
+    title_ar: "تلوث بيولوجي لأغشية التناضح العكسي RO",
+    likelihood: 3,
+    impact: 3,
+    score: 9,
+    mitigation: "Secondary chemical biocides and dual intake filters",
+    controls: "Secondary chemical biocides and dual intake filters",
+    owner: "Central Operations Lead",
+    linked_plan_id: "CP-DESAL-04",
+    planId: "CP-DESAL-04",
+  },
+  {
+    id: "RSK-06",
+    code: "RSK-06",
+    title_en: "High-Pressure Main Pipeline Hydraulic Rupture",
+    title_ar: "انفجار هيدروليكي في خط النقل الرئيسي عالي الضغط",
+    likelihood: 2,
+    impact: 4,
+    score: 8,
+    mitigation: "Fast-acting telemetry shutoff valves and bypass loops",
+    controls: "Fast-acting telemetry shutoff valves and bypass loops",
+    owner: "Hydraulics Operations Engineer",
+    linked_plan_id: "CP-WATER-01",
+    planId: "CP-WATER-01",
+  },
+  {
+    id: "RSK-07",
+    code: "RSK-07",
+    title_en: "Single-Source Chemical Reagent Supply Disruption",
+    title_ar: "تعطل سلاسل توريد الكواشف الكيميائية أحادية المصدر",
+    likelihood: 4,
+    impact: 2,
+    score: 8,
+    mitigation: "Secondary GCC regional vendor frame agreement in UAE",
+    controls: "Secondary GCC regional vendor frame agreement in UAE",
+    owner: "Supply Chain Manager",
+    linked_plan_id: "CP-SUPPLY-01",
+    planId: "CP-SUPPLY-01",
+  },
+  {
+    id: "RSK-08",
+    code: "RSK-08",
+    title_en: "Emergency Comms TETRA Radio Mast Failure",
+    title_ar: "عطل في أبراج الاتصالات اللاسلكية للطوارئ TETRA",
+    likelihood: 2,
+    impact: 3,
+    score: 6,
+    mitigation: "Satellite uplink terminal failover and LTE backup",
+    controls: "Satellite uplink terminal failover and LTE backup",
+    owner: "Head of Communications & Media",
+    linked_plan_id: "CP-COMM-01",
+    planId: "CP-COMM-01",
+  },
+];
