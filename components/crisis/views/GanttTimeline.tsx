@@ -11,17 +11,40 @@ export interface GanttItem {
   status: "pending" | "active" | "completed" | "delayed";
 }
 
-interface GanttTimelineProps {
-  items: GanttItem[];
+export interface GanttTimelineProps {
+  items?: GanttItem[];
+  tasks?: Array<{
+    id: string;
+    name?: string;
+    title?: string;
+    owner?: string;
+    start?: string;
+    end?: string;
+    startMinutes?: number;
+    durationMinutes?: number;
+    progress?: number;
+    progressPercent?: number;
+    status?: "pending" | "active" | "completed" | "delayed" | "todo" | "inprogress" | "done";
+  }>;
   totalTimeMinutes?: number;
   className?: string;
 }
 
 export const GanttTimeline: React.FC<GanttTimelineProps> = ({
-  items,
+  items: directItems,
+  tasks: directTasks,
   totalTimeMinutes = 240,
   className = "",
 }) => {
+  const items: GanttItem[] = directItems || (directTasks || []).map((t, idx) => ({
+    id: t.id,
+    title: t.name || t.title || `Task ${idx + 1}`,
+    owner: t.owner || "Crisis Team",
+    startMinutes: t.startMinutes ?? idx * 30,
+    durationMinutes: t.durationMinutes ?? 45,
+    progressPercent: t.progressPercent ?? t.progress ?? 0,
+    status: (t.status === "done" ? "completed" : t.status === "inprogress" ? "active" : "pending") as any,
+  }));
   return (
     <div className={`p-4 rounded-card bg-app-surface border border-app-border space-y-4 ${className}`}>
       <div className="flex items-center justify-between">

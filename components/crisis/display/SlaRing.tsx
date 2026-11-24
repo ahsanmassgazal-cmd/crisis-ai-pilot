@@ -5,6 +5,8 @@ interface SlaRingProps {
   totalMinutes: number;
   elapsedMinutes: number;
   size?: number;
+  strokeWidth?: number;
+  isBreached?: boolean;
   className?: string;
 }
 
@@ -12,10 +14,12 @@ export const SlaRing: React.FC<SlaRingProps> = ({
   totalMinutes,
   elapsedMinutes,
   size = 64,
+  strokeWidth = 6,
+  isBreached: explicitBreached,
   className = "",
 }) => {
   const percentUsed = totalMinutes > 0 ? (elapsedMinutes / totalMinutes) * 100 : 0;
-  const isBreached = elapsedMinutes > totalMinutes;
+  const isBreached = explicitBreached !== undefined ? explicitBreached : elapsedMinutes > totalMinutes;
   const percentLeft = Math.max(0, 100 - percentUsed);
 
   // SLA Color Logic

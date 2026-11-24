@@ -5,17 +5,37 @@ import { Site, SEED_SITES } from "@/seed/data";
 import { MapPin, Navigation, Building2, AlertTriangle, CheckCircle2 } from "lucide-react";
 import { Ltr } from "@/components/common/Ltr";
 
-interface MapPanelProps {
+export interface MapPoint {
+  lat: number;
+  lng: number;
+  label: string;
+}
+
+export interface MapPanelProps {
   sites?: Site[];
+  points?: MapPoint[];
   onSelectSite?: (site: Site) => void;
   className?: string;
 }
 
 export const MapPanel: React.FC<MapPanelProps> = ({
-  sites = SEED_SITES,
+  sites: directSites,
+  points,
   onSelectSite,
   className = "",
 }) => {
+  const sites: Site[] = directSites || (points ? points.map((p, idx) => ({
+    id: `point-${idx}`,
+    tenant_id: "gulf_water",
+    name_en: p.label,
+    name_ar: p.label,
+    city: "Sohar",
+    country: "Oman",
+    lat: p.lat,
+    lng: p.lng,
+    criticality: "tier1" as const,
+    active_incidents_count: 1
+  })) : SEED_SITES);
   const [selectedSite, setSelectedSite] = useState<Site | null>(sites[0] || null);
 
   const handleSelect = (s: Site) => {
