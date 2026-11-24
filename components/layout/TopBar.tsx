@@ -35,6 +35,7 @@ export const TopBar: React.FC = () => {
     setTheme,
     setCommandPaletteOpen,
     setRolePickerOpen,
+    toggleCopilot,
   } = useAppStore();
 
   const [tenantDropdownOpen, setTenantDropdownOpen] = React.useState(false);
@@ -229,6 +230,7 @@ export const TopBar: React.FC = () => {
 
         {/* AI Copilot Button (Purple) */}
         <button
+          onClick={() => toggleCopilot()}
           className="flex items-center gap-1.5 px-3 py-1.5 rounded-input bg-brand-600 hover:bg-brand-hover text-white text-xs font-semibold shadow-sm transition-all"
           aria-label={t("topbar.copilot")}
         >

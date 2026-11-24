@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 import { OctagonAlert, Play, CheckCircle2, AlertTriangle } from "lucide-react";
 
 export interface KillSwitchProps {
@@ -9,6 +10,7 @@ export interface KillSwitchProps {
 }
 
 export function KillSwitch({ isPaused, onToggle }: KillSwitchProps) {
+  const t = useTranslations("components");
   const [showModal, setShowModal] = useState(false);
   const [confirmInput, setConfirmInput] = useState("");
 
@@ -34,7 +36,7 @@ export function KillSwitch({ isPaused, onToggle }: KillSwitchProps) {
           className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-4 py-2 text-xs font-bold text-white shadow-sm hover:bg-emerald-700 transition"
         >
           <Play className="h-4 w-4 fill-white" />
-          <span>Resume All Automations</span>
+          <span>{t("resumeAllAutomations")}</span>
         </button>
       ) : (
         <button
@@ -43,7 +45,7 @@ export function KillSwitch({ isPaused, onToggle }: KillSwitchProps) {
           className="inline-flex items-center gap-2 rounded-xl bg-critical-600 px-4 py-2 text-xs font-bold text-white shadow-md hover:bg-critical-700 transition"
         >
           <OctagonAlert className="h-4 w-4" />
-          <span>Pause All Automations</span>
+          <span>{t("pauseAllAutomations")}</span>
         </button>
       )}
 
@@ -57,10 +59,10 @@ export function KillSwitch({ isPaused, onToggle }: KillSwitchProps) {
               </div>
               <div>
                 <h3 className="text-base font-bold text-text-main">
-                  Emergency Kill Switch Confirmation
+                  {t("emergencyHaltTitle")}
                 </h3>
                 <p className="text-xs text-text-muted">
-                  Halt all automated notifications, retries and scheduled tasks.
+                  {t("emergencyHaltSub")}
                 </p>
               </div>
             </div>
@@ -68,14 +70,13 @@ export function KillSwitch({ isPaused, onToggle }: KillSwitchProps) {
             <div className="rounded-lg border border-amber-500/30 bg-amber-500/10 p-3 text-xs text-amber-300 flex items-start gap-2">
               <AlertTriangle className="h-4 w-4 shrink-0 mt-0.5" />
               <p>
-                This will immediately freeze all 12 active automation rules across the organization.
-                Ongoing alerts will require manual commander intervention.
+                {t("emergencyHaltWarning")}
               </p>
             </div>
 
             <div className="space-y-1.5 text-xs">
               <label className="text-text-muted font-medium block">
-                Type <span className="font-mono font-bold text-critical-400">PAUSE</span> to confirm:
+                {t("typePauseToConfirm")}:
               </label>
               <input
                 type="text"
@@ -103,7 +104,7 @@ export function KillSwitch({ isPaused, onToggle }: KillSwitchProps) {
                 onClick={handleAction}
                 className="px-4 py-1.5 text-xs rounded-lg bg-critical-600 font-bold text-white hover:bg-critical-700 disabled:opacity-40 disabled:cursor-not-allowed transition"
               >
-                Execute Emergency Halt
+                {t("executeEmergencyHalt")}
               </button>
             </div>
           </div>

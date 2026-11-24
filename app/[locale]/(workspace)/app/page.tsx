@@ -35,7 +35,7 @@ export default function CommandCenterPage() {
     <div className="space-y-6 animate-in fade-in duration-300">
       {/* Row 1: Hero Band (Von Restorff isolation effect) */}
       <section
-        aria-label="Hero Metric"
+        aria-label={t("commandCenter.heroMetric")}
         className="rounded-card p-6 bg-app-surface border border-app-border shadow-sm flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 relative overflow-hidden"
       >
         <div className="absolute top-0 end-0 w-96 h-96 bg-brand-50 dark:bg-brand-50/10 rounded-full blur-3xl -z-10 pointer-events-none" />
@@ -43,7 +43,7 @@ export default function CommandCenterPage() {
         <div className="space-y-2 max-w-2xl">
           <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-chip text-xs font-semibold bg-brand-50 dark:bg-brand-50/20 text-brand-600 border border-brand-600/30">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>AI Automated Mass Notification Engine</span>
+            <span>{t("commandCenter.heroBadge")}</span>
           </div>
 
           <h1 className="text-xl sm:text-2xl font-black tracking-tight text-app-text">
@@ -77,7 +77,7 @@ export default function CommandCenterPage() {
       </section>
 
       {/* Row 2: 6 KPI Tiles (Miller's Law) */}
-      <section aria-label="Key Performance Indicators" className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+      <section aria-label={t("commandCenter.kpis")} className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
         {/* KPI 1: Active Incidents */}
         <Link
           href="/app/incidents"
@@ -92,7 +92,7 @@ export default function CommandCenterPage() {
               <Ltr>3</Ltr>
             </div>
             <div className="text-[11px] text-severity-critical font-bold mt-0.5 flex items-center gap-1">
-              <span>1 SEV1 Critical</span>
+              <span>1 {t("commandCenter.sev1Critical")}</span>
             </div>
           </div>
         </Link>
@@ -147,7 +147,7 @@ export default function CommandCenterPage() {
             </div>
             <div className="text-[11px] text-emerald-600 font-bold mt-0.5 flex items-center gap-1">
               <TrendingUp className="w-3 h-3" />
-              <span>-32s vs baseline</span>
+              <><Ltr>-32s</Ltr> {t("commandCenter.vsBaseline")}</>
             </div>
           </div>
         </div>
@@ -189,7 +189,7 @@ export default function CommandCenterPage() {
       </section>
 
       {/* Row 3: Attention Queue (Now / Next / Later Lanes with reasons) */}
-      <section aria-label="Attention Queue" className="space-y-3">
+      <section aria-label={t("commandCenter.attentionQueue")} className="space-y-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <h2 className="font-bold text-base text-app-text">
@@ -221,8 +221,8 @@ export default function CommandCenterPage() {
             <div className="space-y-2 text-xs">
               <div className="p-3 rounded-input bg-app-surface-subtle border border-app-border space-y-1">
                 <div className="flex items-center justify-between">
-                  <span className="font-bold text-app-text">Approval Waiting</span>
-                  <span className="text-[10px] text-priority-p1 font-bold">6 min</span>
+                  <span className="font-bold text-app-text">{t("commandCenter.approvalWaiting")}</span>
+                  <span className="text-[10px] text-priority-p1 font-bold"><Ltr>6m</Ltr></span>
                 </div>
                 <p className="text-app-muted text-[11px]">
                   Bilingual evacuation alert for Sohar Plant Desalination Unit 2.
@@ -239,8 +239,8 @@ export default function CommandCenterPage() {
 
               <div className="p-3 rounded-input bg-app-surface-subtle border border-app-border space-y-1">
                 <div className="flex items-center justify-between">
-                  <span className="font-bold text-app-text">Responders Unreached</span>
-                  <span className="text-[10px] text-priority-p1 font-bold">3 People</span>
+                  <span className="font-bold text-app-text">{t("commandCenter.respondersUnreached")}</span>
+                  <span className="text-[10px] text-priority-p1 font-bold"><Ltr>3</Ltr> {t("common.responders") || "Responders"}</span>
                 </div>
                 <p className="text-app-muted text-[11px]">
                   Primary SMS channel timed out; failover B route auto-triggered.
@@ -261,8 +261,8 @@ export default function CommandCenterPage() {
             <div className="space-y-2 text-xs">
               <div className="p-3 rounded-input bg-app-surface-subtle border border-app-border space-y-1">
                 <div className="flex items-center justify-between">
-                  <span className="font-bold text-app-text">RTO Deadline Approach</span>
-                  <span className="text-[10px] text-priority-p2 font-bold">42 min left</span>
+                  <span className="font-bold text-app-text">{t("commandCenter.rtoApproach")}</span>
+                  <span className="text-[10px] text-priority-p2 font-bold"><Ltr>42m</Ltr></span>
                 </div>
                 <p className="text-app-muted text-[11px]">
                   SCADA Telemetry System recovery plan checkpoint required.
@@ -283,8 +283,8 @@ export default function CommandCenterPage() {
             <div className="space-y-2 text-xs">
               <div className="p-3 rounded-input bg-app-surface-subtle border border-app-border space-y-1">
                 <div className="flex items-center justify-between">
-                  <span className="font-bold text-app-text">Post-Drill Survey Followup</span>
-                  <span className="text-[10px] text-app-muted">Due in 2 days</span>
+                  <span className="font-bold text-app-text">{t("commandCenter.postDrillSurvey")}</span>
+                  <span className="text-[10px] text-app-muted"><Ltr>2d</Ltr></span>
                 </div>
                 <p className="text-app-muted text-[11px]">
                   Gather feedback on Nizwa electrical isolation exercise.
@@ -296,7 +296,7 @@ export default function CommandCenterPage() {
       </section>
 
       {/* Row 4: Live Incidents & Delivery Funnel */}
-      <section aria-label="Active Incidents Summary" className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <section aria-label={t("commandCenter.activeIncidents")} className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 rounded-card bg-app-surface border border-app-border p-5 space-y-4 shadow-sm">
           <div className="flex items-center justify-between">
             <h2 className="font-bold text-sm text-app-text">
@@ -389,32 +389,32 @@ export default function CommandCenterPage() {
 
           <div className="space-y-2 text-xs">
             <div className="flex items-center justify-between p-2 rounded bg-app-surface-subtle">
-              <span className="text-app-muted">1. Queued in Engine</span>
+              <span className="text-app-muted">{t("commandCenter.funnelQueued")}</span>
               <span className="font-bold text-app-text"><Ltr>0</Ltr></span>
             </div>
             <div className="flex items-center justify-between p-2 rounded bg-app-surface-subtle">
-              <span className="text-app-muted">2. Sent to Channels</span>
+              <span className="text-app-muted">{t("commandCenter.funnelSent")}</span>
               <span className="font-bold text-app-text"><Ltr>248 (100%)</Ltr></span>
             </div>
             <div className="flex items-center justify-between p-2 rounded bg-app-surface-subtle">
-              <span className="text-app-muted">3. Delivered (SMS/Teams/Email)</span>
+              <span className="text-app-muted">{t("commandCenter.funnelDelivered")}</span>
               <span className="font-bold text-teal-600"><Ltr>245 (98.8%)</Ltr></span>
             </div>
             <div className="flex items-center justify-between p-2.5 rounded bg-emerald-50 dark:bg-emerald-950/20 text-emerald-800 dark:text-emerald-300 font-bold border border-emerald-300 dark:border-emerald-800">
-              <span>4. Acknowledged Safe &amp; Active</span>
+              <span>{t("commandCenter.funnelAcked")}</span>
               <span><Ltr>228 (92.0%)</Ltr></span>
             </div>
           </div>
 
           <div className="pt-2 text-[11px] text-app-muted border-t border-app-border flex items-center justify-between">
-            <span>Failover Path:</span>
-            <span className="font-semibold text-purple-600">SMS A → SMS B (Active)</span>
+            <span>{t("commandCenter.failoverPath")}:</span>
+            <span className="font-semibold text-purple-600">{t("commandCenter.failoverActive")}</span>
           </div>
         </div>
       </section>
 
       {/* Row 5: Site Map & Readiness Breakdown */}
-      <section aria-label="Infrastructure & Readiness" className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <section aria-label={t("commandCenter.infraReadiness")} className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2">
           <MapPanel />
         </div>

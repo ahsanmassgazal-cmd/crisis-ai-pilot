@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Plus, Trash2, Zap, ArrowRight, ShieldCheck, Clock } from "lucide-react";
 
 export interface AutomationRuleDraft {
@@ -26,6 +27,7 @@ export function RuleBuilder({
   onSave,
   onCancel
 }: RuleBuilderProps) {
+  const t = useTranslations("components");
   const [name, setName] = useState(initialRule?.name || "Auto-Escalate Sev1 Cyber Alert");
   const [description, setDescription] = useState(
     initialRule?.description || "When Sev1 cyber incident occurs, notify executive team within 3m and request commander sign-off"
@@ -78,7 +80,7 @@ export function RuleBuilder({
       {/* Basic Metadata */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <div className="space-y-1">
-          <label className="text-text-muted font-medium">Rule Name</label>
+          <label className="text-text-muted font-medium">{t("ruleName")}</label>
           <input
             type="text"
             value={name}
@@ -87,21 +89,21 @@ export function RuleBuilder({
           />
         </div>
         <div className="space-y-1">
-          <label className="text-text-muted font-medium">Trigger Source (WHEN)</label>
+          <label className="text-text-muted font-medium">{t("triggerSource")}</label>
           <select
             value={triggerEvent}
             onChange={(e) => setTriggerEvent(e.target.value)}
             className="w-full rounded-lg border border-border-subtle bg-surface-base px-3 py-1.5 text-xs text-text-main focus:ring-1 focus:ring-brand-500"
           >
-            <option value="incident.created">Incident Created</option>
-            <option value="incident.severity_escalated">Severity Escalated</option>
-            <option value="sla.breach_warning_15m">SLA Breach Warning (15 mins)</option>
-            <option value="webhook.monitoring_feed">Webhook: SCADA / Splunk Feed</option>
-            <option value="schedule.daily_readiness">Schedule: 07:00 AM Daily Readiness</option>
+            <option value="incident.created">{t("incidentCreated")}</option>
+            <option value="incident.severity_escalated">{t("severityEscalated")}</option>
+            <option value="sla.breach_warning_15m">{t("slaBreachWarning")}</option>
+            <option value="webhook.monitoring_feed">{t("webhookFeed")}</option>
+            <option value="schedule.daily_readiness">{t("scheduleReadiness")}</option>
           </select>
         </div>
         <div className="md:col-span-2 space-y-1">
-          <label className="text-text-muted font-medium">Description</label>
+          <label className="text-text-muted font-medium">{t("description")}</label>
           <input
             type="text"
             value={description}
@@ -114,7 +116,7 @@ export function RuleBuilder({
       {/* Conditions (IF) */}
       <div className="space-y-2 rounded-lg border border-border-subtle bg-surface-base p-3">
         <div className="flex items-center justify-between">
-          <span className="font-semibold text-text-main">IF Conditions (All must match)</span>
+          <span className="font-semibold text-text-main">{t("ifConditions")}</span>
           <button
             type="button"
             onClick={addCondition}
@@ -135,7 +137,7 @@ export function RuleBuilder({
                   setConditions(updated);
                 }}
                 className="w-1/3 rounded border border-border-subtle bg-surface-elevated px-2 py-1 text-xs text-text-main"
-                placeholder="field (e.g. severity)"
+                placeholder={t("fieldPlaceholder")}
               />
               <select
                 value={cond.operator}
@@ -147,9 +149,9 @@ export function RuleBuilder({
                 className="w-1/4 rounded border border-border-subtle bg-surface-elevated px-2 py-1 text-xs text-text-main"
               >
                 <option value="equals">equals</option>
-                <option value="not_equals">not equals</option>
+                <option value="not_equals">{t("notEquals")}</option>
                 <option value="contains">contains</option>
-                <option value="greater_than">greater than</option>
+                <option value="greater_than">{t("greaterThan")}</option>
               </select>
               <input
                 type="text"
@@ -177,7 +179,7 @@ export function RuleBuilder({
       {/* Actions (THEN) */}
       <div className="space-y-2 rounded-lg border border-border-subtle bg-surface-base p-3">
         <div className="flex items-center justify-between">
-          <span className="font-semibold text-text-main">THEN Actions</span>
+          <span className="font-semibold text-text-main">{t("thenActions")}</span>
           <button
             type="button"
             onClick={addAction}
@@ -198,10 +200,10 @@ export function RuleBuilder({
                 }}
                 className="w-1/3 rounded border border-border-subtle bg-surface-elevated px-2 py-1 text-xs text-text-main"
               >
-                <option value="dispatch_notification">Dispatch Notification</option>
-                <option value="create_task">Create Critical Task</option>
-                <option value="escalate_sla">Escalate SLA Level</option>
-                <option value="webhook_post">Post External Webhook</option>
+                <option value="dispatch_notification">{t("dispatchNotification")}</option>
+                <option value="create_task">{t("createCriticalTask")}</option>
+                <option value="escalate_sla">{t("escalateSla")}</option>
+                <option value="webhook_post">{t("postWebhook")}</option>
               </select>
               <input
                 type="text"
@@ -212,7 +214,7 @@ export function RuleBuilder({
                   setActions(updated);
                 }}
                 className="flex-1 rounded border border-border-subtle bg-surface-elevated px-2 py-1 text-xs text-text-main"
-                placeholder="Target audience or task title"
+                placeholder={t("targetPlaceholder")}
               />
               <button
                 type="button"

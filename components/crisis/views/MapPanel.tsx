@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Site, SEED_SITES } from "@/seed/data";
 import { MapPin, Navigation, Building2, AlertTriangle, CheckCircle2 } from "lucide-react";
 import { Ltr } from "@/components/common/Ltr";
@@ -24,6 +25,7 @@ export const MapPanel: React.FC<MapPanelProps> = ({
   onSelectSite,
   className = "",
 }) => {
+  const t = useTranslations("components");
   const sites: Site[] = directSites || (points ? points.map((p, idx) => ({
     id: `point-${idx}`,
     tenant_id: "gulf_water",
@@ -49,12 +51,12 @@ export const MapPanel: React.FC<MapPanelProps> = ({
         <div>
           <h3 className="font-bold text-xs text-app-text flex items-center gap-1.5">
             <Navigation className="w-4 h-4 text-brand-600" />
-            <span>Oman &amp; GCC Operational Critical Sites Map</span>
+            <span>{t("mapTitle")}</span>
           </h3>
-          <p className="text-[11px] text-app-muted mt-0.5">Real-time status across coastal and interior infrastructure</p>
+          <p className="text-[11px] text-app-muted mt-0.5">{t("mapSub")}</p>
         </div>
         <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-app-surface-subtle text-app-muted">
-          <Ltr>{sites.length}</Ltr> Monitored Locations
+          <Ltr>{sites.length}</Ltr> {t("monitoredLocations")}
         </span>
       </div>
 
@@ -129,7 +131,7 @@ export const MapPanel: React.FC<MapPanelProps> = ({
                   ) : (
                     <span className="text-[11px] font-semibold text-emerald-600 flex items-center gap-1">
                       <CheckCircle2 className="w-3.5 h-3.5" />
-                      <span>All Systems Normal</span>
+                      <span>{t("allSystemsNormal")}</span>
                     </span>
                   )}
                 </div>
@@ -142,11 +144,11 @@ export const MapPanel: React.FC<MapPanelProps> = ({
 
               <div className="space-y-1 text-[11px] text-app-muted border-t border-app-border pt-2">
                 <div className="flex justify-between">
-                  <span>City / Region:</span>
+                  <span>{t("cityRegion")}</span>
                   <span className="font-semibold text-app-text">{selectedSite.city}, {selectedSite.country}</span>
                 </div>
                 <div className="flex justify-between font-mono">
-                  <span>Coordinates:</span>
+                  <span>{t("coordinates")}</span>
                   <span className="text-app-text">
                     <Ltr>{selectedSite.lat.toFixed(4)}°N, {selectedSite.lng.toFixed(4)}°E</Ltr>
                   </span>
@@ -154,7 +156,7 @@ export const MapPanel: React.FC<MapPanelProps> = ({
               </div>
             </>
           ) : (
-            <div className="text-center text-xs text-app-muted my-auto">Select a site pin on the map</div>
+            <div className="text-center text-xs text-app-muted my-auto">{t("selectSitePin")}</div>
           )}
         </div>
       </div>

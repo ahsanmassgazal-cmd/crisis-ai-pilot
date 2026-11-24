@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Sliders, Plus, Trash2, CheckCircle2 } from "lucide-react";
 
 export interface ConditionRule {
@@ -22,6 +23,7 @@ export function ConditionBuilder({
   ],
   onChange
 }: ConditionBuilderProps) {
+  const t = useTranslations("components");
   const [rules, setRules] = useState<ConditionRule[]>(initialConditions);
 
   const addRule = () => {
@@ -44,7 +46,7 @@ export function ConditionBuilder({
       <div className="flex items-center justify-between border-b border-border-subtle pb-2">
         <div className="flex items-center gap-1.5 font-semibold text-text-main">
           <Sliders className="h-4 w-4 text-brand-500" />
-          <span>Condition Group (Logical AND)</span>
+          <span>{t("conditionGroupTitle")}</span>
         </div>
         <button
           type="button"
@@ -69,11 +71,11 @@ export function ConditionBuilder({
               }}
               className="w-1/3 rounded border border-border-subtle bg-surface-elevated px-2 py-1 text-xs text-text-main"
             >
-              <option value="severity">Incident Severity</option>
-              <option value="category">Category</option>
-              <option value="site.tier">Site Infrastructure Tier</option>
-              <option value="sla.remaining_minutes">SLA Minutes Remaining</option>
-              <option value="responder.acked_percent">Responder Ack Rate (%)</option>
+              <option value="severity">{t("severityEscalated")}</option>
+              <option value="category">{t("categoryLabel") || "Category"}</option>
+              <option value="site.tier">{t("siteTier") || "Site Infrastructure Tier"}</option>
+              <option value="sla.remaining_minutes">{t("slaRemainingMinutes") || "SLA Minutes Remaining"}</option>
+              <option value="responder.acked_percent">{t("responderAckRate") || "Responder Ack Rate (%)"}</option>
             </select>
 
             <select
@@ -87,10 +89,10 @@ export function ConditionBuilder({
               }}
               className="w-1/4 rounded border border-border-subtle bg-surface-elevated px-2 py-1 text-xs text-text-main"
             >
-              <option value="equals">== is</option>
-              <option value="not_equals">!= is not</option>
-              <option value="greater_than">&gt; greater than</option>
-              <option value="less_than">&lt; less than</option>
+              <option value="equals">== {t("isOp") || "is"}</option>
+              <option value="not_equals">!= {t("notEquals")}</option>
+              <option value="greater_than">&gt; {t("greaterThan")}</option>
+              <option value="less_than">&lt; {t("lessThan")}</option>
               <option value="contains">contains</option>
             </select>
 
@@ -105,7 +107,7 @@ export function ConditionBuilder({
                 onChange?.(updated);
               }}
               className="flex-1 rounded border border-border-subtle bg-surface-elevated px-2 py-1 text-xs text-text-main"
-              placeholder="Value"
+              placeholder={t("valuePlaceholder")}
             />
 
             <button

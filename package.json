@@ -9,6 +9,7 @@
     "lint": "next lint",
     "lint:rtl": "node scripts/lint-rtl.mjs",
     "lint:tokens": "node scripts/lint-tokens.mjs",
+    "lint:strings": "node scripts/lint-strings.mjs",
     "i18n:check": "node scripts/i18n-check.mjs"
   },
   "dependencies": {

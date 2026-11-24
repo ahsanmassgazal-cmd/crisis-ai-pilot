@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 import { AlertTriangle, X } from "lucide-react";
 
 interface ConfirmDialogProps {
@@ -24,6 +25,7 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
   onConfirm,
   onCancel,
 }) => {
+  const t = useTranslations("common");
   const [typedInput, setTypedInput] = useState("");
 
   if (!isOpen) return null;
@@ -59,7 +61,7 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
           <button
             onClick={onCancel}
             className="text-app-muted hover:text-app-text p-1 rounded-input"
-            aria-label="Cancel"
+            aria-label={t("cancel")}
           >
             <X className="w-4 h-4" />
           </button>

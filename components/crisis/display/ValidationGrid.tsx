@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Ltr } from "@/components/layout/Ltr";
 import { CheckCircle2, AlertTriangle, XCircle, Search } from "lucide-react";
 
@@ -26,6 +27,7 @@ export function ValidationGrid({
   warningCount,
   errorCount
 }: ValidationGridProps) {
+  const t = useTranslations("components");
   const [filter, setFilter] = useState<"all" | "valid" | "warning" | "error">("all");
   const [search, setSearch] = useState("");
 
@@ -47,7 +49,7 @@ export function ValidationGrid({
       {/* Summary KPI Strip */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
         <div className="rounded-lg border border-border-subtle bg-surface-base p-2.5 text-xs">
-          <span className="text-[10px] text-text-muted uppercase">Total Rows</span>
+          <span className="text-[10px] text-text-muted uppercase">{t("totalRows")}</span>
           <p className="text-base font-bold text-text-main"><Ltr>{totalCount}</Ltr></p>
         </div>
         <div className="rounded-lg border border-emerald-500/20 bg-emerald-500/5 p-2.5 text-xs">
@@ -117,7 +119,7 @@ export function ValidationGrid({
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search validated rows..."
+            placeholder={t("searchValidated")}
             className="w-full rounded-lg border border-border-subtle bg-surface-base ps-8 pe-3 py-1.5 text-xs text-text-main focus:outline-none focus:ring-1 focus:ring-brand-500"
           />
         </div>
@@ -129,13 +131,13 @@ export function ValidationGrid({
           <thead className="bg-surface-elevated text-text-muted border-b border-border-subtle">
             <tr>
               <th className="px-3 py-2 text-start font-semibold w-12">#</th>
-              <th className="px-3 py-2 text-start font-semibold w-24">Status</th>
+              <th className="px-3 py-2 text-start font-semibold w-24">{t("statusLabel")}</th>
               {columns.map((col) => (
                 <th key={col} className="px-3 py-2 text-start font-semibold capitalize whitespace-nowrap">
                   {col}
                 </th>
               ))}
-              <th className="px-3 py-2 text-start font-semibold">Validation Notes</th>
+              <th className="px-3 py-2 text-start font-semibold">{t("validationNotes")}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-border-subtle">

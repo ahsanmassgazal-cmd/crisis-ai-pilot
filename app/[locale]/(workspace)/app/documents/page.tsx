@@ -139,7 +139,7 @@ export default function DocumentsHubPage() {
             className="inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 px-3.5 py-1.5 text-xs font-bold text-white shadow-sm hover:opacity-95 transition"
           >
             <Sparkles className="h-3.5 w-3.5" />
-            <span>Extract Plan with AI</span>
+            <span>{t("documentsCenter.extractPlanWithAi")}</span>
           </button>
         </div>
       </div>
@@ -149,8 +149,8 @@ export default function DocumentsHubPage() {
         <div className="flex items-center gap-2">
           <AlertTriangle className="h-4 w-4 text-amber-400 shrink-0" />
           <span>
-            Document Expiry Alert: <strong className="text-white">ISO 22301 Certification</strong> expires in{" "}
-            <strong className="text-white">32 days</strong>. Review scheduled for next audit cycle.
+            Document Expiry Alert: <strong className="text-white">ISO 22301</strong> expires in{" "}
+            <strong className="text-white"><Ltr>32</Ltr> {t("common.days")}</strong>. Review scheduled for next audit cycle.
           </span>
         </div>
         <button
@@ -179,7 +179,7 @@ export default function DocumentsHubPage() {
                   : "text-text-muted hover:bg-surface-base hover:text-text-main"
               }`}
             >
-              <span>All Documents</span>
+              <span>{t("documentsCenter.allDocuments")}</span>
               <span className="text-[10px] font-mono"><Ltr>{documents.length}</Ltr></span>
             </button>
 
@@ -208,7 +208,7 @@ export default function DocumentsHubPage() {
           </div>
 
           <div className="pt-3 border-t border-border-subtle">
-            <span className="text-[10px] font-semibold text-text-muted uppercase block mb-2">Upload Document</span>
+            <span className="text-[10px] font-semibold text-text-muted uppercase block mb-2">{t("documentsCenter.uploadDocument")}</span>
             <FileDropzone onFileSelect={(file) => showToast(`Uploaded "${file.name}" to repository.`)} />
           </div>
         </div>
@@ -223,7 +223,7 @@ export default function DocumentsHubPage() {
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search documents by name..."
+                placeholder={t("documentsCenter.searchPlaceholder")}
                 className="w-full rounded-lg border border-border-subtle bg-surface-base ps-8 pe-3 py-1.5 text-xs text-text-main focus:outline-none focus:ring-1 focus:ring-brand-500"
               />
             </div>
@@ -271,7 +271,7 @@ export default function DocumentsHubPage() {
                     <div>
                       <h4 className="font-bold text-text-main text-xs line-clamp-2">{doc.title}</h4>
                       <p className="text-[10px] text-text-muted mt-1">
-                        {doc.format} • <Ltr>{doc.size}</Ltr> • Expires in <Ltr>{doc.expiresInDays}</Ltr>d
+                        {doc.format} • <Ltr>{doc.size}</Ltr> • {t("documentsCenter.expiresIn")} <Ltr>{doc.expiresInDays}</Ltr>d
                       </p>
                     </div>
                   </div>
@@ -295,7 +295,7 @@ export default function DocumentsHubPage() {
                       className="inline-flex items-center gap-1 text-[10px] text-brand-400 font-semibold hover:underline"
                     >
                       <Download className="h-3 w-3" />
-                      <span>Download</span>
+                      <span>{t("common.download")}</span>
                     </button>
                   </div>
                 </div>
@@ -306,11 +306,11 @@ export default function DocumentsHubPage() {
               <table className="w-full text-start">
                 <thead className="border-b border-border-subtle text-text-muted">
                   <tr>
-                    <th className="py-2 text-start">Document Title</th>
-                    <th className="py-2 text-start">Version</th>
-                    <th className="py-2 text-start">Size</th>
-                    <th className="py-2 text-start">Expiry</th>
-                    <th className="py-2 text-end">Actions</th>
+                    <th className="py-2 text-start">{t("documentsCenter.documentTitle")}</th>
+                    <th className="py-2 text-start">{t("common.version")}</th>
+                    <th className="py-2 text-start">{t("common.size")}</th>
+                    <th className="py-2 text-start">{t("common.expiry")}</th>
+                    <th className="py-2 text-end">{t("common.actions")}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border-subtle">

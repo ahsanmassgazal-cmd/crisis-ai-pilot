@@ -38,13 +38,17 @@ export interface Person {
   name_ar: string;
   employee_code: string;
   department: string;
+  group_id?: string;
   site_id: string;
   title: string;
+  role?: string;
   email: string;
   phone_e164: string;
+  phone?: string;
   teams_handle?: string;
   channel_pref: string[];
   language_pref: "en" | "ar";
+  lang?: "en" | "ar";
   on_call: boolean;
   reachability_score: number;
   verified_channels: string[];

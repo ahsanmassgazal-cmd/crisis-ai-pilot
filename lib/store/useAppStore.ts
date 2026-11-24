@@ -32,6 +32,7 @@ interface AppState {
   rolePickerOpen: boolean;
   activeSev1BannerVisible: boolean;
   sidebarCollapsed: boolean;
+  copilotOpen: boolean;
 
   setTenant: (tenant: TenantId) => void;
   setRole: (role: RoleId) => void;
@@ -42,6 +43,8 @@ interface AppState {
   setRolePickerOpen: (open: boolean) => void;
   dismissSev1Banner: () => void;
   toggleSidebar: () => void;
+  setCopilotOpen: (open: boolean) => void;
+  toggleCopilot: () => void;
 }
 
 export const useAppStore = create<AppState>((set) => ({
@@ -55,6 +58,7 @@ export const useAppStore = create<AppState>((set) => ({
   rolePickerOpen: false,
   activeSev1BannerVisible: true,
   sidebarCollapsed: false,
+  copilotOpen: false,
 
   setTenant: (currentTenant) => set({ currentTenant }),
   setRole: (currentRole) => set({ currentRole }),
@@ -67,4 +71,6 @@ export const useAppStore = create<AppState>((set) => ({
   dismissSev1Banner: () => set({ activeSev1BannerVisible: false }),
   toggleSidebar: () =>
     set((state) => ({ sidebarCollapsed: !state.sidebarCollapsed })),
+  setCopilotOpen: (copilotOpen) => set({ copilotOpen }),
+  toggleCopilot: () => set((state) => ({ copilotOpen: !state.copilotOpen })),
 }));

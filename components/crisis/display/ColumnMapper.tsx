@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 import { ArrowRight, Check, AlertCircle } from "lucide-react";
 
 export interface ColumnMappingField {
@@ -21,6 +22,7 @@ export function ColumnMapper({
   targetSchema,
   onChange
 }: ColumnMapperProps) {
+  const t = useTranslations("components");
   const [mappings, setMappings] = useState<Record<string, string>>(() => {
     const init: Record<string, string> = {};
     fields.forEach((f) => {
@@ -38,7 +40,7 @@ export function ColumnMapper({
   return (
     <div className="rounded-xl border border-border-subtle bg-surface-elevated p-4 space-y-3">
       <div className="border-b border-border-subtle pb-2">
-        <h4 className="text-xs font-semibold text-text-main">Map File Columns to Platform Schema</h4>
+        <h4 className="text-xs font-semibold text-text-main">{t("mapColumnsTitle")}</h4>
         <p className="text-[11px] text-text-muted">
           Match incoming file columns with platform target fields. Auto-mapping matched 84% of headers.
         </p>
@@ -71,8 +73,8 @@ export function ColumnMapper({
                   onChange={(e) => handleSelect(f.sourceKey, e.target.value)}
                   className="w-full rounded-lg border border-border-subtle bg-surface-base px-2.5 py-1.5 text-xs text-text-main focus:outline-none focus:ring-1 focus:ring-brand-500"
                 >
-                  <option value="">-- Select Target Field --</option>
-                  <option value="ignore">❌ Ignore (Do Not Import)</option>
+                  <option value="">{t("selectTargetField")}</option>
+                  <option value="ignore">{t("ignoreField")}</option>
                   {targetSchema.map((t) => (
                     <option key={t.key} value={t.key}>
                       {t.label} {t.required ? "*" : ""}

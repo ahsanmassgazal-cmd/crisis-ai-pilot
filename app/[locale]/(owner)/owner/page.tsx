@@ -43,45 +43,45 @@ export default function OwnerConsoleOverview() {
             href="/app"
             className="px-3 py-1.5 rounded-input bg-brand-600 hover:bg-brand-hover text-white text-xs font-semibold"
           >
-            Switch to Client Workspace
+            {t("owner.switchToClient")}
           </Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div className="p-4 rounded-card bg-app-surface border border-app-border">
-            <div className="text-xs text-app-muted font-medium">Total Client Tenants</div>
+            <div className="text-xs text-app-muted font-medium">{t("owner.totalTenants")}</div>
             <div className="text-2xl font-bold text-app-text mt-1">4</div>
-            <div className="text-[11px] text-emerald-600 mt-0.5">100% active</div>
+            <div className="text-[11px] text-emerald-600 mt-0.5">{t("owner.activePercent")}</div>
           </div>
           <div className="p-4 rounded-card bg-app-surface border border-app-border">
-            <div className="text-xs text-app-muted font-medium">Active Incidents Monitored</div>
+            <div className="text-xs text-app-muted font-medium">{t("owner.activeIncidents")}</div>
             <div className="text-2xl font-bold text-severity-critical mt-1">1</div>
-            <div className="text-[11px] text-app-muted mt-0.5">SEV1 in Gulf Water</div>
+            <div className="text-[11px] text-app-muted mt-0.5">{t("owner.sev1GulfWater")}</div>
           </div>
           <div className="p-4 rounded-card bg-app-surface border border-app-border">
-            <div className="text-xs text-app-muted font-medium">Monthly Messages Sent</div>
+            <div className="text-xs text-app-muted font-medium">{t("owner.monthlyMessages")}</div>
             <div className="text-2xl font-bold text-app-text mt-1">14,290</div>
-            <div className="text-[11px] text-emerald-600 mt-0.5">99.4% Delivery rate</div>
+            <div className="text-[11px] text-emerald-600 mt-0.5">{t("owner.deliveryRate")}</div>
           </div>
           <div className="p-4 rounded-card bg-app-surface border border-app-border">
-            <div className="text-xs text-app-muted font-medium">Average Client Readiness</div>
+            <div className="text-xs text-app-muted font-medium">{t("owner.clientReadiness")}</div>
             <div className="text-2xl font-bold text-brand-600 mt-1">82%</div>
-            <div className="text-[11px] text-app-muted mt-0.5">Across all GCC orgs</div>
+            <div className="text-[11px] text-app-muted mt-0.5">{t("owner.gccOrgs")}</div>
           </div>
         </div>
 
         <div className="rounded-card bg-app-surface border border-app-border p-5 space-y-4">
-          <h2 className="font-bold text-sm text-app-text">Client Organizations (Tenants)</h2>
+          <h2 className="font-bold text-sm text-app-text">{t("owner.tenantsTitle")}</h2>
           <div className="overflow-x-auto">
             <table className="w-full text-xs text-start">
               <thead className="border-b border-app-border text-app-muted">
                 <tr>
-                  <th className="py-2.5 text-start font-semibold">Client Name</th>
-                  <th className="py-2.5 text-start font-semibold">Country</th>
-                  <th className="py-2.5 text-start font-semibold">Health</th>
-                  <th className="py-2.5 text-start font-semibold">Package</th>
-                  <th className="py-2.5 text-start font-semibold">Responders</th>
-                  <th className="py-2.5 text-end font-semibold">Action</th>
+                  <th className="py-2.5 text-start font-semibold">{t("owner.clientName")}</th>
+                  <th className="py-2.5 text-start font-semibold">{t("owner.country")}</th>
+                  <th className="py-2.5 text-start font-semibold">{t("owner.health")}</th>
+                  <th className="py-2.5 text-start font-semibold">{t("owner.package")}</th>
+                  <th className="py-2.5 text-start font-semibold">{t("owner.responders")}</th>
+                  <th className="py-2.5 text-end font-semibold">{t("owner.action")}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-app-border">
@@ -105,7 +105,7 @@ export default function OwnerConsoleOverview() {
                         href="/app"
                         className="inline-flex items-center gap-1 text-brand-600 hover:underline font-semibold"
                       >
-                        <span>Open Workspace</span>
+                        <span>{t("owner.openWorkspace")}</span>
                         <ArrowUpRight className="w-3.5 h-3.5" />
                       </Link>
                     </td>

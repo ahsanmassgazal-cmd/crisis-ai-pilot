@@ -81,7 +81,7 @@ export default function LoginPage() {
                 </div>
 
                 <div className="mt-4 pt-3 border-t border-app-border flex items-center justify-between text-xs font-semibold text-brand-600">
-                  <span>Enter as Persona</span>
+                  <span>{t("login.enterAsPersona")}</span>
                   <ArrowRight className="w-3.5 h-3.5 dir-aware-flip group-hover:translate-x-1 transition-transform" />
                 </div>
               </button>

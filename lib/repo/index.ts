@@ -186,8 +186,8 @@ class MockCrisisRepo implements CrisisRepository {
       mockRules = mockRules.filter((r) => r.id !== id);
       return true;
     },
-    setMode: async (scope: string, mode: "auto" | "assisted" | "manual") => {},
-    killSwitch: async (paused: boolean, reason?: string) => {},
+    setMode: async (scope: string, mode: "auto" | "assisted" | "manual") => { },
+    killSwitch: async (paused: boolean, reason?: string) => { },
   };
 
   audit = {

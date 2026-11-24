@@ -103,7 +103,7 @@ export default function MessageTemplatesPage() {
           className="inline-flex items-center gap-1.5 rounded-lg bg-brand-500 px-3.5 py-1.5 text-xs font-semibold text-white hover:bg-brand-600 shadow-sm transition"
         >
           <Plus className="h-3.5 w-3.5" />
-          <span>New Template</span>
+          <span>{t("templatesCenter.newTemplate")}</span>
         </button>
       </div>
 
@@ -132,7 +132,7 @@ export default function MessageTemplatesPage() {
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search templates by name..."
+            placeholder={t("templatesCenter.searchPlaceholder")}
             className="w-full rounded-lg border border-border-subtle bg-surface-elevated ps-8 pe-3 py-1.5 text-xs text-text-main focus:outline-none focus:ring-1 focus:ring-brand-500"
           />
         </div>
@@ -187,7 +187,7 @@ export default function MessageTemplatesPage() {
 
                 {/* Variable Chips */}
                 <div className="flex flex-wrap items-center gap-1.5">
-                  <span className="text-[10px] text-text-muted">Variables:</span>
+                  <span className="text-[10px] text-text-muted">{t("templatesCenter.variablesLabel")}:</span>
                   {tpl.variables.map((v) => (
                     <span
                       key={v}
@@ -215,7 +215,7 @@ export default function MessageTemplatesPage() {
         {/* Live Device Phone Preview */}
         <div className="rounded-xl border border-border-subtle bg-surface-elevated p-4 flex flex-col items-center">
           <div className="w-full border-b border-border-subtle pb-3 mb-3 text-center">
-            <h3 className="font-bold text-xs text-text-main">Template Device Preview</h3>
+            <h3 className="font-bold text-xs text-text-main">{t("templatesCenter.devicePreviewTitle")}</h3>
             <p className="text-[10px] text-text-muted">{activeTemplate.name}</p>
           </div>
 

@@ -111,26 +111,26 @@ export default function NotificationsCenterPage() {
       {/* KPI Overview */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
         <div className="rounded-xl border border-border-subtle bg-surface-elevated p-3.5 space-y-1">
-          <span className="text-[10px] text-text-muted uppercase">Total Dispatched (24h)</span>
+          <span className="text-[10px] text-text-muted uppercase">{t("notificationsCenter.totalDispatched")}</span>
           <p className="text-xl font-bold text-text-main"><Ltr>1,482</Ltr></p>
           <span className="text-[10px] text-emerald-400 flex items-center gap-0.5">
             <TrendingUp className="h-3 w-3" /> 99.4% Delivery Success
           </span>
         </div>
         <div className="rounded-xl border border-border-subtle bg-surface-elevated p-3.5 space-y-1">
-          <span className="text-[10px] text-text-muted uppercase">Avg Latency (SMS)</span>
+          <span className="text-[10px] text-text-muted uppercase">{t("notificationsCenter.avgLatency")}</span>
           <p className="text-xl font-bold text-text-main"><Ltr>1.4s</Ltr></p>
-          <span className="text-[10px] text-text-muted">Target &lt; 3.0s</span>
+          <span className="text-[10px] text-text-muted">{t("notificationsCenter.targetLatency")}</span>
         </div>
         <div className="rounded-xl border border-border-subtle bg-surface-elevated p-3.5 space-y-1">
-          <span className="text-[10px] text-text-muted uppercase">Active Gateways</span>
+          <span className="text-[10px] text-text-muted uppercase">{t("notificationsCenter.activeGateways")}</span>
           <p className="text-xl font-bold text-emerald-400"><Ltr>3 / 3</Ltr></p>
-          <span className="text-[10px] text-text-muted">Teams, Email, SMS A/B</span>
+          <span className="text-[10px] text-text-muted">{t("notificationsCenter.gatewaysSummary")}</span>
         </div>
         <div className="rounded-xl border border-border-subtle bg-surface-elevated p-3.5 space-y-1">
-          <span className="text-[10px] text-text-muted uppercase">Auto-Failovers</span>
+          <span className="text-[10px] text-text-muted uppercase">{t("notificationsCenter.autoFailovers")}</span>
           <p className="text-xl font-bold text-amber-400"><Ltr>1</Ltr></p>
-          <span className="text-[10px] text-amber-400">Provider A → Provider B</span>
+          <span className="text-[10px] text-amber-400">{t("notificationsCenter.failoverSummary")}</span>
         </div>
       </div>
 
@@ -191,7 +191,7 @@ export default function NotificationsCenterPage() {
                       <DeliveryStateDot state={item.status} />
                       <span className="capitalize">{item.status}</span>
                     </span>
-                    <span>• Latency: <Ltr>{item.latency}</Ltr></span>
+                    <><span>• {t("notificationsCenter.latencyLabel")}:</span> <Ltr>{item.latency}</Ltr></>
                     <span className="font-mono"><Ltr>{item.time}</Ltr></span>
                   </div>
                 </div>
@@ -202,7 +202,7 @@ export default function NotificationsCenterPage() {
 
                 <div className="flex items-center justify-between text-[10px] text-text-muted pt-1 border-t border-border-subtle/50">
                   <span className="font-mono">Route: {item.provider}</span>
-                  <span className="text-brand-500 font-semibold hover:underline">Preview on Device →</span>
+                  <span className="text-brand-500 font-semibold hover:underline">{t("notificationsCenter.previewOnDevice")}</span>
                 </div>
               </div>
             ))}
@@ -212,8 +212,8 @@ export default function NotificationsCenterPage() {
         {/* Live Device Phone Preview */}
         <div className="rounded-xl border border-border-subtle bg-surface-elevated p-4 flex flex-col items-center">
           <div className="w-full border-b border-border-subtle pb-3 mb-3 text-center">
-            <h3 className="font-bold text-xs text-text-main">Live Mobile & Teams Preview</h3>
-            <p className="text-[10px] text-text-muted">Inspect rendered message formatting across devices</p>
+            <h3 className="font-bold text-xs text-text-main">{t("notificationsCenter.liveDevicePreviewTitle")}</h3>
+            <p className="text-[10px] text-text-muted">{t("notificationsCenter.liveDevicePreviewSub")}</p>
           </div>
 
           <PhonePreview

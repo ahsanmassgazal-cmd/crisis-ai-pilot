@@ -105,7 +105,7 @@ export default function ActivateIncidentPage() {
       {step === 1 && (
         <div className="rounded-xl border border-border-subtle bg-surface-elevated p-6 space-y-5 text-xs animate-fade-in">
           <div>
-            <h3 className="text-sm font-bold text-text-main">Step 1: Choose Scenario & Location</h3>
+            <h3 className="text-sm font-bold text-text-main">{t("activate.step1Head")}</h3>
             <p className="text-[11px] text-text-muted mt-0.5">
               Select an incident template or enter custom incident parameters.
             </p>
@@ -113,7 +113,7 @@ export default function ActivateIncidentPage() {
 
           {/* Preset Buttons */}
           <div className="space-y-1.5">
-            <label className="font-semibold text-text-main block">Quick Scenario Templates</label>
+            <label className="font-semibold text-text-main block">{t("activate.quickTemplates")}</label>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
               {[
                 { id: "cyber", title: "SCADA Cyber Anomaly", cat: "cyber" },
@@ -145,7 +145,7 @@ export default function ActivateIncidentPage() {
           {/* Form Fields */}
           <div className="space-y-3">
             <div className="space-y-1">
-              <label className="font-semibold text-text-main block">Incident Title</label>
+              <label className="font-semibold text-text-main block">{t("activate.incidentTitle")}</label>
               <input
                 type="text"
                 value={title}
@@ -156,31 +156,31 @@ export default function ActivateIncidentPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div className="space-y-1">
-                <label className="font-semibold text-text-main block">Primary Affected Site</label>
+                <label className="font-semibold text-text-main block">{t("activate.affectedSite")}</label>
                 <select
                   value={site}
                   onChange={(e) => setSite(e.target.value)}
                   className="w-full rounded-lg border border-border-subtle bg-surface-base px-3 py-2 text-xs text-text-main focus:ring-1 focus:ring-brand-500"
                 >
-                  <option value="Sohar Desalination Plant">Sohar Desalination Plant (Tier 1)</option>
-                  <option value="Muscat Central Pumping Station">Muscat Central Pumping Station (Tier 1)</option>
-                  <option value="Salalah Power & Distribution">Salalah Power & Distribution (Tier 2)</option>
-                  <option value="Nizwa Regional Operations Hub">Nizwa Regional Operations Hub (Tier 2)</option>
+                  <option value="Sohar Desalination Plant">{t("activate.soharPlant")}</option>
+                  <option value="Muscat Central Pumping Station">{t("activate.muscatStation")}</option>
+                  <option value="Salalah Power & Distribution">{t("activate.salalahPower")}</option>
+                  <option value="Nizwa Regional Operations Hub">{t("activate.nizwaHub")}</option>
                 </select>
               </div>
 
               <div className="space-y-1">
-                <label className="font-semibold text-text-main block">Category</label>
+                <label className="font-semibold text-text-main block">{t("activate.categoryLabel")}</label>
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
                   className="w-full rounded-lg border border-border-subtle bg-surface-base px-3 py-2 text-xs text-text-main focus:ring-1 focus:ring-brand-500"
                 >
-                  <option value="cyber">Cyber Security Anomaly</option>
-                  <option value="power">Power / Utility Failure</option>
-                  <option value="weather">Extreme Weather / Flood</option>
-                  <option value="environmental">Hazardous Chemical Spill</option>
-                  <option value="health">Health & Public Safety</option>
+                  <option value="cyber">{t("activate.cyberAnomaly")}</option>
+                  <option value="power">{t("activate.powerFailure")}</option>
+                  <option value="weather">{t("activate.extremeWeather")}</option>
+                  <option value="environmental">{t("activate.chemicalSpill")}</option>
+                  <option value="health">{t("activate.healthSafety")}</option>
                 </select>
               </div>
             </div>
@@ -192,7 +192,7 @@ export default function ActivateIncidentPage() {
               onClick={() => setStep(2)}
               className="inline-flex items-center gap-1.5 rounded-lg bg-brand-500 px-4 py-2 text-xs font-semibold text-white hover:bg-brand-600 transition"
             >
-              <span>Continue to Severity Assessment</span>
+              <span>{t("activate.continueSeverity")}</span>
               <ArrowRight className="h-3.5 w-3.5 rtl-flip" />
             </button>
           </div>
@@ -203,7 +203,7 @@ export default function ActivateIncidentPage() {
       {step === 2 && (
         <div className="rounded-xl border border-border-subtle bg-surface-elevated p-6 space-y-5 text-xs animate-fade-in">
           <div>
-            <h3 className="text-sm font-bold text-text-main">Step 2: Guided Severity Assessment</h3>
+            <h3 className="text-sm font-bold text-text-main">{t("activate.step2Head")}</h3>
             <p className="text-[11px] text-text-muted mt-0.5">
               Answer the standard ISO 22301 triage matrix questions to determine incident classification.
             </p>
@@ -211,44 +211,44 @@ export default function ActivateIncidentPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div className="rounded-lg border border-border-subtle bg-surface-base p-3 space-y-2">
-              <label className="font-semibold text-text-main block">Human Safety Impact</label>
+              <label className="font-semibold text-text-main block">{t("activate.humanSafety")}</label>
               <select
                 value={safetyImpact}
                 onChange={(e) => setSafetyImpact(e.target.value)}
                 className="w-full rounded border border-border-subtle bg-surface-elevated p-1.5 text-xs text-text-main"
               >
-                <option value="critical">Critical (Threat to life)</option>
-                <option value="high">High (Injury risk)</option>
-                <option value="medium">Medium (Contained hazard)</option>
-                <option value="low">Low (Zero injury)</option>
+                <option value="critical">{t("activate.threatToLife")}</option>
+                <option value="high">{t("activate.injuryRisk")}</option>
+                <option value="medium">{t("activate.containedHazard")}</option>
+                <option value="low">{t("activate.zeroInjury")}</option>
               </select>
             </div>
 
             <div className="rounded-lg border border-border-subtle bg-surface-base p-3 space-y-2">
-              <label className="font-semibold text-text-main block">Operational Disruption</label>
+              <label className="font-semibold text-text-main block">{t("activate.operationalDisruption")}</label>
               <select
                 value={operationalImpact}
                 onChange={(e) => setOperationalImpact(e.target.value)}
                 className="w-full rounded border border-border-subtle bg-surface-elevated p-1.5 text-xs text-text-main"
               >
-                <option value="critical">&gt; 50% capacity offline</option>
-                <option value="high">25% - 50% capacity throttled</option>
-                <option value="medium">&lt; 25% redundant load</option>
-                <option value="low">Minimal operational deviation</option>
+                <option value="critical">{t("activate.over50Offline")}</option>
+                <option value="high">{t("activate.over25Throttled")}</option>
+                <option value="medium">{t("activate.under25Redundant")}</option>
+                <option value="low">{t("activate.minimalDeviation")}</option>
               </select>
             </div>
 
             <div className="rounded-lg border border-border-subtle bg-surface-base p-3 space-y-2">
-              <label className="font-semibold text-text-main block">Regulatory & Public Impact</label>
+              <label className="font-semibold text-text-main block">{t("activate.regulatoryPublicImpact")}</label>
               <select
                 value={regulatoryImpact}
                 onChange={(e) => setRegulatoryImpact(e.target.value)}
                 className="w-full rounded border border-border-subtle bg-surface-elevated p-1.5 text-xs text-text-main"
               >
-                <option value="critical">National disclosure required</option>
-                <option value="high">Regional regulator notice</option>
-                <option value="medium">Internal compliance report</option>
-                <option value="low">Standard log notice</option>
+                <option value="critical">{t("activate.nationalDisclosure")}</option>
+                <option value="high">{t("activate.regulatorNotice")}</option>
+                <option value="medium">{t("activate.complianceReport")}</option>
+                <option value="low">{t("activate.standardLog")}</option>
               </select>
             </div>
           </div>
@@ -261,7 +261,7 @@ export default function ActivateIncidentPage() {
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="font-bold text-sm text-text-main">Calculated Severity: SEV1 (Critical)</span>
+                  <span className="font-bold text-sm text-text-main">{t("activate.calculatedSeverity")}</span>
                   <SeverityBadge severity="critical" />
                 </div>
                 <p className="text-[11px] text-text-muted mt-0.5">
@@ -282,14 +282,14 @@ export default function ActivateIncidentPage() {
               className="inline-flex items-center gap-1 rounded-lg border border-border-subtle bg-surface-base px-3 py-1.5 text-text-muted hover:text-text-main"
             >
               <ArrowLeft className="h-3.5 w-3.5 rtl-flip" />
-              <span>Back</span>
+              <span>{t("common.back")}</span>
             </button>
             <button
               type="button"
               onClick={() => setStep(3)}
               className="inline-flex items-center gap-1.5 rounded-lg bg-brand-500 px-4 py-2 text-xs font-semibold text-white hover:bg-brand-600 transition"
             >
-              <span>Continue to Plan & Audiences</span>
+              <span>{t("activate.continuePlan")}</span>
               <ArrowRight className="h-3.5 w-3.5 rtl-flip" />
             </button>
           </div>
@@ -300,7 +300,7 @@ export default function ActivateIncidentPage() {
       {step === 3 && (
         <div className="rounded-xl border border-border-subtle bg-surface-elevated p-6 space-y-5 text-xs animate-fade-in">
           <div>
-            <h3 className="text-sm font-bold text-text-main">Step 3: Playbook & Responder Audiences</h3>
+            <h3 className="text-sm font-bold text-text-main">{t("activate.step3Head")}</h3>
             <p className="text-[11px] text-text-muted mt-0.5">
               The platform matched the optimal operational playbook based on site tier and incident category.
             </p>
@@ -312,7 +312,7 @@ export default function ActivateIncidentPage() {
               <span className="text-[10px] font-bold uppercase tracking-wider text-brand-400 flex items-center gap-1">
                 <Sparkles className="h-3.5 w-3.5" /> Auto-Matched Playbook (98% Confidence)
               </span>
-              <span className="text-[10px] text-text-muted">Version 3.2 (Approved)</span>
+              <span className="text-[10px] text-text-muted">{t("activate.versionLabel")}</span>
             </div>
             <h4 className="font-bold text-text-main text-sm">{selectedPlan}</h4>
             <p className="text-[11px] text-text-muted">
@@ -322,7 +322,7 @@ export default function ActivateIncidentPage() {
 
           {/* Targeted Audiences */}
           <div className="space-y-2">
-            <label className="font-semibold text-text-main block">Selected Responder Groups</label>
+            <label className="font-semibold text-text-main block">{t("activate.selectedGroups")}</label>
             <div className="space-y-2">
               {[
                 { name: "Primary SCADA On-Call Team", count: 14, channels: "SMS + Teams" },
@@ -378,14 +378,14 @@ export default function ActivateIncidentPage() {
               className="inline-flex items-center gap-1 rounded-lg border border-border-subtle bg-surface-base px-3 py-1.5 text-text-muted hover:text-text-main"
             >
               <ArrowLeft className="h-3.5 w-3.5 rtl-flip" />
-              <span>Back</span>
+              <span>{t("common.back")}</span>
             </button>
             <button
               type="button"
               onClick={() => setStep(4)}
               className="inline-flex items-center gap-1.5 rounded-lg bg-brand-500 px-4 py-2 text-xs font-semibold text-white hover:bg-brand-600 transition"
             >
-              <span>Review Activation Parameters</span>
+              <span>{t("activate.reviewParameters")}</span>
               <ArrowRight className="h-3.5 w-3.5 rtl-flip" />
             </button>
           </div>
@@ -396,7 +396,7 @@ export default function ActivateIncidentPage() {
       {step === 4 && (
         <div className="rounded-xl border border-border-subtle bg-surface-elevated p-6 space-y-5 text-xs animate-fade-in">
           <div>
-            <h3 className="text-sm font-bold text-text-main">Step 4: Review & Final Confirmation</h3>
+            <h3 className="text-sm font-bold text-text-main">{t("activate.step4Head")}</h3>
             <p className="text-[11px] text-text-muted mt-0.5">
               Confirm incident parameters. Activation will initialize the Incident Room and dispatch emergency alerts.
             </p>
@@ -405,7 +405,7 @@ export default function ActivateIncidentPage() {
           <div className="rounded-xl border border-border-subtle bg-surface-base p-4 space-y-3">
             <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border-subtle pb-2">
               <div>
-                <span className="text-[10px] text-text-muted uppercase">Incident Name</span>
+                <span className="text-[10px] text-text-muted uppercase">{t("activate.incidentName")}</span>
                 <h4 className="text-base font-bold text-text-main">{title}</h4>
               </div>
               <div className="flex items-center gap-2">
@@ -416,15 +416,15 @@ export default function ActivateIncidentPage() {
 
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
               <div>
-                <span className="text-text-muted block text-[10px]">Site</span>
+                <span className="text-text-muted block text-[10px]">{t("activate.siteLabel")}</span>
                 <span className="font-semibold text-text-main">{site}</span>
               </div>
               <div>
-                <span className="text-text-muted block text-[10px]">Category</span>
+                <span className="text-text-muted block text-[10px]">{t("activate.categoryLabel")}</span>
                 <span className="font-semibold text-text-main capitalize">{category}</span>
               </div>
               <div>
-                <span className="text-text-muted block text-[10px]">Playbook</span>
+                <span className="text-text-muted block text-[10px]">{t("activate.playbookLabel")}</span>
                 <span className="font-semibold text-text-main">CP-DESAL-04</span>
               </div>
             </div>
@@ -436,7 +436,7 @@ export default function ActivateIncidentPage() {
               <span className="font-semibold text-amber-400 text-xs flex items-center gap-1.5">
                 <Send className="h-3.5 w-3.5" /> Initial Broadcast Preview (SMS & Teams)
               </span>
-              <span className="text-[10px] text-text-muted">Total Recipients: 21</span>
+              <span className="text-[10px] text-text-muted">{t("activate.totalRecipients")}</span>
             </div>
             <p className="font-mono text-[11px] text-text-main bg-surface-base p-3 rounded-lg border border-border-subtle leading-relaxed">
               &quot;CRITICAL ALERT [SEV1]: {title} at {site}. Immediate emergency response activated. Report to Incident Room immediately.&quot;
@@ -450,7 +450,7 @@ export default function ActivateIncidentPage() {
               className="inline-flex items-center gap-1 rounded-lg border border-border-subtle bg-surface-base px-3 py-1.5 text-text-muted hover:text-text-main"
             >
               <ArrowLeft className="h-3.5 w-3.5 rtl-flip" />
-              <span>Back</span>
+              <span>{t("common.back")}</span>
             </button>
             <button
               type="button"

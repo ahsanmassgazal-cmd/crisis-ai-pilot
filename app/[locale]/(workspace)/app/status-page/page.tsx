@@ -95,7 +95,7 @@ export default function StatusPageManagerPage() {
           className="inline-flex items-center gap-1.5 rounded-lg border border-border-subtle bg-surface-elevated px-3 py-1.5 text-xs font-semibold text-brand-400 hover:bg-surface-base shadow-xs transition"
         >
           <Globe className="h-3.5 w-3.5" />
-          <span>View Live Public Status Page</span>
+          <span>{t("statusPageCenter.viewLivePortal")}</span>
           <ExternalLink className="h-3 w-3 rtl-flip" />
         </Link>
       </div>
@@ -103,8 +103,8 @@ export default function StatusPageManagerPage() {
       {/* Component Status Grid */}
       <div className="rounded-xl border border-border-subtle bg-surface-elevated p-5 space-y-4 text-xs">
         <div className="flex items-center justify-between border-b border-border-subtle pb-3">
-          <h3 className="font-bold text-text-main text-sm">Public Service Components & Grid Status</h3>
-          <span className="text-[10px] text-emerald-400 font-semibold">90-Day Uptime: 99.92%</span>
+          <h3 className="font-bold text-text-main text-sm">{t("statusPageCenter.serviceComponentsTitle")}</h3>
+          <span className="text-[10px] text-emerald-400 font-semibold">90-Day {t("statusPageCenter.uptimeLabel")}: <Ltr>99.92%</Ltr></span>
         </div>
 
         <div className="space-y-2.5">
@@ -115,7 +115,7 @@ export default function StatusPageManagerPage() {
             >
               <div className="space-y-0.5">
                 <span className="font-semibold text-text-main text-xs">{comp.name}</span>
-                <p className="text-[10px] text-text-muted font-mono">Uptime: <Ltr>{comp.uptime}</Ltr></p>
+                <p className="text-[10px] text-text-muted font-mono">{t("statusPageCenter.uptimeLabel")}: <Ltr>{comp.uptime}</Ltr></p>
               </div>
 
               {/* Status Selector */}
@@ -173,24 +173,24 @@ export default function StatusPageManagerPage() {
 
         <div className="space-y-3">
           <div className="space-y-1">
-            <label className="font-semibold text-text-main block">Advisory Headline</label>
+            <label className="font-semibold text-text-main block">{t("statusPageCenter.advisoryHeadline")}</label>
             <input
               type="text"
               value={newTitle}
               onChange={(e) => setNewTitle(e.target.value)}
-              placeholder="e.g. Sohar Plant Telemetry Containment Underway"
+              placeholder={t("statusPageCenter.advisoryPlaceholder")}
               className="w-full rounded-lg border border-border-subtle bg-surface-base p-2 text-xs text-text-main focus:ring-1 focus:ring-brand-500"
             />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div className="space-y-1">
-              <label className="font-semibold text-text-main block">English Public Statement</label>
+              <label className="font-semibold text-text-main block">{t("statusPageCenter.englishPublicStatement")}</label>
               <textarea
                 rows={3}
                 value={newBodyEn}
                 onChange={(e) => setNewBodyEn(e.target.value)}
-                placeholder="State the public operational status, safety confirmation, and expected next update..."
+                placeholder={t("statusPageCenter.statementPlaceholder")}
                 className="w-full rounded-lg border border-border-subtle bg-surface-base p-2 text-xs text-text-main focus:ring-1 focus:ring-brand-500"
               />
             </div>
@@ -215,14 +215,14 @@ export default function StatusPageManagerPage() {
             className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-brand-500 font-semibold text-white hover:bg-brand-600 disabled:opacity-40 shadow-sm transition"
           >
             <Send className="h-3.5 w-3.5" />
-            <span>Publish Public Advisory</span>
+            <span>{t("statusPageCenter.publishExternal")}</span>
           </button>
         </div>
       </div>
 
       {/* Recent Public Advisories Feed */}
       <div className="rounded-xl border border-border-subtle bg-surface-elevated p-5 space-y-4 text-xs">
-        <h3 className="font-bold text-text-main text-sm">Published Advisories History</h3>
+        <h3 className="font-bold text-text-main text-sm">{t("statusPageCenter.advisoriesHistory")}</h3>
 
         <div className="space-y-3">
           {publicUpdates.map((upd) => (

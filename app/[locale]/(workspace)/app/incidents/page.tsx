@@ -108,7 +108,7 @@ export default function IncidentsPage() {
             href={`/app/incidents/${row.original.id}`}
             className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-brand-50 text-brand-600 hover:bg-brand-600 hover:text-white transition-colors font-bold text-xs"
           >
-            <span>Open Room</span>
+            <span>{t("incidentRoom.openRoom")}</span>
             <ArrowRight className="w-3 h-3 dir-aware-flip" />
           </Link>
         </div>
@@ -189,10 +189,10 @@ export default function IncidentsPage() {
             className={`flex items-center gap-1 px-2.5 py-1 rounded text-xs font-semibold transition-colors ${
               activeView === "table" ? "bg-app-surface text-brand-600 shadow-xs" : "text-app-muted hover:text-app-text"
             }`}
-            title="Table View"
+            title={t("incidentRoom.tableView")}
           >
             <Table className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Table</span>
+            <span className="hidden sm:inline">{t("incidentRoom.table")}</span>
           </button>
 
           <button
@@ -200,10 +200,10 @@ export default function IncidentsPage() {
             className={`flex items-center gap-1 px-2.5 py-1 rounded text-xs font-semibold transition-colors ${
               activeView === "kanban" ? "bg-app-surface text-brand-600 shadow-xs" : "text-app-muted hover:text-app-text"
             }`}
-            title="Kanban Board"
+            title={t("incidentRoom.kanbanView")}
           >
             <Kanban className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Kanban</span>
+            <span className="hidden sm:inline">{t("incidentRoom.kanban")}</span>
           </button>
 
           <button
@@ -211,10 +211,10 @@ export default function IncidentsPage() {
             className={`flex items-center gap-1 px-2.5 py-1 rounded text-xs font-semibold transition-colors ${
               activeView === "timeline" ? "bg-app-surface text-brand-600 shadow-xs" : "text-app-muted hover:text-app-text"
             }`}
-            title="Timeline View"
+            title={t("incidentRoom.timelineView")}
           >
             <Clock className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Timeline</span>
+            <span className="hidden sm:inline">{t("incidentRoom.timeline")}</span>
           </button>
 
           <button
@@ -222,10 +222,10 @@ export default function IncidentsPage() {
             className={`flex items-center gap-1 px-2.5 py-1 rounded text-xs font-semibold transition-colors ${
               activeView === "calendar" ? "bg-app-surface text-brand-600 shadow-xs" : "text-app-muted hover:text-app-text"
             }`}
-            title="Calendar View"
+            title={t("incidentRoom.calendarView")}
           >
             <Calendar className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Calendar</span>
+            <span className="hidden sm:inline">{t("incidentRoom.calendar")}</span>
           </button>
 
           <button
@@ -233,10 +233,10 @@ export default function IncidentsPage() {
             className={`flex items-center gap-1 px-2.5 py-1 rounded text-xs font-semibold transition-colors ${
               activeView === "map" ? "bg-app-surface text-brand-600 shadow-xs" : "text-app-muted hover:text-app-text"
             }`}
-            title="Map View"
+            title={t("incidentRoom.mapView")}
           >
             <MapPin className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Map</span>
+            <span className="hidden sm:inline">{t("incidentRoom.map")}</span>
           </button>
         </div>
       </div>

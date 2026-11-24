@@ -110,7 +110,7 @@ export default function ImportExportCenterPage() {
             }`}
           >
             <Upload className="h-3.5 w-3.5" />
-            <span>Guided Import Wizard</span>
+            <span>{t("dataCenter.wizard")}</span>
           </button>
           <button
             type="button"
@@ -122,7 +122,7 @@ export default function ImportExportCenterPage() {
             }`}
           >
             <Download className="h-3.5 w-3.5" />
-            <span>Export Center</span>
+            <span>{t("dataCenter.export")}</span>
           </button>
         </div>
       </div>
@@ -148,7 +148,7 @@ export default function ImportExportCenterPage() {
                     : "border-border-subtle bg-surface-base text-text-muted"
                 }`}
               >
-                <span className="block text-[10px] uppercase font-mono">Step <Ltr>{s.num}</Ltr></span>
+                <span className="block text-[10px] uppercase font-mono"><>{t("common.step")} <Ltr>{s.num}</Ltr></></span>
                 <span className="truncate block text-xs">{s.label}</span>
               </div>
             ))}
@@ -158,7 +158,7 @@ export default function ImportExportCenterPage() {
           {importStep === 1 && (
             <div className="rounded-xl border border-border-subtle bg-surface-elevated p-6 space-y-4 text-xs animate-fade-in">
               <div>
-                <h3 className="text-sm font-bold text-text-main">Step 1: Choose Destination Entity</h3>
+                <h3 className="text-sm font-bold text-text-main">{t("dataCenter.step1Title")}</h3>
                 <p className="text-[11px] text-text-muted mt-0.5">
                   Select which platform table will receive the imported records.
                 </p>
@@ -182,7 +182,7 @@ export default function ImportExportCenterPage() {
                     }`}
                   >
                     <span className="font-bold text-xs text-text-main">{ent.label}</span>
-                    <span className="text-[10px] text-text-muted font-mono"><Ltr>{ent.count}</Ltr> existing rows</span>
+                    <span className="text-[10px] text-text-muted font-mono"><><Ltr>{ent.count}</Ltr> {t("dataCenter.existingRows") || "rows"}</></span>
                   </button>
                 ))}
               </div>
@@ -193,7 +193,7 @@ export default function ImportExportCenterPage() {
                   onClick={() => setImportStep(2)}
                   className="inline-flex items-center gap-1.5 rounded-lg bg-brand-500 px-4 py-2 text-xs font-semibold text-white hover:bg-brand-600 transition"
                 >
-                  <span>Continue to File Upload</span>
+                  <span>{t("dataCenter.continueUpload")}</span>
                   <ArrowRight className="h-3.5 w-3.5 rtl-flip" />
                 </button>
               </div>
@@ -204,7 +204,7 @@ export default function ImportExportCenterPage() {
           {importStep === 2 && (
             <div className="rounded-xl border border-border-subtle bg-surface-elevated p-6 space-y-4 text-xs animate-fade-in">
               <div>
-                <h3 className="text-sm font-bold text-text-main">Step 2: Upload CSV / Excel / JSON</h3>
+                <h3 className="text-sm font-bold text-text-main">{t("dataCenter.step2Title")}</h3>
                 <p className="text-[11px] text-text-muted mt-0.5">
                   Drop your file below. Arabic UTF-8 BOM encoding is automatically preserved.
                 </p>
@@ -224,14 +224,14 @@ export default function ImportExportCenterPage() {
                   className="inline-flex items-center gap-1 rounded-lg border border-border-subtle bg-surface-base px-3 py-1.5 text-text-muted hover:text-text-main"
                 >
                   <ArrowLeft className="h-3.5 w-3.5 rtl-flip" />
-                  <span>Back</span>
+                  <span>{t("common.back")}</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => setImportStep(3)}
                   className="inline-flex items-center gap-1.5 rounded-lg bg-brand-500 px-4 py-2 text-xs font-semibold text-white hover:bg-brand-600 transition"
                 >
-                  <span>Continue to Column Mapping</span>
+                  <span>{t("dataCenter.continueMapping")}</span>
                   <ArrowRight className="h-3.5 w-3.5 rtl-flip" />
                 </button>
               </div>
@@ -242,7 +242,7 @@ export default function ImportExportCenterPage() {
           {importStep === 3 && (
             <div className="rounded-xl border border-border-subtle bg-surface-elevated p-6 space-y-4 text-xs animate-fade-in">
               <div>
-                <h3 className="text-sm font-bold text-text-main">Step 3: Map Columns</h3>
+                <h3 className="text-sm font-bold text-text-main">{t("dataCenter.step3Title")}</h3>
                 <p className="text-[11px] text-text-muted mt-0.5">
                   Match uploaded headers to database fields.
                 </p>
@@ -270,14 +270,14 @@ export default function ImportExportCenterPage() {
                   className="inline-flex items-center gap-1 rounded-lg border border-border-subtle bg-surface-base px-3 py-1.5 text-text-muted hover:text-text-main"
                 >
                   <ArrowLeft className="h-3.5 w-3.5 rtl-flip" />
-                  <span>Back</span>
+                  <span>{t("common.back")}</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => setImportStep(4)}
                   className="inline-flex items-center gap-1.5 rounded-lg bg-brand-500 px-4 py-2 text-xs font-semibold text-white hover:bg-brand-600 transition"
                 >
-                  <span>Run Pre-Import Validation</span>
+                  <span>{t("dataCenter.continueValidation")}</span>
                   <ArrowRight className="h-3.5 w-3.5 rtl-flip" />
                 </button>
               </div>
@@ -288,7 +288,7 @@ export default function ImportExportCenterPage() {
           {importStep === 4 && (
             <div className="rounded-xl border border-border-subtle bg-surface-elevated p-6 space-y-5 text-xs animate-fade-in">
               <div>
-                <h3 className="text-sm font-bold text-text-main">Step 4: Pre-Import Validation Results</h3>
+                <h3 className="text-sm font-bold text-text-main">{t("dataCenter.step4Title")}</h3>
                 <p className="text-[11px] text-text-muted mt-0.5">
                   Inspect validated rows. Row 4 has an invalid phone number and will be excluded.
                 </p>
@@ -304,7 +304,7 @@ export default function ImportExportCenterPage() {
 
               {/* De-duplication Strategy */}
               <div className="rounded-xl border border-border-subtle bg-surface-base p-4 space-y-2">
-                <span className="font-semibold text-text-main block">De-duplication Policy</span>
+                <span className="font-semibold text-text-main block">{t("dataCenter.dedupPolicy")}</span>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   {[
                     { id: "overwrite", label: "Overwrite Existing Records", desc: "Update matching email/phone with file values" },
@@ -335,7 +335,7 @@ export default function ImportExportCenterPage() {
                   className="inline-flex items-center gap-1 rounded-lg border border-border-subtle bg-surface-base px-3 py-1.5 text-text-muted hover:text-text-main"
                 >
                   <ArrowLeft className="h-3.5 w-3.5 rtl-flip" />
-                  <span>Back</span>
+                  <span>{t("common.back")}</span>
                 </button>
                 <button
                   type="button"
@@ -358,7 +358,7 @@ export default function ImportExportCenterPage() {
               </div>
 
               <div>
-                <h3 className="text-base font-bold text-text-main">Import Successfully Committed!</h3>
+                <h3 className="text-base font-bold text-text-main">{t("dataCenter.step5Title")}</h3>
                 <p className="text-text-muted mt-1">
                   3 records written to <span className="font-mono text-brand-400">{entityType}</span>. Transaction logged under Batch #IMP-2026-88.
                 </p>
@@ -374,7 +374,7 @@ export default function ImportExportCenterPage() {
                   className="inline-flex items-center gap-1.5 rounded-lg border border-critical-500/40 bg-critical-500/10 px-4 py-2 text-xs font-semibold text-critical-300 hover:bg-critical-500/20 transition"
                 >
                   <RotateCcw className="h-4 w-4" />
-                  <span>Rollback This Batch</span>
+                  <span>{t("dataCenter.rollbackBatch")}</span>
                 </button>
 
                 <button
@@ -382,7 +382,7 @@ export default function ImportExportCenterPage() {
                   onClick={() => setImportStep(1)}
                   className="inline-flex items-center gap-1.5 rounded-lg bg-brand-500 px-5 py-2 text-xs font-semibold text-white hover:bg-brand-600 transition"
                 >
-                  <span>Start Another Import</span>
+                  <span>{t("dataCenter.startAnother")}</span>
                 </button>
               </div>
             </div>
@@ -392,7 +392,7 @@ export default function ImportExportCenterPage() {
         /* EXPORT TAB */
         <div className="rounded-xl border border-border-subtle bg-surface-elevated p-6 space-y-5 text-xs">
           <div>
-            <h3 className="text-sm font-bold text-text-main">Export Platform Data Records</h3>
+            <h3 className="text-sm font-bold text-text-main">{t("dataCenter.exportTitle")}</h3>
             <p className="text-[11px] text-text-muted mt-0.5">
               Export data in multiple formats with guaranteed UTF-8 BOM encoding so Arabic headers open correctly in Excel.
             </p>
@@ -400,17 +400,17 @@ export default function ImportExportCenterPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="rounded-xl border border-border-subtle bg-surface-base p-4 space-y-3">
-              <span className="font-semibold text-text-main block">Select Entity to Export</span>
+              <span className="font-semibold text-text-main block">{t("dataCenter.selectEntityExport")}</span>
               <select
                 value={entityType}
                 onChange={(e) => setEntityType(e.target.value)}
                 className="w-full rounded-lg border border-border-subtle bg-surface-elevated p-2 text-xs text-text-main"
               >
-                <option value="incidents">All Crisis Incidents (5)</option>
-                <option value="people">People & On-Call Roster (18)</option>
-                <option value="audit">Cryptographic Audit Trail (1,248)</option>
-                <option value="risks">Risk Register (12)</option>
-                <option value="bia">BIA Critical Functions (4)</option>
+                <option value="incidents">{t("dataCenter.allIncidents") || "All Incidents"}</option>
+                <option value="people">{t("dataCenter.peopleRoster")}</option>
+                <option value="audit">{t("dataCenter.auditTrailExport") || "Cryptographic Audit Trail"}</option>
+                <option value="risks">{t("dataCenter.riskRegister") || "Risk Register"}</option>
+                <option value="bia">{t("dataCenter.criticalFunctions")}</option>
               </select>
 
               <div className="pt-2">
@@ -419,7 +419,7 @@ export default function ImportExportCenterPage() {
             </div>
 
             <div className="rounded-xl border border-border-subtle bg-surface-base p-4 space-y-2 text-text-muted">
-              <span className="font-semibold text-text-main block">Encoding Guarantee</span>
+              <span className="font-semibold text-text-main block">{t("dataCenter.encodingGuarantee")}</span>
               <p className="leading-relaxed">
                 All CSV and XLSX exports generated by Crisis AI Pilot include the 3-byte UTF-8 Byte Order Mark
                 (<Ltr>EF BB BF</Ltr>). This guarantees Arabic text renders in correct RTL direction without mojibake character

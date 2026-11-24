@@ -217,7 +217,7 @@ export default function IncidentRoomPage() {
             </div>
 
             <div className="space-y-2">
-              <label className="font-semibold text-text-main block">Select New Severity Level</label>
+              <label className="font-semibold text-text-main block">{t("incidentRoom.selectNewSeverity")}</label>
               <div className="grid grid-cols-2 gap-2">
                 {(["critical", "high", "medium", "low"] as const).map((lvl) => (
                   <button
@@ -245,7 +245,7 @@ export default function IncidentRoomPage() {
                 rows={3}
                 value={sevReason}
                 onChange={(e) => setSevReason(e.target.value)}
-                placeholder="State the technical and operational grounds for reclassifying severity..."
+                placeholder={t("incidentRoom.auditJustificationPlaceholder")}
                 className="w-full rounded-lg border border-border-subtle bg-surface-base p-2 text-text-main focus:outline-none focus:ring-1 focus:ring-brand-500"
               />
             </div>
@@ -299,21 +299,21 @@ export default function IncidentRoomPage() {
                 <span className="text-[10px] text-critical-400 font-bold block uppercase tracking-wider">
                   Initial SLA: 4m left
                 </span>
-                <span className="text-text-muted text-[10px]">Response Target: 15 mins</span>
+                <span className="text-text-muted text-[10px]">{t("incidentRoom.target15m")}</span>
               </div>
             </div>
 
-            {/* Escalation Ladder */}
+            {/* {t("incidentRoom.escalationLadder")} */}
             <div className="hidden lg:flex flex-col gap-0.5 text-[10px] bg-surface-base p-2 rounded-xl border border-border-subtle">
-              <span className="text-text-muted font-medium">Escalation Ladder</span>
+              <span className="text-text-muted font-medium">{t("incidentRoom.escalationLadder")}</span>
               <div className="flex items-center gap-1 font-semibold">
-                <span className="text-text-muted">L1 Plant</span>
+                <span className="text-text-muted">{t("incidentRoom.level1Plant")}</span>
                 <span className="text-text-muted">→</span>
                 <span className="text-brand-400 bg-brand-500/10 px-1.5 py-0.5 rounded border border-brand-500/20">
                   L2 Regional (Active)
                 </span>
                 <span className="text-text-muted">→</span>
-                <span className="text-text-muted">L3 Executive</span>
+                <span className="text-text-muted">{t("incidentRoom.level3Executive")}</span>
               </div>
             </div>
 
@@ -385,12 +385,12 @@ export default function IncidentRoomPage() {
                   <ShieldAlert className="h-4 w-4 text-critical-500" />
                   Primary Situation Board (Bilingual Operational Record)
                 </h3>
-                <span className="text-[10px] text-text-muted">Updated 2m ago</span>
+                <span className="text-[10px] text-text-muted">{t("incidentRoom.updatedAgo")}</span>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
                 <div className="rounded-lg bg-surface-base p-3 border border-border-subtle space-y-1">
-                  <span className="text-[10px] font-bold uppercase text-brand-400">English Summary</span>
+                  <span className="text-[10px] font-bold uppercase text-brand-400">{t("incidentRoom.englishSummary")}</span>
                   <p className="text-text-main leading-relaxed">
                     At 09:42 GST, automated intrusion detection flagged anomalous high-volume TCP telemetry bursts on
                     SCADA VLAN 14 (Desalination Rack 3). Secondary telemetry verified pressure fluctuations. On-call
@@ -410,24 +410,24 @@ export default function IncidentRoomPage() {
               {/* Impact Indicators */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
                 <div className="rounded-lg bg-surface-base p-3 border border-border-subtle text-xs">
-                  <span className="text-text-muted block text-[10px] uppercase">Affected Population</span>
+                  <span className="text-text-muted block text-[10px] uppercase">{t("incidentRoom.affectedPopulation")}</span>
                   <p className="text-lg font-bold text-text-main mt-0.5"><Ltr>145,000</Ltr></p>
-                  <span className="text-[10px] text-amber-400 font-medium">Sohar & Al-Batinah</span>
+                  <span className="text-[10px] text-amber-400 font-medium">{t("incidentRoom.affectedPopulationRegion")}</span>
                 </div>
                 <div className="rounded-lg bg-surface-base p-3 border border-border-subtle text-xs">
-                  <span className="text-text-muted block text-[10px] uppercase">Plant Output</span>
+                  <span className="text-text-muted block text-[10px] uppercase">{t("incidentRoom.plantOutput")}</span>
                   <p className="text-lg font-bold text-critical-400 mt-0.5"><Ltr>-28%</Ltr></p>
-                  <span className="text-[10px] text-text-muted">Rack 3 Throttled</span>
+                  <span className="text-[10px] text-text-muted">{t("incidentRoom.plantOutputThrottled")}</span>
                 </div>
                 <div className="rounded-lg bg-surface-base p-3 border border-border-subtle text-xs">
-                  <span className="text-text-muted block text-[10px] uppercase">Reserve Capacity</span>
+                  <span className="text-text-muted block text-[10px] uppercase">{t("incidentRoom.reserveCapacity")}</span>
                   <p className="text-lg font-bold text-emerald-400 mt-0.5"><Ltr>18.4 hrs</Ltr></p>
-                  <span className="text-[10px] text-emerald-400 font-medium">Safe Margin (&gt;12h)</span>
+                  <span className="text-[10px] text-emerald-400 font-medium">{t("incidentRoom.reserveCapacityMargin")}</span>
                 </div>
                 <div className="rounded-lg bg-surface-base p-3 border border-border-subtle text-xs">
-                  <span className="text-text-muted block text-[10px] uppercase">Dispatched Responders</span>
+                  <span className="text-text-muted block text-[10px] uppercase">{t("incidentRoom.dispatchedResponders")}</span>
                   <p className="text-lg font-bold text-text-main mt-0.5"><Ltr>14 / 16</Ltr></p>
-                  <span className="text-[10px] text-brand-400 font-medium">87.5% Ack Rate</span>
+                  <span className="text-[10px] text-brand-400 font-medium">{t("incidentRoom.ackRate")}</span>
                 </div>
               </div>
             </div>
@@ -436,7 +436,7 @@ export default function IncidentRoomPage() {
             <div className="space-y-4">
               <AiSuggestionCard
                 id="sug-1"
-                title="Authorize Potable Reserve Redistribution"
+                title={t("incidentRoom.authorizeRedistribution")}
                 recommendation="Secondary reservoirs at Al-Khaburah have 100% capacity. Shift regional pipeline flow to maintain municipal pressure while SCADA Rack 3 is isolated."
                 impactScore={92}
                 confidencePercent={96}
@@ -446,15 +446,15 @@ export default function IncidentRoomPage() {
               />
 
               <div className="rounded-xl border border-border-subtle bg-surface-elevated p-4 space-y-3 text-xs">
-                <span className="font-semibold text-text-main block">Active Command Structure</span>
+                <span className="font-semibold text-text-main block">{t("incidentRoom.activeCommandStructure")}</span>
                 <div className="flex items-center gap-3">
                   <div className="h-10 w-10 rounded-full bg-brand-500/20 text-brand-400 flex items-center justify-center font-bold text-sm">
                     SH
                   </div>
                   <div>
-                    <h4 className="font-bold text-text-main">Eng. Salem Al-Harthy</h4>
-                    <p className="text-[11px] text-brand-400 font-medium">Incident Commander (Primary)</p>
-                    <p className="text-[10px] text-text-muted">On Duty Since 08:00 AM • Phone: +968 9123 4567</p>
+                    <h4 className="font-bold text-text-main">{t("incidentRoom.commanderName")}</h4>
+                    <p className="text-[11px] text-brand-400 font-medium">{t("incidentRoom.commanderTitle")}</p>
+                    <p className="text-[10px] text-text-muted">{t("incidentRoom.onDutySince")}</p>
                   </div>
                 </div>
               </div>
@@ -471,7 +471,7 @@ export default function IncidentRoomPage() {
               <History className="h-4 w-4 text-brand-500" />
               Chronological Incident Event Log
             </h3>
-            <span className="text-[11px] text-text-muted">All events timestamped in UTC+4 (GST)</span>
+            <span className="text-[11px] text-text-muted">{t("incidentRoom.timelineSub")}</span>
           </div>
 
           <div className="relative border-s-2 border-border-subtle ms-4 space-y-6 py-2">
@@ -532,7 +532,7 @@ export default function IncidentRoomPage() {
           {/* Header Controls */}
           <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border-subtle bg-surface-elevated p-3">
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold text-text-main">Incident Action Items</span>
+              <span className="text-xs font-bold text-text-main">{t("incidentRoom.tasksTitle")}</span>
               <span className="text-[10px] px-2 py-0.5 rounded-full bg-brand-500/20 text-brand-400 font-mono">
                 <Ltr>{tasks.length}</Ltr> Total
               </span>
@@ -589,7 +589,7 @@ export default function IncidentRoomPage() {
                 className="inline-flex items-center gap-1 rounded-lg bg-brand-500 px-3 py-1.5 text-xs font-semibold text-white hover:bg-brand-600 transition"
               >
                 <Plus className="h-3.5 w-3.5" />
-                <span>Add Task</span>
+                <span>{t("incidentRoom.addTask")}</span>
               </button>
             </div>
           </div>
@@ -655,11 +655,11 @@ export default function IncidentRoomPage() {
               <table className="w-full text-xs text-start">
                 <thead className="border-b border-border-subtle text-text-muted">
                   <tr>
-                    <th className="py-2 text-start">Priority</th>
-                    <th className="py-2 text-start">Task Description</th>
-                    <th className="py-2 text-start">Assignee</th>
-                    <th className="py-2 text-start">Due Time</th>
-                    <th className="py-2 text-start">Status</th>
+                    <th className="py-2 text-start">{t("incidentRoom.priorityCol")}</th>
+                    <th className="py-2 text-start">{t("incidentRoom.taskDescCol")}</th>
+                    <th className="py-2 text-start">{t("incidentRoom.assigneeCol")}</th>
+                    <th className="py-2 text-start">{t("incidentRoom.dueTimeCol")}</th>
+                    <th className="py-2 text-start">{t("incidentRoom.statusCol")}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border-subtle">
@@ -706,7 +706,7 @@ export default function IncidentRoomPage() {
                 <Send className="h-4 w-4 text-brand-500" />
                 Multi-Channel Communications Stream
               </h3>
-              <p className="text-[11px] text-text-muted">SMS, Teams, Email delivery status & provider failover</p>
+              <p className="text-[11px] text-text-muted">{t("incidentRoom.commsSub")}</p>
             </div>
             <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 font-medium border border-emerald-500/20">
               Provider A: Active • Provider B: Standby
@@ -787,7 +787,7 @@ export default function IncidentRoomPage() {
                 <Users className="h-4 w-4 text-brand-500" />
                 Active Incident Responders (14 Online)
               </h3>
-              <span className="text-[10px] text-emerald-400 font-semibold">14 Acknowledged</span>
+              <span className="text-[10px] text-emerald-400 font-semibold">{t("incidentRoom.fourteenAcked")}</span>
             </div>
 
             <div className="space-y-2">
@@ -822,8 +822,8 @@ export default function IncidentRoomPage() {
           {/* Interactive Map */}
           <div className="rounded-xl border border-border-subtle bg-surface-elevated p-4 flex flex-col justify-between">
             <div className="border-b border-border-subtle pb-2 mb-2">
-              <h3 className="font-bold text-text-main">Sohar Plant Tactical Responder Map</h3>
-              <p className="text-[10px] text-text-muted">Live geolocation check-ins and perimeter gates</p>
+              <h3 className="font-bold text-text-main">{t("incidentRoom.tacticalMapTitle")}</h3>
+              <p className="text-[10px] text-text-muted">{t("incidentRoom.tacticalMapSub")}</p>
             </div>
             <div className="flex-1 min-h-[300px]">
               <MapPanel
@@ -847,7 +847,7 @@ export default function IncidentRoomPage() {
                 <FileText className="h-4 w-4 text-brand-500" />
                 Associated Playbooks, Diagrams & Evidence
               </h3>
-              <p className="text-[11px] text-text-muted">Version-controlled repository files for this incident</p>
+              <p className="text-[11px] text-text-muted">{t("incidentRoom.evidenceRepoSub")}</p>
             </div>
           </div>
 
@@ -878,7 +878,7 @@ export default function IncidentRoomPage() {
           </div>
 
           <div className="pt-2">
-            <span className="font-semibold text-text-main block mb-2">Upload Incident Evidence or Photos</span>
+            <span className="font-semibold text-text-main block mb-2">{t("incidentRoom.uploadEvidence")}</span>
             <FileDropzone onFileSelect={(file) => showToast(`Uploaded ${file.name} to incident document store.`)} />
           </div>
         </div>
@@ -899,19 +899,19 @@ export default function IncidentRoomPage() {
 
           {/* Add Decision Form */}
           <div className="rounded-xl border border-brand-500/20 bg-brand-500/5 p-4 space-y-3">
-            <span className="font-bold text-text-main block">Log Formal Commander Decision</span>
+            <span className="font-bold text-text-main block">{t("incidentRoom.decisionModalTitle")}</span>
             <input
               type="text"
               value={newDecision}
               onChange={(e) => setNewDecision(e.target.value)}
-              placeholder="State decision (e.g. Authorized emergency bypass of auxiliary pump line...)"
+              placeholder={t("incidentRoom.decisionPlaceholder")}
               className="w-full rounded-lg border border-border-subtle bg-surface-base p-2 text-xs text-text-main focus:ring-1 focus:ring-brand-500"
             />
             <input
               type="text"
               value={newRationale}
               onChange={(e) => setNewRationale(e.target.value)}
-              placeholder="State operational rationale and risk justification..."
+              placeholder={t("incidentRoom.rationalePlaceholder")}
               className="w-full rounded-lg border border-border-subtle bg-surface-base p-2 text-xs text-text-main focus:ring-1 focus:ring-brand-500"
             />
             <div className="flex justify-end">
@@ -943,7 +943,7 @@ export default function IncidentRoomPage() {
                 <p className="text-[11px] text-text-muted italic">Rationale: {dec.rationale}</p>
                 <div className="flex items-center gap-1 text-[10px] text-emerald-400 pt-1">
                   <CheckCircle2 className="h-3 w-3" />
-                  <span>Verified & signed in audit ledger</span>
+                  <span>{t("incidentRoom.signedLedger")}</span>
                 </div>
               </div>
             ))}
@@ -1003,7 +1003,7 @@ export default function IncidentRoomPage() {
             ].map((block) => (
               <div key={block.seq} className="p-3 rounded-lg border border-border-subtle bg-surface-base space-y-1 font-mono text-[11px]">
                 <div className="flex items-center justify-between text-text-main font-bold">
-                  <span>Block #<Ltr>{block.seq}</Ltr> • {block.action}</span>
+                  <span>{t("incidentRoom.blockLabel")}<Ltr>{block.seq}</Ltr> • {block.action}</span>
                   <span className="text-text-muted font-normal"><Ltr>{block.time}</Ltr></span>
                 </div>
                 <div className="text-[10px] text-text-muted truncate">

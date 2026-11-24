@@ -149,7 +149,7 @@ export const AppSidebar: React.FC = () => {
       </div>
 
       {/* Nav Items List */}
-      <nav aria-label="Sidebar navigation" className="flex-1 overflow-y-auto py-3 px-2 space-y-4 text-xs">
+      <nav aria-label={t("components.sidebarNav")} className="flex-1 overflow-y-auto py-3 px-2 space-y-4 text-xs">
         {navGroups.map((group, gIdx) => (
           <div key={gIdx} className="space-y-1">
             {!sidebarCollapsed && (

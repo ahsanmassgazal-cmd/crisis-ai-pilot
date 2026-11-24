@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Sparkles, X, Send, Bot, ArrowRight, DollarSign, RefreshCw } from "lucide-react";
 import { Ltr } from "@/components/layout/Ltr";
 
@@ -19,6 +20,7 @@ export function AiCopilotDrawer({
     severity: "critical"
   }
 }: AiCopilotDrawerProps) {
+  const t = useTranslations("components");
   const [query, setQuery] = useState("");
   const [history, setHistory] = useState<Array<{ role: "user" | "assistant"; text: string; time: string }>>([
     {
@@ -160,7 +162,7 @@ export function AiCopilotDrawer({
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Ask Copilot for crisis recommendations..."
+              placeholder={t("askCopilotPlaceholder")}
               className="flex-1 rounded-xl border border-border-subtle bg-surface-base px-3 py-2 text-xs text-text-main focus:outline-none focus:ring-1 focus:ring-brand-500"
             />
             <button

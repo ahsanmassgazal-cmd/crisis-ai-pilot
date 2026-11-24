@@ -196,11 +196,11 @@ export default function ConditionsAndTriggersPage() {
 
                 <div className="border-t border-border-subtle pt-2 space-y-1 text-[10px] text-text-muted">
                   <div className="flex justify-between">
-                    <span>Rate Limit:</span>
+                    <span>{t("triggersCenter.rateLimitLabel")}:</span>
                     <span className="font-mono text-text-main">{src.rateLimit}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Matched Rules:</span>
+                    <span>{t("triggersCenter.matchedRulesLabel")}:</span>
                     <span className="font-bold text-brand-400"><Ltr>{src.matchedRules}</Ltr> Rules</span>
                   </div>
                 </div>
@@ -221,7 +221,7 @@ export default function ConditionsAndTriggersPage() {
           </div>
 
           <div className="space-y-1">
-            <label className="font-semibold text-text-main block">Inbound JSON Payload</label>
+            <label className="font-semibold text-text-main block">{t("triggersCenter.inboundPayloadLabel")}</label>
             <textarea
               rows={8}
               value={testPayload}
@@ -242,7 +242,7 @@ export default function ConditionsAndTriggersPage() {
 
           {testOutput && (
             <div className="rounded-lg border border-emerald-500/30 bg-surface-base p-3 space-y-1">
-              <span className="text-[10px] font-bold uppercase text-emerald-400">Simulation Evaluation Log</span>
+              <span className="text-[10px] font-bold uppercase text-emerald-400">{t("triggersCenter.evaluationLogTitle")}</span>
               <pre className="font-mono text-[11px] text-emerald-300 whitespace-pre-wrap leading-relaxed">
                 {testOutput}
               </pre>

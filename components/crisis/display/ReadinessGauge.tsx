@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslations } from "next-intl";
 import { ProgressRing } from "./ProgressRing";
 import { ShieldCheck, BookCheck, Flame, Users, FileText } from "lucide-react";
 import { Ltr } from "@/components/common/Ltr";
@@ -20,16 +21,17 @@ export const ReadinessGauge: React.FC<ReadinessGaugeProps> = ({
   documentsExpiring = 3,
   className = "",
 }) => {
+  const t = useTranslations("components");
   return (
     <div className={`p-5 rounded-card bg-app-surface border border-app-border space-y-4 ${className}`}>
       <div className="flex items-center justify-between">
         <div>
           <h3 className="font-bold text-sm text-app-text flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-brand-600" />
-            <span>Organizational Readiness</span>
+            <span>{t("orgReadinessTitle")}</span>
           </h3>
           <p className="text-xs text-app-muted mt-0.5">
-            Preparedness composite score based on drills, plans, contacts &amp; policies.
+            {t("orgReadinessSub")}
           </p>
         </div>
         <ProgressRing value={score} size={64} colorClass="text-brand-600" />
@@ -39,7 +41,7 @@ export const ReadinessGauge: React.FC<ReadinessGaugeProps> = ({
         <div className="p-2.5 rounded-input bg-app-surface-subtle space-y-1">
           <div className="flex items-center gap-1.5 text-app-muted text-[11px]">
             <BookCheck className="w-3.5 h-3.5 text-brand-600" />
-            <span>Plans Valid</span>
+            <span>{t("plansValid")}</span>
           </div>
           <div className="font-bold text-app-text"><Ltr>{plansUpToDate}%</Ltr></div>
         </div>
@@ -47,7 +49,7 @@ export const ReadinessGauge: React.FC<ReadinessGaugeProps> = ({
         <div className="p-2.5 rounded-input bg-app-surface-subtle space-y-1">
           <div className="flex items-center gap-1.5 text-app-muted text-[11px]">
             <Flame className="w-3.5 h-3.5 text-amber-500" />
-            <span>Drills Done</span>
+            <span>{t("drillsDone")}</span>
           </div>
           <div className="font-bold text-app-text"><Ltr>{drillsCompleted}%</Ltr></div>
         </div>
@@ -55,7 +57,7 @@ export const ReadinessGauge: React.FC<ReadinessGaugeProps> = ({
         <div className="p-2.5 rounded-input bg-app-surface-subtle space-y-1">
           <div className="flex items-center gap-1.5 text-app-muted text-[11px]">
             <Users className="w-3.5 h-3.5 text-emerald-600" />
-            <span>Contacts OK</span>
+            <span>{t("contactsOk")}</span>
           </div>
           <div className="font-bold text-app-text"><Ltr>{contactsVerified}%</Ltr></div>
         </div>
@@ -63,9 +65,9 @@ export const ReadinessGauge: React.FC<ReadinessGaugeProps> = ({
         <div className="p-2.5 rounded-input bg-app-surface-subtle space-y-1">
           <div className="flex items-center gap-1.5 text-app-muted text-[11px]">
             <FileText className="w-3.5 h-3.5 text-amber-500" />
-            <span>Expiring</span>
+            <span>{t("expiring")}</span>
           </div>
-          <div className="font-bold text-amber-600"><Ltr>{documentsExpiring}</Ltr> docs</div>
+          <div className="font-bold text-amber-600"><><Ltr>{documentsExpiring}</Ltr> {t("docsCount")}</></div>
         </div>
       </div>
     </div>

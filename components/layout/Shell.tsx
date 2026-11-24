@@ -7,6 +7,7 @@ import { AppSidebar } from "./AppSidebar";
 import { TopBar } from "./TopBar";
 import { CommandPalette } from "./CommandPalette";
 import { RolePickerModal } from "./RolePickerModal";
+import { AiCopilotDrawer } from "@/components/crisis/ai/AiCopilotDrawer";
 import { useAppStore } from "@/lib/store/useAppStore";
 
 interface ShellProps {
@@ -15,7 +16,7 @@ interface ShellProps {
 
 export const Shell: React.FC<ShellProps> = ({ children }) => {
   const t = useTranslations();
-  const { theme } = useAppStore();
+  const { theme, copilotOpen, setCopilotOpen } = useAppStore();
 
   // Apply theme class to document element
   useEffect(() => {
@@ -60,6 +61,7 @@ export const Shell: React.FC<ShellProps> = ({ children }) => {
       {/* Modals & Overlays */}
       <CommandPalette />
       <RolePickerModal />
+      <AiCopilotDrawer isOpen={copilotOpen} onClose={() => setCopilotOpen(false)} />
     </div>
   );
 };

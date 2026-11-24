@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import React from "react";
 import { Filter, X, Plus } from "lucide-react";
 
@@ -23,11 +24,12 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   onClearAll,
   className = "",
 }) => {
+  const t = useTranslations("components");
   return (
     <div className={`flex flex-wrap items-center gap-2 text-xs ${className}`}>
       <div className="flex items-center gap-1.5 text-app-muted font-bold text-[11px] pe-1">
         <Filter className="w-3.5 h-3.5" />
-        <span>Filters:</span>
+        <span>{t("filtersLabel")}</span>
       </div>
 
       {filters.map((f) => (
@@ -56,7 +58,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           className="flex items-center gap-1 px-2.5 py-1 rounded-chip border border-dashed border-app-border text-app-muted hover:text-brand-600 hover:border-brand-600 transition-colors"
         >
           <Plus className="w-3 h-3" />
-          <span>Add Filter</span>
+          <span>{t("addFilter")}</span>
         </button>
       )}
 

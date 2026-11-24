@@ -17,7 +17,7 @@ export const PersistentBanners: React.FC = () => {
   } = useAppStore();
 
   return (
-    <aside aria-label="System status banners" className="w-full flex flex-col gap-0 z-40">
+    <aside aria-label={t("components.statusBanners")} className="w-full flex flex-col gap-0 z-40">
       {/* Sandbox Banner */}
       {isSandboxMode && (
         <div className="w-full bg-slate-800 text-slate-100 py-1.5 px-4 text-xs flex items-center justify-center gap-2 sandbox-stripes border-b border-slate-700">

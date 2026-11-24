@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslations } from "next-intl";
 import { Ltr } from "@/components/common/Ltr";
 
 export interface GanttItem {
@@ -36,6 +37,7 @@ export const GanttTimeline: React.FC<GanttTimelineProps> = ({
   totalTimeMinutes = 240,
   className = "",
 }) => {
+  const t = useTranslations("components");
   const items: GanttItem[] = directItems || (directTasks || []).map((t, idx) => ({
     id: t.id,
     title: t.name || t.title || `Task ${idx + 1}`,
@@ -49,8 +51,8 @@ export const GanttTimeline: React.FC<GanttTimelineProps> = ({
     <div className={`p-4 rounded-card bg-app-surface border border-app-border space-y-4 ${className}`}>
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="font-bold text-xs text-app-text">Recovery Phase Timeline (RTO Countdown)</h3>
-          <p className="text-[11px] text-app-muted">Scheduled sequence and offset durations across recovery teams</p>
+          <h3 className="font-bold text-xs text-app-text">{t("ganttTitle")}</h3>
+          <p className="text-[11px] text-app-muted">{t("ganttSub")}</p>
         </div>
         <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-app-surface-subtle text-app-muted">
           Total Window: <Ltr>{totalTimeMinutes}m</Ltr>

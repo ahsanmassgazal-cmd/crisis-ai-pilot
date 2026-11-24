@@ -133,7 +133,7 @@ export const CommandPalette: React.FC = () => {
                       : t("common.pauseAutomations")}
                   </span>
                 </div>
-                <span className="text-[10px] text-app-muted font-mono">Kill Switch</span>
+                <span className="text-[10px] text-app-muted font-mono">{t("components.killSwitch")}</span>
               </button>
 
               <button
@@ -159,7 +159,7 @@ export const CommandPalette: React.FC = () => {
                     {t("common.importData")}
                   </span>
                 </div>
-                <span className="text-[10px] text-app-muted font-mono">Excel / CSV</span>
+                <span className="text-[10px] text-app-muted font-mono">{t("components.excelCsv")}</span>
               </button>
 
               <button
@@ -240,7 +240,7 @@ export const CommandPalette: React.FC = () => {
         {/* Footer info */}
         <div className="px-4 py-2 bg-app-surface-subtle border-t border-app-border text-[11px] text-app-muted flex items-center justify-between">
           <span>{t("app.name")}</span>
-          <span className="font-mono">ESC to close · ↵ to select</span>
+          <span className="font-mono">{t("components.escToClose")}</span>
         </div>
       </div>
     </div>

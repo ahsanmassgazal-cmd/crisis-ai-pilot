@@ -128,7 +128,7 @@ export default function IntegrationsPage() {
           className="inline-flex items-center gap-1.5 rounded-lg bg-brand-500 px-3.5 py-1.5 text-xs font-semibold text-white hover:bg-brand-600 shadow-sm transition"
         >
           <Plus className="h-3.5 w-3.5" />
-          <span>Add Custom Webhook</span>
+          <span>{t("integrationsCenter.addCustomWebhook")}</span>
         </button>
       </div>
 

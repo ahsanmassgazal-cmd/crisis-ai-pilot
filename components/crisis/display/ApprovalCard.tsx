@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Ltr } from "@/components/layout/Ltr";
 import { PriorityChip } from "@/components/crisis/atoms/PriorityChip";
 import { SeverityBadge } from "@/components/crisis/atoms/SeverityBadge";
@@ -43,6 +44,7 @@ export function ApprovalCard({
   onReject,
   onEdit
 }: ApprovalCardProps) {
+  const t = useTranslations("components");
   const [activeTab, setActiveTab] = useState<"sideBySide" | "en" | "ar">("sideBySide");
   const [isRejecting, setIsRejecting] = useState(false);
   const [rejectReason, setRejectReason] = useState("");
@@ -77,15 +79,15 @@ export function ApprovalCard({
       {/* Targets metadata */}
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs bg-surface-base p-2.5 rounded-lg border border-border-subtle">
         <div>
-          <span className="text-text-muted block text-[10px]">Audience</span>
+          <span className="text-text-muted block text-[10px]">{t("audience")}</span>
           <span className="font-medium text-text-main">{audience}</span>
         </div>
         <div>
-          <span className="text-text-muted block text-[10px]">Recipients</span>
+          <span className="text-text-muted block text-[10px]">{t("recipients")}</span>
           <span className="font-medium text-text-main"><Ltr>{recipientsCount.toLocaleString()}</Ltr> contacts</span>
         </div>
         <div>
-          <span className="text-text-muted block text-[10px]">Channels</span>
+          <span className="text-text-muted block text-[10px]">{t("channels")}</span>
           <div className="flex items-center gap-1 mt-0.5">
             {channels.map((c) => (
               <span key={c} className="uppercase px-1.5 py-0.5 rounded text-[10px] bg-surface-elevated border border-border-subtle font-medium">
@@ -137,7 +139,7 @@ export function ApprovalCard({
         {activeTab === "sideBySide" ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div className="rounded-lg border border-border-subtle bg-surface-base p-3 text-xs space-y-1">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-text-muted">English (Source)</span>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-text-muted">{t("englishSource")}</span>
               <p className="text-text-main whitespace-pre-line leading-relaxed">{bodyEn}</p>
             </div>
             <div className="rounded-lg border border-border-subtle bg-surface-base p-3 text-xs space-y-1" dir="rtl">
@@ -166,7 +168,7 @@ export function ApprovalCard({
             type="text"
             value={rejectReason}
             onChange={(e) => setRejectReason(e.target.value)}
-            placeholder="e.g. Inaccurate restoration timeline or unverified incident details..."
+            placeholder={t("rejectPlaceholder")}
             className="w-full rounded-md border border-border-subtle bg-surface-elevated px-3 py-1.5 text-xs text-text-main focus:outline-none focus:ring-1 focus:ring-critical-500"
           />
           <div className="flex items-center justify-end gap-2 pt-1">

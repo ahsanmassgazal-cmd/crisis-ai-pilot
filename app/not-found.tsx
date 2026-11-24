@@ -26,7 +26,7 @@ export default function RootNotFound() {
               className="w-full py-3 px-4 rounded-lg bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition-all"
             >
               <LayoutDashboard className="w-4 h-4 shrink-0" />
-              <span>Go to Command Center</span>
+              <span>Go to Command Center · الانتقال إلى مركز القيادة</span>
               <ArrowRight className="w-3.5 h-3.5 shrink-0" />
             </Link>
           </div>

@@ -91,7 +91,7 @@ export const RolePickerModal: React.FC = () => {
         </div>
 
         <div className="px-6 py-3 bg-app-surface-subtle border-t border-app-border flex items-center justify-between text-xs text-app-muted">
-          <span>Current active role: <strong>{t(`roles.${currentRole}`)}</strong></span>
+          <span>{t("components.currentActiveRole")}: <strong>{t(`roles.${currentRole}`)}</strong></span>
           <button
             onClick={() => setRolePickerOpen(false)}
             className="px-3 py-1 bg-app-surface border border-app-border rounded-input hover:bg-app-border/40 font-medium"

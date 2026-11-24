@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslations } from "next-intl";
 import { Ltr } from "@/components/common/Ltr";
 
 export interface MatrixRisk {
@@ -19,6 +20,7 @@ export const RiskMatrix5x5: React.FC<RiskMatrix5x5Props> = ({
   onSelectCell,
   className = "",
 }) => {
+  const t = useTranslations("components");
   const getCellColor = (likelihood: number, impact: number) => {
     const score = likelihood * impact;
     if (score >= 16) {
@@ -44,14 +46,14 @@ export const RiskMatrix5x5: React.FC<RiskMatrix5x5Props> = ({
     <div className={`p-5 rounded-card bg-app-surface border border-app-border space-y-4 ${className}`}>
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="font-bold text-sm text-app-text">5×5 Risk Assessment Matrix</h3>
-          <p className="text-xs text-app-muted mt-0.5">Likelihood vs Impact classification across enterprise assets</p>
+          <h3 className="font-bold text-sm text-app-text">{t("riskMatrixTitle")}</h3>
+          <p className="text-xs text-app-muted mt-0.5">{t("riskMatrixSub")}</p>
         </div>
         <div className="flex items-center gap-2 text-[10px] font-semibold">
-          <span className="px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-300">Low (1-4)</span>
-          <span className="px-2 py-0.5 rounded bg-severity-medium-tint text-severity-medium border border-severity-medium">Medium (5-9)</span>
-          <span className="px-2 py-0.5 rounded bg-severity-high-tint text-severity-high border border-severity-high">High (10-15)</span>
-          <span className="px-2 py-0.5 rounded bg-severity-critical-tint text-severity-critical border border-severity-critical">Critical (16-25)</span>
+          <span className="px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-300">{t("riskLow")}</span>
+          <span className="px-2 py-0.5 rounded bg-severity-medium-tint text-severity-medium border border-severity-medium">{t("riskMedium")}</span>
+          <span className="px-2 py-0.5 rounded bg-severity-high-tint text-severity-high border border-severity-high">{t("riskHigh")}</span>
+          <span className="px-2 py-0.5 rounded bg-severity-critical-tint text-severity-critical border border-severity-critical">{t("riskCritical")}</span>
         </div>
       </div>
 

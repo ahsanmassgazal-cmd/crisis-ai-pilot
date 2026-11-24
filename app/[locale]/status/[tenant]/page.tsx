@@ -52,7 +52,7 @@ export default function PublicStatusPage({
         <div className="p-4 rounded-card bg-amber-50 dark:bg-amber-950/20 border border-amber-300 dark:border-amber-700 text-amber-800 dark:text-amber-300 flex items-center gap-3">
           <AlertTriangle className="w-5 h-5 shrink-0" />
           <div className="text-xs">
-            <span className="font-bold">Minor Technical Degraded Status:</span> All municipal water distribution networks operate normally with zero interruption to homes or commercial businesses.
+            <span className="font-bold">{t("publicStatus.degradedBanner")}</span> All municipal water distribution networks operate normally with zero interruption to homes or commercial businesses.
           </div>
         </div>
 
@@ -76,7 +76,7 @@ export default function PublicStatusPage({
 
         {/* Incident History Timeline */}
         <div className="space-y-3">
-          <h2 className="font-bold text-sm text-app-text">Past Incident Updates</h2>
+          <h2 className="font-bold text-sm text-app-text">{t("publicStatus.pastUpdatesTitle")}</h2>
           <div className="p-4 rounded-card bg-app-surface border border-app-border space-y-2 text-xs">
             <div className="flex items-center justify-between">
               <span className="font-bold text-app-text">

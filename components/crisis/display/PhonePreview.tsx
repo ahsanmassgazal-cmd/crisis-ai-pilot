@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Ltr } from "@/components/layout/Ltr";
 import { Smartphone, Mail, MessageSquare, Send, CheckCheck, AlertCircle } from "lucide-react";
 
@@ -23,6 +24,7 @@ export function PhonePreview({
   bodyAr,
   actions = [{ label: "1: Acknowledge", primary: true }, { label: "2: Decline", primary: false }]
 }: PhonePreviewProps) {
+  const t = useTranslations("components");
   const [channel, setChannel] = useState<"sms" | "email" | "teams">(initialChannel);
   const [lang, setLang] = useState<"en" | "ar">("en");
 
@@ -132,7 +134,7 @@ export function PhonePreview({
 
               {actions.length > 0 && (
                 <div className="space-y-1.5 pt-2">
-                  <p className="text-[10px] text-slate-400">Reply to respond:</p>
+                  <p className="text-[10px] text-slate-400">{t("replyToRespond")}:</p>
                   <div className="flex flex-wrap gap-1.5">
                     {actions.map((act, i) => (
                       <span
@@ -156,13 +158,13 @@ export function PhonePreview({
           {channel === "email" && (
             <div className="flex-1 flex flex-col gap-2">
               <div className="rounded-lg bg-slate-800/80 p-2 text-xs border border-slate-700 space-y-1">
-                <div className="text-[10px] text-slate-400">Subject: <span className="text-slate-200 font-medium">{title}</span></div>
-                <div className="text-[10px] text-slate-400">From: <span className="text-slate-200">{sender}</span></div>
+                <div className="text-[10px] text-slate-400">{t("subject")}: <span className="text-slate-200 font-medium">{title}</span></div>
+                <div className="text-[10px] text-slate-400">{t("from")}: <span className="text-slate-200">{sender}</span></div>
               </div>
               <div className="rounded-lg bg-slate-800 p-3 text-xs text-slate-200 border border-slate-700 flex-1 space-y-3">
                 <div className="border-b border-slate-700/60 pb-2">
                   <span className="inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded bg-critical-500/20 text-critical-300 font-medium border border-critical-500/30">
-                    <AlertCircle className="h-3 w-3" /> Urgent Crisis Update
+                    <AlertCircle className="h-3 w-3" /> {t("urgentCrisisUpdate")}
                   </span>
                 </div>
                 <p className="whitespace-pre-line leading-relaxed">{currentBody}</p>

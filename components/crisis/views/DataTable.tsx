@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 import {
   useReactTable,
   getCoreRowModel,
@@ -29,6 +30,7 @@ export function DataTable<TData, TValue>({
   pageSize = 10,
   className = "",
 }: DataTableProps<TData, TValue>) {
+  const t = useTranslations("components");
   const [sorting, setSorting] = useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = useState("");
   const [density, setDensity] = useState<"compact" | "comfortable">("comfortable");
@@ -72,7 +74,7 @@ export function DataTable<TData, TValue>({
           <button
             onClick={() => setDensity(density === "compact" ? "comfortable" : "compact")}
             className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-input border border-app-border bg-app-surface text-app-muted hover:text-app-text transition-colors"
-            title="Toggle Row Density"
+            title={t("toggleDensity")}
           >
             <SlidersHorizontal className="w-3.5 h-3.5" />
             <span className="capitalize">{density}</span>
@@ -182,7 +184,7 @@ export function DataTable<TData, TValue>({
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
               className="p-1 rounded border border-app-border disabled:opacity-30 hover:bg-app-surface text-app-text"
-              aria-label="Previous Page"
+              aria-label={t("previousPage")}
             >
               <ChevronLeft className="w-4 h-4 dir-aware-flip" />
             </button>
@@ -194,7 +196,7 @@ export function DataTable<TData, TValue>({
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
               className="p-1 rounded border border-app-border disabled:opacity-30 hover:bg-app-surface text-app-text"
-              aria-label="Next Page"
+              aria-label={t("nextPage")}
             >
               <ChevronRight className="w-4 h-4 dir-aware-flip" />
             </button>

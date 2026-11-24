@@ -32,8 +32,8 @@ export default function StakeholderPortalPage() {
           </div>
         </div>
         <div className="flex items-center gap-2 text-xs">
-          <span className="text-app-muted">Organization:</span>
-          <span className="font-bold text-app-text">Gulf Water &amp; Power Co.</span>
+          <span className="text-app-muted">{t("portal.orgLabel")}:</span>
+          <span className="font-bold text-app-text">{t("tenants.gulf_water")}</span>
         </div>
       </header>
 
@@ -43,7 +43,7 @@ export default function StakeholderPortalPage() {
           <div className="flex items-center justify-between border-b border-app-border pb-3">
             <div className="flex items-center gap-2">
               <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300">
-                OFFICIAL EXECUTIVE UPDATE
+                {t("portal.officialExecutiveUpdate")}
               </span>
               <span className="text-xs text-app-muted font-mono">
                 <Clock className="w-3.5 h-3.5 inline me-1" />
@@ -51,12 +51,12 @@ export default function StakeholderPortalPage() {
               </span>
             </div>
             <span className="text-xs font-semibold text-emerald-600">
-              ✓ Approved by Crisis Commander
+              {t("portal.approvedByCommander")}
             </span>
           </div>
 
           <h2 className="text-lg font-bold text-app-text">
-            Incident Briefing: SCADA Network Anomaly at Sohar Desalination Plant
+            {t("portal.incidentBriefingTitle")}
           </h2>
 
           <div className="prose text-xs text-app-text/90 leading-relaxed space-y-2">
@@ -64,10 +64,10 @@ export default function StakeholderPortalPage() {
               At 20:15 GST, technical sensors detected an anomaly in telemetry data within Section 4 of the Sohar plant. Backup analog systems have engaged automatically to ensure safe continuous potable water generation.
             </p>
             <p>
-              <strong>Impact on Public Supply:</strong> Nil. Reserve water tanks in Muscat and Al Batinah South are at 96% capacity, representing 72 hours of uninterrupted water distribution.
+              <strong>{t("portal.publicSupplyImpact")}:</strong> Nil. Reserve water tanks in Muscat and Al Batinah South are at 96% capacity, representing 72 hours of uninterrupted water distribution.
             </p>
             <p>
-              <strong>Next Scheduled Briefing:</strong> 22:00 GST.
+              <strong>{t("portal.nextBriefing")}:</strong> 22:00 GST.
             </p>
           </div>
 
@@ -77,7 +77,7 @@ export default function StakeholderPortalPage() {
             </span>
             <button className="flex items-center gap-1.5 px-3 py-1.5 bg-brand-600 text-white rounded-input text-xs font-semibold hover:bg-brand-hover">
               <FileDown className="w-4 h-4" />
-              <span>Download Executive Pack (PDF)</span>
+              <span>{t("portal.downloadPack")}</span>
             </button>
           </div>
         </div>
@@ -87,9 +87,9 @@ export default function StakeholderPortalPage() {
           <div className="p-4 rounded-card bg-app-surface border border-app-border space-y-2">
             <div className="flex items-center gap-2 text-xs font-bold text-app-muted">
               <Activity className="w-4 h-4 text-emerald-500" />
-              <span>National Water Supply Continuity</span>
+              <span>{t("portal.waterContinuity")}</span>
             </div>
-            <div className="text-2xl font-black text-emerald-600">100% Stable</div>
+            <div className="text-2xl font-black text-emerald-600">{t("portal.stable")}</div>
             <p className="text-[11px] text-app-muted">
               Secondary distribution networks operational without disruption.
             </p>
@@ -98,9 +98,9 @@ export default function StakeholderPortalPage() {
           <div className="p-4 rounded-card bg-app-surface border border-app-border space-y-2">
             <div className="flex items-center gap-2 text-xs font-bold text-app-muted">
               <Calendar className="w-4 h-4 text-brand-600" />
-              <span>Regulatory Reporting Compliance</span>
+              <span>{t("portal.reportingCompliance")}</span>
             </div>
-            <div className="text-2xl font-black text-brand-600">On Track</div>
+            <div className="text-2xl font-black text-brand-600">{t("portal.onTrack")}</div>
             <p className="text-[11px] text-app-muted">
               Preliminary incident report filed with the Authority within the 1-hour mandate.
             </p>

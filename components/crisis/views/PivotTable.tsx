@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslations } from "next-intl";
 import { Ltr } from "@/components/common/Ltr";
 
 interface PivotRow {
@@ -20,6 +21,7 @@ export const PivotTable: React.FC<PivotTableProps> = ({
   title = "Channel Delivery Breakdown by Site / Department",
   className = "",
 }) => {
+  const t = useTranslations("components");
   return (
     <div className={`p-4 rounded-card bg-app-surface border border-app-border space-y-3 ${className}`}>
       <h3 className="font-bold text-xs text-app-text">{title}</h3>
@@ -28,11 +30,11 @@ export const PivotTable: React.FC<PivotTableProps> = ({
         <table className="w-full text-xs text-start">
           <thead className="border-b border-app-border bg-app-surface-subtle text-app-muted">
             <tr>
-              <th className="py-2 px-3 text-start font-semibold">Entity / Group</th>
+              <th className="py-2 px-3 text-start font-semibold">{t("entityGroup")}</th>
               <th className="py-2 px-3 text-end font-semibold">SMS</th>
               <th className="py-2 px-3 text-end font-semibold">Email</th>
               <th className="py-2 px-3 text-end font-semibold">Teams</th>
-              <th className="py-2 px-3 text-end font-bold text-app-text">Total</th>
+              <th className="py-2 px-3 text-end font-bold text-app-text">{t("total")}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-app-border font-mono">

@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import React from "react";
 import { Ltr } from "@/components/common/Ltr";
 
@@ -19,6 +20,7 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
   events = [],
   className = "",
 }) => {
+  const t = useTranslations("components");
   const days = Array.from({ length: 30 }, (_, i) => i + 1);
 
   const getBadgeClass = (type: CalendarEvent["type"]) => {
@@ -38,7 +40,7 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
     <div className={`p-4 rounded-card bg-app-surface border border-app-border space-y-3 ${className}`}>
       <div className="flex items-center justify-between">
         <h3 className="font-bold text-sm text-app-text">{monthName}</h3>
-        <span className="text-xs text-app-muted">On-Call Shifts &amp; Scheduled Drills</span>
+        <span className="text-xs text-app-muted">{t("calendarTitle")}</span>
       </div>
 
       <div className="grid grid-cols-7 gap-1 text-center text-xs">

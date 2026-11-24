@@ -103,12 +103,12 @@ export default function AttentionQueuePage() {
           <div>
             <div className="flex items-center gap-1.5 text-critical-400 text-xs font-bold uppercase tracking-wider">
               <AlertTriangle className="h-4 w-4" />
-              <span>Now Lane (P90–100)</span>
+              <span>{t("attentionQueue.laneNowTitle")}</span>
             </div>
             <p className="text-2xl font-bold text-text-main mt-1">
               <Ltr>{nowCount}</Ltr>
             </p>
-            <p className="text-[11px] text-text-muted mt-0.5">Under 15m SLA / Executive sign-off</p>
+            <p className="text-[11px] text-text-muted mt-0.5">{t("attentionQueue.laneNowSub")}</p>
           </div>
           <span className="h-3 w-3 rounded-full bg-critical-500 animate-pulse" />
         </button>
@@ -125,12 +125,12 @@ export default function AttentionQueuePage() {
           <div>
             <div className="flex items-center gap-1.5 text-amber-400 text-xs font-bold uppercase tracking-wider">
               <Clock className="h-4 w-4" />
-              <span>Next Lane (P60–89)</span>
+              <span>{t("attentionQueue.laneNextTitle")}</span>
             </div>
             <p className="text-2xl font-bold text-text-main mt-1">
               <Ltr>{nextCount}</Ltr>
             </p>
-            <p className="text-[11px] text-text-muted mt-0.5">This shift tasks & holding statements</p>
+            <p className="text-[11px] text-text-muted mt-0.5">{t("attentionQueue.laneNextSub")}</p>
           </div>
           <span className="h-2.5 w-2.5 rounded-full bg-amber-500" />
         </button>
@@ -147,12 +147,12 @@ export default function AttentionQueuePage() {
           <div>
             <div className="flex items-center gap-1.5 text-slate-400 text-xs font-bold uppercase tracking-wider">
               <CheckCircle2 className="h-4 w-4" />
-              <span>Later Lane (P0–59)</span>
+              <span>{t("attentionQueue.laneLaterTitle")}</span>
             </div>
             <p className="text-2xl font-bold text-text-main mt-1">
               <Ltr>{laterCount}</Ltr>
             </p>
-            <p className="text-[11px] text-text-muted mt-0.5">Post-incident logs & recovery plan drafts</p>
+            <p className="text-[11px] text-text-muted mt-0.5">{t("attentionQueue.laneLaterSub")}</p>
           </div>
           <span className="h-2.5 w-2.5 rounded-full bg-slate-500" />
         </button>
@@ -247,9 +247,9 @@ export default function AttentionQueuePage() {
                 <div className="flex items-center gap-4 text-xs text-text-muted">
                   <span className="flex items-center gap-1">
                     <Clock className="h-3 w-3" />
-                    Due within <Ltr>{item.dueMinutes}</Ltr> mins
+                    {t("attentionQueue.dueWithin", { minutes: item.dueMinutes })}
                   </span>
-                  <span>Type: <span className="capitalize text-text-main">{item.type}</span></span>
+                  <span>{t("attentionQueue.typeLabel")}: <span className="capitalize text-text-main">{item.type}</span></span>
                 </div>
               </div>
 
@@ -259,7 +259,7 @@ export default function AttentionQueuePage() {
                   href={`/${locale}/app/incidents/${item.incidentId}`}
                   className="inline-flex items-center gap-1 rounded-lg border border-border-subtle bg-surface-elevated px-3 py-1.5 text-xs font-medium text-text-muted hover:text-text-main transition"
                 >
-                  <span>View Details</span>
+                  <span>{t("attentionQueue.viewDetails")}</span>
                   <ArrowRight className="h-3.5 w-3.5 rtl-flip" />
                 </Link>
 

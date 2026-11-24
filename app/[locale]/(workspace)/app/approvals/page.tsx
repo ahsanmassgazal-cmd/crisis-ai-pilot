@@ -147,7 +147,7 @@ export default function ApprovalsInboxPage() {
             }`}
           >
             <Clock className="h-3.5 w-3.5" />
-            <span>Pending Approvals ({pendingApprovals.length})</span>
+            <span>{t("approvalsCenter.pendingApprovals")} ({pendingApprovals.length})</span>
           </button>
           <button
             type="button"
@@ -159,7 +159,7 @@ export default function ApprovalsInboxPage() {
             }`}
           >
             <CheckCheck className="h-3.5 w-3.5" />
-            <span>Audit History ({historyItems.length})</span>
+            <span>{t("approvalsCenter.auditHistory")} ({historyItems.length})</span>
           </button>
         </div>
       </div>
@@ -170,8 +170,8 @@ export default function ApprovalsInboxPage() {
           {pendingApprovals.length === 0 ? (
             <div className="rounded-xl border border-dashed border-border-subtle p-12 text-center text-xs space-y-2 bg-surface-elevated">
               <CheckCircle2 className="h-8 w-8 text-emerald-400 mx-auto" />
-              <p className="font-semibold text-text-main">Approvals Inbox is Clear</p>
-              <p className="text-text-muted">No pending crisis broadcasts awaiting commander sign-off.</p>
+              <p className="font-semibold text-text-main">{t("approvalsCenter.inboxClear")}</p>
+              <p className="text-text-muted">{t("approvalsCenter.inboxClearSub")}</p>
             </div>
           ) : (
             pendingApprovals.map((app) => (
@@ -200,8 +200,8 @@ export default function ApprovalsInboxPage() {
       ) : (
         <div className="rounded-xl border border-border-subtle bg-surface-elevated p-4 text-xs">
           <div className="border-b border-border-subtle pb-2 mb-3">
-            <h3 className="font-bold text-text-main">Approved & Rejected Decision Log</h3>
-            <p className="text-[10px] text-text-muted">Immutable historical record of every message sign-off</p>
+            <h3 className="font-bold text-text-main">{t("approvalsCenter.decisionLogTitle")}</h3>
+            <p className="text-[10px] text-text-muted">{t("approvalsCenter.decisionLogSub")}</p>
           </div>
 
           <div className="divide-y divide-border-subtle">
@@ -209,7 +209,7 @@ export default function ApprovalsInboxPage() {
               <div key={h.id} className="py-2.5 flex items-center justify-between">
                 <div>
                   <p className="font-semibold text-text-main">{h.title}</p>
-                  <p className="text-[10px] text-text-muted">Signed by: {h.decisionBy}</p>
+                  <p className="text-[10px] text-text-muted">{t("approvalsCenter.signedBy")}: {h.decisionBy}</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <span

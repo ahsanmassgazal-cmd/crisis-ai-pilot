@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Download, FileSpreadsheet, FileText, Code, Check } from "lucide-react";
 
 export interface ExportMenuProps {
@@ -8,7 +9,9 @@ export interface ExportMenuProps {
   title?: string;
 }
 
-export function ExportMenu({ onExport, title = "Export" }: ExportMenuProps) {
+export function ExportMenu({ onExport, title }: ExportMenuProps) {
+  const t = useTranslations("components");
+  const displayTitle = title || t("chooseExportFormat");
   const [isOpen, setIsOpen] = useState(false);
   const [withBom, setWithBom] = useState(true);
 
@@ -20,7 +23,7 @@ export function ExportMenu({ onExport, title = "Export" }: ExportMenuProps) {
         className="inline-flex items-center gap-1.5 rounded-lg border border-border-subtle bg-surface-elevated px-3 py-1.5 text-xs font-semibold text-text-main shadow-xs hover:bg-surface-base transition"
       >
         <Download className="h-3.5 w-3.5 text-brand-500" />
-        <span>{title}</span>
+        <span>{displayTitle}</span>
       </button>
 
       {isOpen && (
@@ -28,7 +31,7 @@ export function ExportMenu({ onExport, title = "Export" }: ExportMenuProps) {
           <div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)} />
           <div className="absolute inset-inline-end-0 mt-1.5 w-56 rounded-xl border border-border-subtle bg-surface-elevated p-2 shadow-xl z-50 text-xs space-y-1">
             <div className="px-2 py-1 text-[10px] font-semibold text-text-muted uppercase tracking-wider">
-              Choose Export Format
+              {t("chooseExportFormat")}
             </div>
 
             <button
@@ -41,7 +44,7 @@ export function ExportMenu({ onExport, title = "Export" }: ExportMenuProps) {
             >
               <div className="flex items-center gap-2">
                 <FileSpreadsheet className="h-3.5 w-3.5 text-emerald-400" />
-                <span>CSV File (.csv)</span>
+                <span>{t("csvFormat")}</span>
               </div>
               <span className="text-[10px] text-text-muted">UTF-8 BOM</span>
             </button>
@@ -55,7 +58,7 @@ export function ExportMenu({ onExport, title = "Export" }: ExportMenuProps) {
               className="w-full flex items-center gap-2 rounded-lg px-2.5 py-1.5 text-text-main hover:bg-surface-base transition"
             >
               <FileSpreadsheet className="h-3.5 w-3.5 text-emerald-500" />
-              <span>Excel Workbook (.xlsx)</span>
+              <span>{t("xlsxFormat")}</span>
             </button>
 
             <button
@@ -67,7 +70,7 @@ export function ExportMenu({ onExport, title = "Export" }: ExportMenuProps) {
               className="w-full flex items-center gap-2 rounded-lg px-2.5 py-1.5 text-text-main hover:bg-surface-base transition"
             >
               <Code className="h-3.5 w-3.5 text-indigo-400" />
-              <span>Raw JSON Data (.json)</span>
+              <span>{t("jsonFormat")}</span>
             </button>
 
             <button
@@ -79,11 +82,11 @@ export function ExportMenu({ onExport, title = "Export" }: ExportMenuProps) {
               className="w-full flex items-center gap-2 rounded-lg px-2.5 py-1.5 text-text-main hover:bg-surface-base transition"
             >
               <FileText className="h-3.5 w-3.5 text-critical-400" />
-              <span>Formatted Executive PDF (.pdf)</span>
+              <span>{t("pdfFormat")}</span>
             </button>
 
             <div className="border-t border-border-subtle pt-1 mt-1 px-2 flex items-center justify-between">
-              <span className="text-[10px] text-text-muted">Excel Arabic UTF-8 BOM</span>
+              <span className="text-[10px] text-text-muted">{t("utf8BomToggle")}</span>
               <button
                 type="button"
                 onClick={() => setWithBom(!withBom)}

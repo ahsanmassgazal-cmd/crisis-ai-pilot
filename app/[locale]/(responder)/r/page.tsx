@@ -43,7 +43,7 @@ export default function ResponderAppPage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-1.5 text-xs font-bold text-severity-critical">
               <Bell className="w-4 h-4 animate-bounce shrink-0" />
-              <span>CRITICAL ALERT (SEV1)</span>
+              <span>{t("responder.criticalAlert")}</span>
             </div>
             <span className="text-[11px] font-mono text-app-muted">
               <Clock className="w-3 h-3 inline me-1" />
@@ -70,7 +70,7 @@ export default function ResponderAppPage() {
               }`}
             >
               <CheckCircle2 className="w-5 h-5" />
-              <span>I&apos;m Safe &amp; Acknowledged</span>
+              <span>{t("responder.imSafeAcked")}</span>
             </button>
 
             <button
@@ -82,7 +82,7 @@ export default function ResponderAppPage() {
               }`}
             >
               <AlertTriangle className="w-5 h-5" />
-              <span>Need Help / Trapped</span>
+              <span>{t("responder.needHelp")}</span>
             </button>
           </div>
 
@@ -100,8 +100,8 @@ export default function ResponderAppPage() {
           </h3>
           <div className="p-3 rounded-input bg-app-surface-subtle border border-app-border space-y-1">
             <div className="flex items-center justify-between text-xs font-bold text-app-text">
-              <span>Isolate Feed Pump 3B Manually</span>
-              <span className="text-priority-p1 text-[10px]">P1 Due &lt; 15m</span>
+              <span>{t("responder.isolatePump")}</span>
+              <span className="text-priority-p1 text-[10px]">{t("responder.dueSoon")}</span>
             </div>
             <p className="text-[11px] text-app-muted">
               Location: Auxiliary Pump Room B, North Wing.
@@ -113,9 +113,9 @@ export default function ResponderAppPage() {
         <div className="p-3 rounded-input bg-app-surface-subtle border border-app-border flex items-center justify-between text-xs text-app-muted">
           <div className="flex items-center gap-2">
             <MapPin className="w-4 h-4 text-brand-600" />
-            <span>Sohar Plant (24.36°N, 56.74°E)</span>
+            <span>{t("responder.plantLocation")}</span>
           </div>
-          <span className="text-[11px] font-semibold text-brand-600">Verified</span>
+          <span className="text-[11px] font-semibold text-brand-600">{t("responder.verified")}</span>
         </div>
 
         <div className="text-center text-[11px] text-app-muted pt-4">
