@@ -1,15 +1,15 @@
 /**
- * Repository interface (Section 16)
+ * Repository interface (Section 16 & Gap-Close Spec)
  *
  * All screens must query against this interface.
- * Stage A/B uses MockRepository backed by memory & Dexie.
+ * Stage A/B uses MockRepository backed by memory & Dexie IndexedDB.
  * Stage C swaps to SupabaseRepository without altering UI screens.
  */
 
 export interface Crud<T> {
   getAll(): Promise<T[]>;
   getById(id: string): Promise<T | null>;
-  create(item: Omit<T, "id">): Promise<T>;
+  create(item: Omit<T, "id"> | T): Promise<T>;
   update(id: string, updates: Partial<T>): Promise<T>;
   delete(id: string): Promise<boolean>;
 }
@@ -73,6 +73,14 @@ export interface Plan {
   owner_role: string;
   steps_count: number;
   version: string;
+  steps?: {
+    id: string;
+    step_number: number;
+    title_en: string;
+    title_ar: string;
+    role: string;
+    duration_minutes: number;
+  }[];
 }
 
 export interface Message {
@@ -150,6 +158,127 @@ export interface AuditRow {
   hash: string;
 }
 
+export interface Site {
+  id: string;
+  tenant_id: string;
+  name_en: string;
+  name_ar: string;
+  city: string;
+  country: string;
+  lat: number;
+  lng: number;
+  criticality: "tier1" | "tier2" | "tier3";
+  active_incidents_count: number;
+}
+
+export interface Task {
+  id: string;
+  incident_id: string;
+  title_en: string;
+  title_ar: string;
+  owner_id: string;
+  owner_name: string;
+  priority: "p1" | "p2" | "p3" | "p4";
+  status: "todo" | "doing" | "blocked" | "done";
+  due_minutes: number;
+  priority_score: number;
+}
+
+export interface CriticalFunction {
+  id: string;
+  tenant_id: string;
+  name_en: string;
+  name_ar: string;
+  rto_minutes: number;
+  rpo_minutes: number;
+  mtpd_minutes: number;
+  status: "normal" | "impacted" | "degraded" | "recovering";
+  sla_used_percent: number;
+  dependencies: string[];
+}
+
+export interface RiskItem {
+  id: string;
+  code?: string;
+  tenant_id: string;
+  title_en: string;
+  title_ar: string;
+  likelihood: number;
+  impact: number;
+  score?: number;
+  owner: string;
+  controls: string;
+  mitigation?: string;
+  linked_plan_id: string;
+  planId?: string;
+}
+
+export interface ApprovalItem {
+  id: string;
+  incident_id: string;
+  incident_title: string;
+  type: "stakeholder_brief" | "status_page_publish" | "evacuation_order";
+  subject_en: string;
+  subject_ar: string;
+  body_en: string;
+  body_ar: string;
+  ai_generated: boolean;
+  priority_score: number;
+  waiting_minutes: number;
+  status: "pending" | "approved" | "rejected";
+}
+
+export interface DrillItem {
+  id: string;
+  tenant_id: string;
+  title_en: string;
+  title_ar: string;
+  date: string;
+  type: "unannounced" | "tabletop" | "full_scale";
+  participants_count: number;
+  score_percent: number;
+  status: "completed" | "scheduled" | "in_progress";
+}
+
+export interface DocumentItem {
+  id: string;
+  tenant_id: string;
+  title_en: string;
+  title_ar: string;
+  category: "policy" | "sop" | "diagram" | "agreement";
+  version: string;
+  updated_at: string;
+  file_size_kb: number;
+  mime_type: string;
+  blob_data?: string;
+}
+
+export interface TenantConfig {
+  id: string;
+  name_en: string;
+  name_ar: string;
+  country: string;
+  package: "Enterprise" | "Professional" | "Pilot";
+  brand_color: string;
+  logo_url: string;
+  active_incidents_count: number;
+  responders_count: number;
+  readiness_percent: number;
+}
+
+export interface AttentionQueueItem {
+  id: string;
+  title: string;
+  incidentId: string;
+  incidentTitle: string;
+  lane: "now" | "next" | "later";
+  priorityScore: number;
+  reason: string;
+  dueMinutes: number;
+  type: "incident" | "approval" | "responder" | "task" | "audit";
+  suggestedAction: string;
+}
+
 export interface CrisisRepository {
   incidents: Crud<Incident> & {
     activate(input: Partial<Incident>): Promise<Incident>;
@@ -164,6 +293,8 @@ export interface CrisisRepository {
   deliveries: {
     getAll(): Promise<Delivery[]>;
     getByMessageId(messageId: string): Promise<Delivery[]>;
+    create(delivery: Omit<Delivery, "id"> | Delivery): Promise<Delivery>;
+    update(id: string, updates: Partial<Delivery>): Promise<Delivery>;
   };
   automations: Crud<AutomationRule> & {
     setMode(scope: string, mode: "auto" | "assisted" | "manual"): Promise<void>;
@@ -171,6 +302,18 @@ export interface CrisisRepository {
   };
   audit: {
     getAll(): Promise<AuditRow[]>;
+    append(row: Omit<AuditRow, "id" | "seq" | "hash" | "prev_hash">): Promise<AuditRow>;
     verifyChain(): Promise<{ valid: boolean; brokenAt?: number; count: number }>;
+    tamperBlock(index: number): Promise<boolean>;
   };
+  tasks: Crud<Task>;
+  sites: Crud<Site>;
+  criticalFunctions: Crud<CriticalFunction>;
+  risks: Crud<RiskItem>;
+  drills: Crud<DrillItem>;
+  documents: Crud<DocumentItem>;
+  approvals: Crud<ApprovalItem>;
+  tenants: Crud<TenantConfig>;
+  getAttentionQueue(): Promise<AttentionQueueItem[]>;
+  resetToSeed(): Promise<void>;
 }

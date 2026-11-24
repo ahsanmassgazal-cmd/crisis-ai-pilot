@@ -252,7 +252,25 @@
     "sev1GulfWater": "SEV1 Gulf Water",
     "deliveryRate": "99.4% Delivery",
     "gccOrgs": "GCC Orgs",
-    "switchToClient": "Switch to Client Workspace"
+    "switchToClient": "Switch to Client Workspace",
+    "provisionTenant": "Provision New Tenant",
+    "deployTenant": "Deploy Tenant",
+    "orgLegalEn": "Organization Legal Name (English)",
+    "orgLegalAr": "Organization Legal Name (Arabic)",
+    "jurisdiction": "Country / Jurisdiction",
+    "initialCommander": "Initial Incident Commander Name",
+    "commanderEmail": "Commander Official Email",
+    "brandAccent": "Brand Accent Color",
+    "livePreview": "Live Card Preview:",
+    "activeCrisisHub": "Active Crisis Hub",
+    "orgLabel": "Organization:",
+    "jurisdictionLabel": "Jurisdiction:",
+    "commanderLabel": "Commander Admin:",
+    "packageLabel": "Package:",
+    "oman": "Sultanate of Oman",
+    "uae": "United Arab Emirates",
+    "saudi": "Kingdom of Saudi Arabia",
+    "qatar": "State of Qatar"
   },
   "portal": {
     "orgLabel": "Organization",
@@ -265,7 +283,9 @@
     "onTrack": "On Track",
     "officialExecutiveUpdate": "OFFICIAL EXECUTIVE UPDATE",
     "approvedByCommander": "✓ Approved by Crisis Commander",
-    "incidentBriefingTitle": "Incident Briefing: SCADA Network Anomaly at Sohar Desalination Plant"
+    "incidentBriefingTitle": "Incident Briefing: SCADA Network Anomaly at Sohar Desalination Plant",
+    "confidentialClassification": "Classification: Confidential — Board & Regulatory Distribution",
+    "downloadEvidenceZip": "Download Official Evidence ZIP"
   },
   "responder": {
     "criticalAlert": "CRITICAL ALERT (SEV1)",
@@ -274,7 +294,10 @@
     "isolatePump": "Isolate Feed Pump 3B Manually",
     "dueSoon": "P1 Due < 15m",
     "plantLocation": "Sohar Plant (24.36°N, 56.74°E)",
-    "verified": "Verified"
+    "verified": "Verified",
+    "sla15m": "SLA 15m",
+    "smsTeamsVerification": "SMS & Teams Verification",
+    "verifiedStatus": "VERIFIED"
   },
   "attentionQueue": {
     "title": "Attention Queue",
@@ -587,7 +610,17 @@
     "history": "History",
     "download": "Download",
     "versionHistoryTitle": "Version History",
-    "restoreVersion": "Restore This Version"
+    "restoreVersion": "Restore This Version",
+    "aiDraftBadge": "AI draft — needs approval",
+    "modelSonnet": "Model: Claude 3.5 Sonnet Verified",
+    "gridView": "Grid View",
+    "tableView": "Table View",
+    "documentTitle": "Document Title",
+    "category": "Category",
+    "version": "Version",
+    "size": "Size",
+    "action": "Action",
+    "kbUnit": "KB"
   },
   "peopleCenter": {
     "title": "People & Groups",
@@ -744,7 +777,10 @@
   "publicStatus": {
     "title": "National Water Grid Status",
     "degradedBanner": "Minor Technical Degraded Status: All municipal water distribution networks operate normally with zero interruption to homes or commercial businesses.",
-    "pastUpdatesTitle": "Past Incident Updates"
+    "pastUpdatesTitle": "Past Incident Updates",
+    "allMonitored": "All Systems Monitored 24/7",
+    "utilityServices": "Utility & Grid Services",
+    "liveTelemetry": "Live Telemetry"
   },
   "plansCenter": {
     "title": "Plans & Playbooks",
@@ -977,6 +1013,12 @@
     "resetBaseline": "Reset All Data to Seed Baseline",
     "activeSpeed": "Active Speed: {speed}x",
     "close": "Close Simulation Panel",
-    "injectedSuccess": "Simulation event triggered successfully."
+    "injectedSuccess": "Simulation event triggered successfully.",
+    "breakSmsA": "Break SMS A (Failover)",
+    "delayEmail": "Delay Email 2m",
+    "teamsError": "Teams Error (429)",
+    "responderSilent": "20% Responder Silent",
+    "scadaSpike": "SCADA Telemetry Spike",
+    "bitFlipTamper": "Bit-Flip Block 1247"
   }
 }

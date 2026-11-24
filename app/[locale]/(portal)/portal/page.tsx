@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import {
@@ -9,12 +9,60 @@ import {
   Clock,
   ArrowLeft,
   Activity,
-  Calendar,
+  CheckCircle2,
+  FileArchive,
+  Lock,
 } from "lucide-react";
-import { Ltr } from "@/components/common/Ltr";
+import { Ltr } from "@/components/layout/Ltr";
+import { useRepo, Message } from "@/lib/repo";
+import { generateEvidenceZip } from "@/lib/engine/export";
+import { showToast } from "@/lib/toast";
 
 export default function StakeholderPortalPage() {
   const t = useTranslations();
+  const repo = useRepo();
+
+  const [approvedMessage, setApprovedMessage] = useState<Message | null>(null);
+  const [downloadingZip, setDownloadingZip] = useState(false);
+
+  useEffect(() => {
+    async function loadData() {
+      const msgs = await repo.messages.getAll();
+      const approved = msgs.find((m) => m.status === "approved") || msgs[0];
+      if (approved) setApprovedMessage(approved);
+    }
+    loadData();
+  }, [repo]);
+
+  const handleDownloadEvidenceZip = async () => {
+    setDownloadingZip(true);
+    try {
+      const { zipBlob } = await generateEvidenceZip(repo, "inc-2026-001");
+      const url = URL.createObjectURL(zipBlob as Blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `crisis_evidence_pack_inc_2026_001.zip`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      showToast({
+        title: "Evidence ZIP Generated",
+        description: "Official ZIP downloaded with manifest.json and SHA-256 checksums.",
+        tone: "emerald",
+      });
+    } catch (e) {
+      console.error(e);
+      showToast({
+        title: "Download Failed",
+        description: "Could not generate evidence ZIP.",
+        tone: "rose",
+      });
+    } finally {
+      setDownloadingZip(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-app-bg text-app-text flex flex-col font-sans">
@@ -47,37 +95,45 @@ export default function StakeholderPortalPage() {
               </span>
               <span className="text-xs text-app-muted font-mono">
                 <Clock className="w-3.5 h-3.5 inline me-1" />
-                <Ltr>2026-11-23 20:45 GST</Ltr>
+                <Ltr>2026-11-24 06:20 GST</Ltr>
               </span>
             </div>
-            <span className="text-xs font-semibold text-emerald-600">
-              {t("portal.approvedByCommander")}
+            <span className="text-xs font-semibold text-emerald-600 flex items-center gap-1">
+              <CheckCircle2 className="w-3.5 h-3.5" />
+              <span>{t("portal.approvedByCommander")}</span>
             </span>
           </div>
 
           <h2 className="text-lg font-bold text-app-text">
-            {t("portal.incidentBriefingTitle")}
+            {approvedMessage?.subject_en || t("portal.incidentBriefingTitle")}
           </h2>
 
           <div className="prose text-xs text-app-text/90 leading-relaxed space-y-2">
             <p>
-              At 20:15 GST, technical sensors detected an anomaly in telemetry data within Section 4 of the Sohar plant. Backup analog systems have engaged automatically to ensure safe continuous potable water generation.
+              {approvedMessage?.body_en ||
+                "At 06:15 GST, technical telemetry sensors detected an anomaly within Section 4 of the Sohar plant. Backup analog controls have engaged automatically to ensure safe continuous potable water generation."}
             </p>
             <p>
-              <strong>{t("portal.publicSupplyImpact")}:</strong> Nil. Reserve water tanks in Muscat and Al Batinah South are at 96% capacity, representing 72 hours of uninterrupted water distribution.
+              <strong>{t("portal.publicSupplyImpact")}:</strong> Nil. Strategic reserve tanks across Muscat and Al Batinah remain at 96% capacity, representing over 72 hours of uninterrupted water distribution.
             </p>
             <p>
-              <strong>{t("portal.nextBriefing")}:</strong> 22:00 GST.
+              <strong>{t("portal.nextBriefing")}:</strong> 08:00 GST.
             </p>
           </div>
 
-          <div className="pt-2 flex items-center justify-between border-t border-app-border">
-            <span className="text-xs text-app-muted">
-              Classification: Confidential — Board &amp; Regulatory Distribution
-            </span>
-            <button className="flex items-center gap-1.5 px-3 py-1.5 bg-brand-600 text-white rounded-input text-xs font-semibold hover:bg-brand-hover">
-              <FileDown className="w-4 h-4" />
-              <span>{t("portal.downloadPack")}</span>
+          <div className="pt-3 flex flex-wrap items-center justify-between gap-3 border-t border-app-border">
+            <div className="flex items-center gap-1.5 text-xs text-app-muted">
+              <Lock className="w-3.5 h-3.5 text-brand-600" />
+              <span>{t("portal.confidentialClassification")}</span>
+            </div>
+
+            <button
+              onClick={handleDownloadEvidenceZip}
+              disabled={downloadingZip}
+              className="flex items-center gap-2 px-3.5 py-1.5 bg-brand-600 text-white rounded-input text-xs font-semibold hover:bg-brand-hover shadow-sm transition disabled:opacity-50"
+            >
+              <FileArchive className="w-4 h-4" />
+              <span>{downloadingZip ? "Generating..." : t("portal.downloadEvidenceZip")}</span>
             </button>
           </div>
         </div>
@@ -97,12 +153,12 @@ export default function StakeholderPortalPage() {
 
           <div className="p-4 rounded-card bg-app-surface border border-app-border space-y-2">
             <div className="flex items-center gap-2 text-xs font-bold text-app-muted">
-              <Calendar className="w-4 h-4 text-brand-600" />
+              <ShieldCheck className="w-4 h-4 text-brand-600" />
               <span>{t("portal.reportingCompliance")}</span>
             </div>
             <div className="text-2xl font-black text-brand-600">{t("portal.onTrack")}</div>
             <p className="text-[11px] text-app-muted">
-              Preliminary incident report filed with the Authority within the 1-hour mandate.
+              Mandatory 1-hour public authority notice submitted within SLA.
             </p>
           </div>
         </div>

@@ -1,26 +1,30 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useTranslations } from "next-intl";
 import {
   Presentation,
   X,
   FastForward,
-  Play,
   RotateCcw,
   Zap,
   UserX,
   Radio,
   Fingerprint,
-  Activity,
+  Mail,
+  MessageSquare,
   CheckCircle2,
+  AlertTriangle,
 } from "lucide-react";
 import { Ltr } from "@/components/layout/Ltr";
 import { useAppStore } from "@/lib/store/useAppStore";
+import { useRepo } from "@/lib/repo";
 import { showToast } from "@/lib/toast";
+import { automationRunner } from "@/lib/engine/automations";
 
 export const PresenterSimulationPanel: React.FC = () => {
   const t = useTranslations();
+  const repo = useRepo();
   const {
     currentRole,
     presenterPanelOpen,
@@ -28,22 +32,94 @@ export const PresenterSimulationPanel: React.FC = () => {
     togglePresenterPanel,
     simSpeed,
     setSimSpeed,
+    failures,
+    toggleFailure,
+    resetFailures,
   } = useAppStore();
 
   const speeds: Array<1 | 5 | 60 | 300> = [1, 5, 60, 300];
 
-  const handleInject = (scenarioName: string, description: string) => {
+  const handleToggleSms = () => {
+    toggleFailure("smsABroken");
+    const newState = !failures.smsABroken;
     showToast({
-      title: scenarioName,
-      description,
-      tone: "amber",
+      title: newState ? "SMS A Primary Broken" : "SMS A Restored",
+      description: newState
+        ? "OmanTel SMPP gateway error simulated. Next SMS will fail over to SMS B (Ooredoo)."
+        : "Primary SMS route restored to healthy.",
+      tone: newState ? "rose" : "emerald",
     });
   };
 
-  const handleReset = () => {
+  const handleToggleEmail = () => {
+    toggleFailure("emailDelayed");
+    const newState = !failures.emailDelayed;
+    showToast({
+      title: newState ? "Email 2m Delay Injected" : "Email Normal Latency",
+      description: newState ? "SMTP outbound relay delayed by 120s." : "SMTP outbound latency restored to normal.",
+      tone: newState ? "amber" : "emerald",
+    });
+  };
+
+  const handleToggleTeams = () => {
+    toggleFailure("teamsError");
+    const newState = !failures.teamsError;
+    showToast({
+      title: newState ? "Teams Webhook Error Injected" : "Teams Webhook Restored",
+      description: newState ? "Microsoft Graph returns 429 RateLimitExceeded." : "Teams notifications restored.",
+      tone: newState ? "rose" : "emerald",
+    });
+  };
+
+  const handleToggleResponder = () => {
+    toggleFailure("responderUnresponsive");
+    const newState = !failures.responderUnresponsive;
+    showToast({
+      title: newState ? "Responder Unresponsive (20%)" : "Responders Responsive",
+      description: newState
+        ? "On-call lead silent past 5m SLA. Escalation ladder advancing to Tier 2."
+        : "Responders answering normally.",
+      tone: newState ? "amber" : "emerald",
+    });
+  };
+
+  const handleToggleScada = async () => {
+    toggleFailure("scadaSpike");
+    const newState = !failures.scadaSpike;
+    if (newState) {
+      // Trigger automation evaluation
+      await automationRunner.runRules(repo, { scadaMetric: 34.2 });
+    }
+    showToast({
+      title: newState ? "SCADA Telemetry Spike Injected" : "SCADA Telemetry Normal",
+      description: newState
+        ? "RO differential pressure dropped below 49.0 bar. Attention queue suggested incident created."
+        : "SCADA telemetry back within normal operating parameters.",
+      tone: newState ? "rose" : "emerald",
+    });
+  };
+
+  const handleToggleTamper = async () => {
+    toggleFailure("auditBitFlipped");
+    const newState = !failures.auditBitFlipped;
+    if (newState) {
+      await repo.audit.tamperBlock(1247);
+    }
+    showToast({
+      title: newState ? "Bit-Flip Tampering Injected" : "Audit Chain Healthy",
+      description: newState
+        ? "Cryptographic mutation injected into block 1247. Chain verification will flag mismatch."
+        : "Tampering cleared.",
+      tone: newState ? "rose" : "emerald",
+    });
+  };
+
+  const handleReset = async () => {
+    resetFailures();
+    await repo.resetToSeed();
     showToast({
       title: t("presenterPanel.resetBaseline"),
-      description: "Sandbox seed state successfully restored to baseline.",
+      description: "Sandbox seed state successfully restored to baseline in IndexedDB.",
       tone: "brand",
     });
   };
@@ -127,62 +203,106 @@ export const PresenterSimulationPanel: React.FC = () => {
               </div>
             </div>
 
-            {/* Section 2: Failure Injections */}
+            {/* Section 2: Failure Injections (6 Controls per Spec) */}
             <div className="space-y-2 pt-2 border-t border-app-border">
               <span className="text-xs font-bold text-app-text uppercase tracking-wider block">
                 {t("presenterPanel.injectScenarios")}
               </span>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                {/* 1: Break SMS A */}
                 <button
-                  onClick={() =>
-                    handleInject(
-                      t("presenterPanel.injectScada"),
-                      "Section 4 RO differential pressure dropped -14.2 bar below SLA."
-                    )
-                  }
-                  className="p-2.5 rounded-input border border-app-border bg-app-surface-subtle hover:bg-app-border/40 text-start flex items-center gap-2 font-medium text-app-text"
+                  onClick={handleToggleSms}
+                  className={`p-2.5 rounded-input border text-start flex items-center justify-between font-medium transition ${
+                    failures.smsABroken
+                      ? "bg-rose-500/10 border-rose-500 text-rose-500 font-bold"
+                      : "bg-app-surface-subtle border-app-border text-app-text hover:bg-app-border/40"
+                  }`}
                 >
-                  <Radio className="w-4 h-4 text-status-critical shrink-0" />
-                  <span className="truncate">{t("presenterPanel.injectScada")}</span>
+                  <div className="flex items-center gap-2 truncate">
+                    <Zap className="w-4 h-4 shrink-0 text-rose-500" />
+                    <span className="truncate">{t("presenterPanel.breakSmsA")}</span>
+                  </div>
+                  <span className="text-[10px] font-mono uppercase">{failures.smsABroken ? "Active" : "Off"}</span>
                 </button>
 
+                {/* 2: Delay Email 2m */}
                 <button
-                  onClick={() =>
-                    handleInject(
-                      t("presenterPanel.injectResponderOffline"),
-                      "Primary on-call lead unresponsive for 8 mins; automatic escalation to secondary lead triggered."
-                    )
-                  }
-                  className="p-2.5 rounded-input border border-app-border bg-app-surface-subtle hover:bg-app-border/40 text-start flex items-center gap-2 font-medium text-app-text"
+                  onClick={handleToggleEmail}
+                  className={`p-2.5 rounded-input border text-start flex items-center justify-between font-medium transition ${
+                    failures.emailDelayed
+                      ? "bg-amber-500/10 border-amber-500 text-amber-500 font-bold"
+                      : "bg-app-surface-subtle border-app-border text-app-text hover:bg-app-border/40"
+                  }`}
                 >
-                  <UserX className="w-4 h-4 text-status-degraded shrink-0" />
-                  <span className="truncate">{t("presenterPanel.injectResponderOffline")}</span>
+                  <div className="flex items-center gap-2 truncate">
+                    <Mail className="w-4 h-4 shrink-0 text-amber-500" />
+                    <span className="truncate">{t("presenterPanel.delayEmail")}</span>
+                  </div>
+                  <span className="text-[10px] font-mono uppercase">{failures.emailDelayed ? "Active" : "Off"}</span>
                 </button>
 
+                {/* 3: Teams Error */}
                 <button
-                  onClick={() =>
-                    handleInject(
-                      t("presenterPanel.injectSmsLatency"),
-                      "OmanTel SMPP queue backpressure simulated; SMS latency increased to 90s."
-                    )
-                  }
-                  className="p-2.5 rounded-input border border-app-border bg-app-surface-subtle hover:bg-app-border/40 text-start flex items-center gap-2 font-medium text-app-text"
+                  onClick={handleToggleTeams}
+                  className={`p-2.5 rounded-input border text-start flex items-center justify-between font-medium transition ${
+                    failures.teamsError
+                      ? "bg-rose-500/10 border-rose-500 text-rose-500 font-bold"
+                      : "bg-app-surface-subtle border-app-border text-app-text hover:bg-app-border/40"
+                  }`}
                 >
-                  <Zap className="w-4 h-4 text-amber-500 shrink-0" />
-                  <span className="truncate">{t("presenterPanel.injectSmsLatency")}</span>
+                  <div className="flex items-center gap-2 truncate">
+                    <MessageSquare className="w-4 h-4 shrink-0 text-rose-500" />
+                    <span className="truncate">{t("presenterPanel.teamsError")}</span>
+                  </div>
+                  <span className="text-[10px] font-mono uppercase">{failures.teamsError ? "Active" : "Off"}</span>
                 </button>
 
+                {/* 4: Responder Unresponsive */}
                 <button
-                  onClick={() =>
-                    handleInject(
-                      t("presenterPanel.injectTamper"),
-                      "Bit-flip injected into Block 1247. Cryptographic chain integrity will detect hash mismatch."
-                    )
-                  }
-                  className="p-2.5 rounded-input border border-app-border bg-app-surface-subtle hover:bg-app-border/40 text-start flex items-center gap-2 font-medium text-app-text"
+                  onClick={handleToggleResponder}
+                  className={`p-2.5 rounded-input border text-start flex items-center justify-between font-medium transition ${
+                    failures.responderUnresponsive
+                      ? "bg-amber-500/10 border-amber-500 text-amber-500 font-bold"
+                      : "bg-app-surface-subtle border-app-border text-app-text hover:bg-app-border/40"
+                  }`}
                 >
-                  <Fingerprint className="w-4 h-4 text-rose-500 shrink-0" />
-                  <span className="truncate">{t("presenterPanel.injectTamper")}</span>
+                  <div className="flex items-center gap-2 truncate">
+                    <UserX className="w-4 h-4 shrink-0 text-amber-500" />
+                    <span className="truncate">{t("presenterPanel.responderSilent")}</span>
+                  </div>
+                  <span className="text-[10px] font-mono uppercase">{failures.responderUnresponsive ? "Active" : "Off"}</span>
+                </button>
+
+                {/* 5: SCADA Spike */}
+                <button
+                  onClick={handleToggleScada}
+                  className={`p-2.5 rounded-input border text-start flex items-center justify-between font-medium transition ${
+                    failures.scadaSpike
+                      ? "bg-rose-500/10 border-rose-500 text-rose-500 font-bold"
+                      : "bg-app-surface-subtle border-app-border text-app-text hover:bg-app-border/40"
+                  }`}
+                >
+                  <div className="flex items-center gap-2 truncate">
+                    <Radio className="w-4 h-4 shrink-0 text-rose-500" />
+                    <span className="truncate">{t("presenterPanel.scadaSpike")}</span>
+                  </div>
+                  <span className="text-[10px] font-mono uppercase">{failures.scadaSpike ? "Active" : "Off"}</span>
+                </button>
+
+                {/* 6: Bit-flip Tamper */}
+                <button
+                  onClick={handleToggleTamper}
+                  className={`p-2.5 rounded-input border text-start flex items-center justify-between font-medium transition ${
+                    failures.auditBitFlipped
+                      ? "bg-rose-500/10 border-rose-500 text-rose-500 font-bold"
+                      : "bg-app-surface-subtle border-app-border text-app-text hover:bg-app-border/40"
+                  }`}
+                >
+                  <div className="flex items-center gap-2 truncate">
+                    <Fingerprint className="w-4 h-4 shrink-0 text-rose-500" />
+                    <span className="truncate">{t("presenterPanel.bitFlipTamper")}</span>
+                  </div>
+                  <span className="text-[10px] font-mono uppercase">{failures.auditBitFlipped ? "Active" : "Off"}</span>
                 </button>
               </div>
             </div>

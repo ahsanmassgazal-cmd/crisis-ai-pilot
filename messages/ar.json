@@ -252,7 +252,25 @@
     "sev1GulfWater": "SEV1 مياه الخليج",
     "deliveryRate": "99.4% نسبة التسليم",
     "gccOrgs": "مؤسسات خليجية",
-    "switchToClient": "التبديل إلى مساحة عمل المشترك"
+    "switchToClient": "التبديل إلى مساحة عمل المشترك",
+    "provisionTenant": "تهيئة مستأجر جديد",
+    "deployTenant": "نشر وتفعيل المستأجر",
+    "orgLegalEn": "الاسم القانوني للمؤسسة (بالإنجليزية)",
+    "orgLegalAr": "الاسم القانوني للمؤسسة (بالعربية)",
+    "jurisdiction": "الدولة / النطاق القضائي",
+    "initialCommander": "اسم قائد الحادث المعتمد",
+    "commanderEmail": "البريد الرسمي لقائد الحادث",
+    "brandAccent": "لون هوية المؤسسة",
+    "livePreview": "معاينة حية للبطاقة:",
+    "activeCrisisHub": "مركز الأزمات النشط",
+    "orgLabel": "المؤسسة:",
+    "jurisdictionLabel": "النطاق القضائي:",
+    "commanderLabel": "مسؤول القيادة:",
+    "packageLabel": "الباقة:",
+    "oman": "سلطنة عمان",
+    "uae": "الإمارات العربية المتحدة",
+    "saudi": "المملكة العربية السعودية",
+    "qatar": "دولة قطر"
   },
   "portal": {
     "orgLabel": "المؤسسة",
@@ -265,7 +283,9 @@
     "onTrack": "ضمن المسار المعتمد",
     "officialExecutiveUpdate": "تحديث تنفيذي رسمي",
     "approvedByCommander": "✓ معتمد من قائد الحدث الطارئ",
-    "incidentBriefingTitle": "إحاطة الحدث: خلل في شبكة SCADA بمحطة تحلية صحار"
+    "incidentBriefingTitle": "إحاطة الحدث: خلل في شبكة SCADA بمحطة تحلية صحار",
+    "confidentialClassification": "التصنيف: سري — مخصص لمجلس الإدارة والجهات التنظيمية",
+    "downloadEvidenceZip": "تحميل حزمة الأدلة الرسمية (ZIP)"
   },
   "responder": {
     "criticalAlert": "إنذار طوارئ حرج (SEV1)",
@@ -274,7 +294,10 @@
     "isolatePump": "عزل مضخة التغذية 3B يدوياً",
     "dueSoon": "أولوية 1 مطلوبة في أقل من 15 دقيقة",
     "plantLocation": "محطة صحار (24.36° شمالاً، 56.74° شرقاً)",
-    "verified": "تم التحقق"
+    "verified": "تم التحقق",
+    "sla15m": "اتفاقية 15 دقيقة",
+    "smsTeamsVerification": "توثيق قنوات SMS و Teams",
+    "verifiedStatus": "موثق"
   },
   "attentionQueue": {
     "title": "قائمة الاهتمام الفوري",
@@ -587,7 +610,17 @@
     "history": "السجل",
     "download": "تحميل",
     "versionHistoryTitle": "سجل الإصدارات",
-    "restoreVersion": "استعادة هذا الإصدار"
+    "restoreVersion": "استعادة هذا الإصدار",
+    "aiDraftBadge": "مسودة الذكاء الاصطناعي — تتطلب الاعتماد",
+    "modelSonnet": "النموذج: Claude 3.5 Sonnet موثق",
+    "gridView": "عرض شبكي",
+    "tableView": "عرض جدولي",
+    "documentTitle": "عنوان الوثيقة",
+    "category": "الفئة",
+    "version": "الإصدار",
+    "size": "الحجم",
+    "action": "الإجراء",
+    "kbUnit": "كيلوبايت"
   },
   "peopleCenter": {
     "title": "الأفراد والمجموعات",
@@ -744,7 +777,10 @@
   "publicStatus": {
     "title": "حالة شبكة المياه الوطنية",
     "degradedBanner": "حالة انخفاض فني طفيف: كافة شبكات توزيع المياه البلدية تعمل بصورة طبيعية دون أي انقطاع للمنازل أو المنشآت التجارية.",
-    "pastUpdatesTitle": "تحديثات الأحداث السابقة"
+    "pastUpdatesTitle": "تحديثات الأحداث السابقة",
+    "allMonitored": "جميع الأنظمة تخضع للمراقبة على مدار الساعة",
+    "utilityServices": "خدمات وشبكات المرافق العامة",
+    "liveTelemetry": "قراءات مباشرة"
   },
   "plansCenter": {
     "title": "الخطط وكتيبات الاستجابة",
@@ -977,6 +1013,12 @@
     "resetBaseline": "إعادة تعيين كافة البيانات إلى الحالة الأولية",
     "activeSpeed": "السرعة النشطة: {speed}x",
     "close": "إغلاق لوحة المحاكاة",
-    "injectedSuccess": "تم تفعيل حدث المحاكاة بنجاح."
+    "injectedSuccess": "تم تفعيل حدث المحاكاة بنجاح.",
+    "breakSmsA": "تعطيل مسار SMS أ (التحويل التلقائي)",
+    "delayEmail": "تأخير البريد الإلكتروني دقيقتين",
+    "teamsError": "خطأ خادم Teams (429)",
+    "responderSilent": "صمت 20% من المستجيبين",
+    "scadaSpike": "قفزة شاذة في قياسات SCADA",
+    "bitFlipTamper": "حقن تحريف بالكتلة 1247"
   }
 }
