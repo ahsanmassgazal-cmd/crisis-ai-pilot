@@ -964,5 +964,19 @@
     "telemetryNodesOnline": "34/36 Monitoring telemetry nodes online",
     "ackSlaMet": "100% Acknowledgement met within SLA",
     "nizwaHubName": "Nizwa Backup Hub"
+  },
+  "presenterPanel": {
+    "title": "Demo Simulation Engine",
+    "subtitle": "Interactive sandbox failure injects, clock acceleration, and state reset.",
+    "clockSpeed": "Simulation Speed Multiplier",
+    "injectScenarios": "Live Scenario Injections",
+    "injectScada": "Inject SCADA Anomaly (Sohar Plant)",
+    "injectResponderOffline": "Simulate On-Call Responder Offline",
+    "injectSmsLatency": "Simulate SMS Gateway Queue Latency",
+    "injectTamper": "Simulate Ledger Hash Bit-Flip",
+    "resetBaseline": "Reset All Data to Seed Baseline",
+    "activeSpeed": "Active Speed: {speed}x",
+    "close": "Close Simulation Panel",
+    "injectedSuccess": "Simulation event triggered successfully."
   }
 }

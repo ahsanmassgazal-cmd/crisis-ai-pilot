@@ -8,6 +8,7 @@ import { TopBar } from "./TopBar";
 import { CommandPalette } from "./CommandPalette";
 import { RolePickerModal } from "./RolePickerModal";
 import { AiCopilotDrawer } from "@/components/crisis/ai/AiCopilotDrawer";
+import { PresenterSimulationPanel } from "@/components/crisis/display/PresenterSimulationPanel";
 import { useAppStore } from "@/lib/store/useAppStore";
 
 interface ShellProps {
@@ -62,6 +63,7 @@ export const Shell: React.FC<ShellProps> = ({ children }) => {
       <CommandPalette />
       <RolePickerModal />
       <AiCopilotDrawer isOpen={copilotOpen} onClose={() => setCopilotOpen(false)} />
+      <PresenterSimulationPanel />
     </div>
   );
 };

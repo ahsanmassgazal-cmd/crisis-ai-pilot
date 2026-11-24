@@ -14,8 +14,10 @@ import {
   UserCheck,
   X,
   Play,
+  Presentation,
 } from "lucide-react";
 import { useAppStore, TenantId, RoleId } from "@/lib/store/useAppStore";
+import { Ltr } from "@/components/layout/Ltr";
 
 export const CommandPalette: React.FC = () => {
   const t = useTranslations();
@@ -30,6 +32,7 @@ export const CommandPalette: React.FC = () => {
     togglePauseAutomations,
     setTenant,
     setRole,
+    setPresenterPanelOpen,
   } = useAppStore();
 
   const [query, setQuery] = React.useState("");
@@ -160,6 +163,22 @@ export const CommandPalette: React.FC = () => {
                   </span>
                 </div>
                 <span className="text-[10px] text-app-muted font-mono">{t("components.excelCsv")}</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setPresenterPanelOpen(true);
+                  setCommandPaletteOpen(false);
+                }}
+                className="w-full text-start flex items-center justify-between px-3 py-2 rounded-input hover:bg-brand-50 hover:text-brand-600 transition-colors"
+              >
+                <div className="flex items-center gap-2.5">
+                  <Presentation className="w-4 h-4 text-indigo-600" />
+                  <span className="font-semibold text-app-text">
+                    {t("presenterPanel.title")}
+                  </span>
+                </div>
+                <span className="text-[10px] text-app-muted font-mono"><Ltr>1x-300x</Ltr></span>
               </button>
 
               <button

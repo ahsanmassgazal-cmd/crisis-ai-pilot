@@ -110,8 +110,8 @@ function isExempt(str) {
     return true;
   }
 
-  // Pure numbers, currencies, percentages, time durations, latencies, hex strings
-  if (/^([-+]?[$€£]?\s*[\d,.]+\s*(%|ms|s|m|h|d|hrs|mins|MB|KB|GB|B|k|kv|bar)?|[-+]?\d+[mhd]\s*\d+[smhd]|([0-9A-F]{2}\s+)+[0-9A-F]{2})$/i.test(trimmed)) {
+  // Pure numbers, currencies, percentages, time durations, latencies, speed multipliers, hex strings
+  if (/^([-+]?[$€£]?\s*[\d,.]+\s*(%|ms|s|m|h|d|hrs|mins|MB|KB|GB|B|k|kv|bar|x)?|[-+]?\d+[mhd]\s*\d+[smhd]|\d+x[-–]\d+x|([0-9A-F]{2}\s+)+[0-9A-F]{2})$/i.test(trimmed)) {
     return true;
   }
 

@@ -33,6 +33,8 @@ interface AppState {
   activeSev1BannerVisible: boolean;
   sidebarCollapsed: boolean;
   copilotOpen: boolean;
+  presenterPanelOpen: boolean;
+  simSpeed: 1 | 5 | 60 | 300;
 
   setTenant: (tenant: TenantId) => void;
   setRole: (role: RoleId) => void;
@@ -45,6 +47,9 @@ interface AppState {
   toggleSidebar: () => void;
   setCopilotOpen: (open: boolean) => void;
   toggleCopilot: () => void;
+  setPresenterPanelOpen: (open: boolean) => void;
+  togglePresenterPanel: () => void;
+  setSimSpeed: (speed: 1 | 5 | 60 | 300) => void;
 }
 
 export const useAppStore = create<AppState>((set) => ({
@@ -59,6 +64,8 @@ export const useAppStore = create<AppState>((set) => ({
   activeSev1BannerVisible: true,
   sidebarCollapsed: false,
   copilotOpen: false,
+  presenterPanelOpen: false,
+  simSpeed: 1,
 
   setTenant: (currentTenant) => set({ currentTenant }),
   setRole: (currentRole) => set({ currentRole }),
@@ -73,4 +80,8 @@ export const useAppStore = create<AppState>((set) => ({
     set((state) => ({ sidebarCollapsed: !state.sidebarCollapsed })),
   setCopilotOpen: (copilotOpen) => set({ copilotOpen }),
   toggleCopilot: () => set((state) => ({ copilotOpen: !state.copilotOpen })),
+  setPresenterPanelOpen: (presenterPanelOpen) => set({ presenterPanelOpen }),
+  togglePresenterPanel: () =>
+    set((state) => ({ presenterPanelOpen: !state.presenterPanelOpen })),
+  setSimSpeed: (simSpeed) => set({ simSpeed }),
 }));
