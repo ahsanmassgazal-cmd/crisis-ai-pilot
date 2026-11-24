@@ -1,59 +1,54 @@
-import { CrisisRepository, Incident, Person, Group, Plan, Message, Delivery, AutomationRule, AuditRow } from "./types";
+import {
+  CrisisRepository,
+  Incident,
+  Person,
+  Group,
+  Plan,
+  Message,
+  Delivery,
+  AutomationRule,
+  AuditRow,
+} from "./types";
+import {
+  SEED_INCIDENTS,
+  SEED_PEOPLE,
+  SEED_RULES,
+  SEED_TASKS,
+  SEED_SITES,
+  SEED_CRITICAL_FUNCTIONS,
+  SEED_APPROVALS,
+  Site,
+  Task,
+  CriticalFunction,
+  ApprovalItem,
+} from "@/seed/data";
+import { computePriorityScore } from "@/lib/engine/priority";
 
-const mockIncidents: Incident[] = [
-  {
-    id: "inc-2026-001",
-    tenant_id: "gulf_water",
-    number: "INC-2026-001",
-    title_en: "SCADA Network Anomaly & Sensor Desynchronization",
-    title_ar: "خلل في شبكة التحكم الإشرافي SCADA وعدم تزامن الحساسات",
-    category: "cyber",
-    severity: "critical",
-    status: "active",
-    plan_id: "plan-cyber-01",
-    commander_id: "usr-001",
-    sla_minutes: 60,
-    started_at: "2026-11-23T20:15:00Z",
-    priority_score: 95,
-  },
-  {
-    id: "inc-2026-002",
-    tenant_id: "gulf_water",
-    number: "INC-2026-002",
-    title_en: "Chemical Reagent Supplier Disruption (Sohar Port)",
-    title_ar: "تعطل توريد الكواشف الكيميائية (ميناء صحار)",
-    category: "supply",
-    severity: "medium",
-    status: "active",
-    plan_id: "plan-supply-01",
-    commander_id: "usr-003",
-    sla_minutes: 240,
-    started_at: "2026-11-23T18:30:00Z",
-    priority_score: 55,
-  },
-  {
-    id: "inc-2026-003",
-    tenant_id: "gulf_water",
-    number: "INC-2026-003",
-    title_en: "Tropical Low Pressure & Coastal Surge Advisory",
-    title_ar: "منخفض مداري وتحذير من ارتفاع الأمواج الساحلية",
-    category: "weather",
-    severity: "low",
-    status: "monitoring",
-    plan_id: "plan-weather-01",
-    commander_id: "usr-004",
-    sla_minutes: 720,
-    started_at: "2026-11-23T14:00:00Z",
-    priority_score: 35,
-  },
-];
+let mockIncidents: Incident[] = [...SEED_INCIDENTS];
+let mockPeople: Person[] = [...SEED_PEOPLE];
+let mockRules: AutomationRule[] = [...SEED_RULES];
+let mockTasks: Task[] = [...SEED_TASKS];
+let mockSites: Site[] = [...SEED_SITES];
+let mockFunctions: CriticalFunction[] = [...SEED_CRITICAL_FUNCTIONS];
+let mockApprovals: ApprovalItem[] = [...SEED_APPROVALS];
 
 class MockCrisisRepo implements CrisisRepository {
   incidents = {
     getAll: async () => [...mockIncidents],
     getById: async (id: string) => mockIncidents.find((i) => i.id === id) || null,
     create: async (item: Omit<Incident, "id">) => {
-      const newInc = { ...item, id: `inc-${Date.now()}` } as Incident;
+      const priority = computePriorityScore({
+        severity: item.severity,
+        slaMinutes: item.sla_minutes || 60,
+        elapsedMinutes: 0,
+        criticalFunctionAffected: true,
+      });
+
+      const newInc: Incident = {
+        ...item,
+        id: `inc-${Date.now()}`,
+        priority_score: priority.score,
+      };
       mockIncidents.unshift(newInc);
       return newInc;
     },
@@ -74,19 +69,26 @@ class MockCrisisRepo implements CrisisRepository {
       return false;
     },
     activate: async (input: Partial<Incident>) => {
+      const priority = computePriorityScore({
+        severity: input.severity || "critical",
+        slaMinutes: input.sla_minutes || 60,
+        elapsedMinutes: 0,
+        criticalFunctionAffected: true,
+      });
+
       const inc: Incident = {
         id: `inc-${Date.now()}`,
         tenant_id: input.tenant_id || "gulf_water",
         number: `INC-2026-00${mockIncidents.length + 1}`,
-        title_en: input.title_en || "New Incident",
-        title_ar: input.title_ar || "حادثة جديدة",
+        title_en: input.title_en || "SCADA Telemetry Disruption",
+        title_ar: input.title_ar || "خلل في شبكة التحكم الإشرافي SCADA",
         category: input.category || "cyber",
-        severity: input.severity || "high",
+        severity: input.severity || "critical",
         status: "active",
         commander_id: input.commander_id || "usr-001",
         sla_minutes: input.sla_minutes || 60,
         started_at: new Date().toISOString(),
-        priority_score: input.priority_score || 80,
+        priority_score: priority.score,
       };
       mockIncidents.unshift(inc);
       return inc;
@@ -101,24 +103,48 @@ class MockCrisisRepo implements CrisisRepository {
   };
 
   people = {
-    getAll: async () => [],
-    getById: async () => null,
-    create: async (p: any) => p,
-    update: async (_id: string, p: any) => p,
-    delete: async () => true,
+    getAll: async () => [...mockPeople],
+    getById: async (id: string) => mockPeople.find((p) => p.id === id) || null,
+    create: async (p: any) => {
+      mockPeople.unshift(p);
+      return p;
+    },
+    update: async (id: string, p: any) => {
+      const idx = mockPeople.findIndex((x) => x.id === id);
+      if (idx !== -1) {
+        mockPeople[idx] = { ...mockPeople[idx], ...p };
+        return mockPeople[idx];
+      }
+      return p;
+    },
+    delete: async (id: string) => {
+      mockPeople = mockPeople.filter((p) => p.id !== id);
+      return true;
+    },
   };
 
   groups = {
-    getAll: async () => [],
-    getById: async () => null,
+    getAll: async () => [
+      { id: "grp-1", tenant_id: "gulf_water", name_en: "Crisis Management Team (CMT)", name_ar: "فريق إدارة الأزمات الرئيسي", type: "core", member_ids: ["usr-001", "usr-002", "usr-003"] },
+      { id: "grp-2", tenant_id: "gulf_water", name_en: "Executive Board", name_ar: "مجلس الإدارة التنفيذي", type: "exec", member_ids: ["usr-001"] },
+      { id: "grp-3", tenant_id: "gulf_water", name_en: "OT / Cyber Response Team", name_ar: "فريق الاستجابة السيبرانية والتحكم", type: "tech", member_ids: ["usr-003"] },
+      { id: "grp-4", tenant_id: "gulf_water", name_en: "Sohar Site Emergency Responders", name_ar: "فريق الطوارئ بموقع صحار", type: "site", member_ids: ["usr-002", "usr-005"] },
+    ],
+    getById: async (id: string) => null,
     create: async (g: any) => g,
     update: async (_id: string, g: any) => g,
     delete: async () => true,
   };
 
   plans = {
-    getAll: async () => [],
-    getById: async () => null,
+    getAll: async () => [
+      { id: "plan-cyber", tenant_id: "gulf_water", category: "cyber", title_en: "Industrial OT / SCADA Cyber Attack Response", title_ar: "دليل الاستجابة للهجمات السيبرانية على شبكات التحكم", severity_default: "critical", owner_role: "commander", steps_count: 10, version: "2.4" },
+      { id: "plan-fire", tenant_id: "gulf_water", category: "fire", title_en: "Chemical Storage & Refinery Fire Evacuation", title_ar: "خطة إخلاء حريق مستودعات الكيماويات ومحطات التكرير", severity_default: "critical", owner_role: "commander", steps_count: 8, version: "1.8" },
+      { id: "plan-power", tenant_id: "gulf_water", category: "power", title_en: "Total Power Blackout & Generator Failover", title_ar: "إجراءات الانقطاع الشامل للكهرباء وتشغيل المولدات", severity_default: "high", owner_role: "continuity", steps_count: 6, version: "3.1" },
+      { id: "plan-weather", tenant_id: "gulf_water", category: "weather", title_en: "Tropical Cyclone & Flash Flood Preparedness", title_ar: "خطة الطوارئ للأنواء المناخية الاستثنائية والفيضانات", severity_default: "high", owner_role: "commander", steps_count: 12, version: "2.0" },
+      { id: "plan-supply", tenant_id: "gulf_water", category: "supply", title_en: "Critical Chemical Reagent Supply Chain Continuity", title_ar: "خطة استدامة توريد الكواشف الكيميائية الحيوية", severity_default: "medium", owner_role: "continuity", steps_count: 7, version: "1.2" },
+    ],
+    getById: async (id: string) => null,
     create: async (p: any) => p,
     update: async (_id: string, p: any) => p,
     delete: async () => true,
@@ -130,7 +156,10 @@ class MockCrisisRepo implements CrisisRepository {
     create: async (m: any) => m,
     update: async (_id: string, m: any) => m,
     delete: async () => true,
-    approve: async () => {},
+    approve: async (id: string, userId: string) => {
+      const app = mockApprovals.find((a) => a.id === id);
+      if (app) app.status = "approved";
+    },
   };
 
   deliveries = {
@@ -139,23 +168,119 @@ class MockCrisisRepo implements CrisisRepository {
   };
 
   automations = {
-    getAll: async () => [],
-    getById: async () => null,
-    create: async (a: any) => a,
-    update: async (_id: string, a: any) => a,
-    delete: async () => true,
-    setMode: async () => {},
-    killSwitch: async () => {},
+    getAll: async () => [...mockRules],
+    getById: async (id: string) => mockRules.find((r) => r.id === id) || null,
+    create: async (a: any) => {
+      mockRules.unshift(a);
+      return a;
+    },
+    update: async (id: string, a: any) => {
+      const idx = mockRules.findIndex((r) => r.id === id);
+      if (idx !== -1) {
+        mockRules[idx] = { ...mockRules[idx], ...a };
+        return mockRules[idx];
+      }
+      return a;
+    },
+    delete: async (id: string) => {
+      mockRules = mockRules.filter((r) => r.id !== id);
+      return true;
+    },
+    setMode: async (scope: string, mode: "auto" | "assisted" | "manual") => {},
+    killSwitch: async (paused: boolean, reason?: string) => {},
   };
 
   audit = {
     getAll: async () => [],
     verifyChain: async () => ({ valid: true, count: 1248 }),
   };
+
+  // Helper getters for UI views
+  getSites = () => [...mockSites];
+  getTasks = () => [...mockTasks];
+  getCriticalFunctions = () => [...mockFunctions];
+  getApprovals = () => [...mockApprovals];
+  getAttentionQueue = () => [
+    {
+      id: "Q-1",
+      title: "SCADA Telemetry Anomaly - Exceeded 15m Initial SLA",
+      incidentId: "inc-1",
+      incidentTitle: "SCADA Telemetry Anomaly (Sohar Plant)",
+      lane: "now" as const,
+      priorityScore: 98,
+      reason: "SLA_BREACH_15M",
+      dueMinutes: 4,
+      type: "incident",
+      suggestedAction: "Review & Escalate"
+    },
+    {
+      id: "Q-2",
+      title: "Bilingual Emergency SMS broadcast awaiting Executive approval",
+      incidentId: "inc-1",
+      incidentTitle: "SCADA Telemetry Anomaly (Sohar Plant)",
+      lane: "now" as const,
+      priorityScore: 94,
+      reason: "APPROVAL_PENDING_EXECUTIVE",
+      dueMinutes: 8,
+      type: "approval",
+      suggestedAction: "Approve Broadcast"
+    },
+    {
+      id: "Q-3",
+      title: "Primary On-Call SCADA Lead offline (Failover triggered to Secondary)",
+      incidentId: "inc-1",
+      incidentTitle: "SCADA Telemetry Anomaly (Sohar Plant)",
+      lane: "now" as const,
+      priorityScore: 91,
+      reason: "RESPONDER_OFFLINE",
+      dueMinutes: 12,
+      type: "responder",
+      suggestedAction: "Confirm Handover"
+    },
+    {
+      id: "Q-4",
+      title: "Draft 2-Hour Situation Report for Crisis Committee",
+      incidentId: "inc-1",
+      incidentTitle: "SCADA Telemetry Anomaly (Sohar Plant)",
+      lane: "next" as const,
+      priorityScore: 78,
+      reason: "SITREP_DUE_SHIFT",
+      dueMinutes: 45,
+      type: "task",
+      suggestedAction: "Generate with AI"
+    },
+    {
+      id: "Q-5",
+      title: "Review Water Authority Regulatory Holding Statement",
+      incidentId: "inc-1",
+      incidentTitle: "SCADA Telemetry Anomaly (Sohar Plant)",
+      lane: "next" as const,
+      priorityScore: 72,
+      reason: "STAKEHOLDER_UPDATE",
+      dueMinutes: 60,
+      type: "approval",
+      suggestedAction: "Review Statement"
+    },
+    {
+      id: "Q-6",
+      title: "Export Audit Ledger Manifest & Verify SHA-256 Hashing",
+      incidentId: "inc-1",
+      incidentTitle: "SCADA Telemetry Anomaly (Sohar Plant)",
+      lane: "later" as const,
+      priorityScore: 45,
+      reason: "POST_INCIDENT_AUDIT",
+      dueMinutes: 240,
+      type: "audit",
+      suggestedAction: "Run Verification"
+    }
+  ];
 }
 
 const singletonRepo = new MockCrisisRepo();
 
-export function useRepo(): CrisisRepository {
+export const mockRepository = singletonRepo;
+
+export function useRepo(): MockCrisisRepo {
   return singletonRepo;
 }
+
