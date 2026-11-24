@@ -3,7 +3,7 @@
 export interface ToastOptions {
   title?: string;
   description?: string;
-  tone?: "brand" | "critical" | "amber" | "emerald" | "normal";
+  tone?: "brand" | "critical" | "rose" | "amber" | "emerald" | "normal";
 }
 
 type ToastInput = string | ToastOptions;
@@ -35,10 +35,12 @@ export function showToast(input: ToastInput) {
 
   const toastItem = document.createElement("div");
   const bgClass =
-    tone === "critical"
+    tone === "critical" || tone === "rose"
       ? "bg-rose-900 border-rose-700 text-white"
       : tone === "amber"
       ? "bg-amber-900 border-amber-700 text-white"
+      : tone === "emerald"
+      ? "bg-emerald-900 border-emerald-700 text-white"
       : "bg-slate-900 border-slate-700 text-white";
 
   toastItem.className = `p-3 rounded-card border shadow-lg text-xs pointer-events-auto flex flex-col gap-0.5 animate-in fade-in slide-in-from-bottom-2 duration-200 ${bgClass}`;
