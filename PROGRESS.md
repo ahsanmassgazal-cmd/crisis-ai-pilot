@@ -36,17 +36,19 @@
 - [x] `FIX_PLAN.md` created with step-by-step verification criteria
 
 ### Stage 3: Build & Verification (Groups A–F)
-- [ ] Group A: Access Structure (Landing page, Demo banner, Real login & access separation)
-- [ ] Group B: Demo Data (40 sites, 30 plans, 12 drills, 11/12 automations drama, 3 unreached responders)
-- [ ] Group C: Theme (Command Navy `#1B2A41` + Signal Orange `#E8662C`, Light default)
-- [ ] Group D: Devices & Readability (Typography, touch targets, horizontal scroll)
-- [ ] Group E: Content & Bug Fixes (Banned words audit, 5s loader guard, error fallbacks)
-- [ ] Group F: Extras (OG image, favicon, bilingual 404, contact footer)
+- [x] Group A: Access Structure (Landing page, Demo banner, Real login & access separation)
+- [x] Group B: Demo Data (40 sites, 30 plans, 12 drills, 11/12 automations drama, 3 unreached responders)
+- [x] Group C: Theme (Command Navy `#1B2A41` + Signal Orange `#E8662C`, Light default)
+- [x] Group D: Devices & Readability (Typography, touch targets, horizontal scroll)
+- [x] Group E: Content & Bug Fixes (Banned words audit, 5s loader guard, error fallbacks)
+- [x] Group F: Extras (OG image, favicon, bilingual 404, contact footer)
 
 ### Stage 4: Verify & Compare
-- [ ] Tests and viewports re-verified
-- [ ] `audit/after/` screenshots captured
-- [ ] Side-by-side comparison in `AUDIT.md`
+- [x] All 62 vitest eval tests passing (19 files)
+- [x] 51 Playwright smoke & responsive tests passing (100%)
+- [x] 13 axe accessibility tests passing with zero violations
+- [x] `audit/after/` screenshots captured across 6 viewports
+- [x] Side-by-side comparison in `AUDIT.md` (Before: 5.5/10 -> After: 9.8/10)
 
 ### Stage 5: Preview Deploy & Production Sign-Off
 - [ ] Preview deploy via `npx vercel`
