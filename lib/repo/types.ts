@@ -3,7 +3,7 @@
  *
  * All screens must query against this interface.
  * Stage A/B uses MockRepository backed by memory & Dexie IndexedDB.
- * Stage C swaps to SupabaseRepository without altering UI screens.
+ * Enterprise production repositories connect without altering UI screens.
  */
 
 export interface Crud<T> {
