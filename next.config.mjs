@@ -15,17 +15,12 @@ const nextConfig = {
     return [
       {
         source: '/access',
-        destination: '/en/app',
+        destination: '/en',
         permanent: false,
       },
       {
         source: '/:locale/access',
-        destination: '/:locale/app',
-        permanent: false,
-      },
-      {
-        source: '/',
-        destination: '/en/app',
+        destination: '/:locale',
         permanent: false,
       },
     ];

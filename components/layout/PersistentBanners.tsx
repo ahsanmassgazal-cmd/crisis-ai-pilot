@@ -1,13 +1,16 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useTranslations } from "next-intl";
-import { FlaskConical, AlertTriangle, Siren, X, Play } from "lucide-react";
+import { FlaskConical, AlertTriangle, Siren, X, Play, RefreshCw, Calendar } from "lucide-react";
 import { useAppStore } from "@/lib/store/useAppStore";
 import { Link } from "@/i18n/routing";
+import { useRepo } from "@/lib/repo";
+import { showToast } from "@/lib/toast";
 
 export const PersistentBanners: React.FC = () => {
   const t = useTranslations();
+  const repo = useRepo();
   const {
     isSandboxMode,
     isAutomationsPaused,
@@ -16,8 +19,58 @@ export const PersistentBanners: React.FC = () => {
     dismissSev1Banner,
   } = useAppStore();
 
+  const [resetting, setResetting] = useState(false);
+
+  const handleResetDemo = async () => {
+    setResetting(true);
+    try {
+      await repo.resetToSeed();
+      showToast({
+        title: t("common.success"),
+        description: t("app.demoBannerText"),
+        tone: "emerald",
+      });
+      setTimeout(() => {
+        window.location.reload();
+      }, 400);
+    } catch (e) {
+      console.error(e);
+      setResetting(false);
+    }
+  };
+
   return (
     <aside aria-label={t("components.statusBanners")} className="w-full flex flex-col gap-0 z-40">
+      {/* Top Demo Bar (SigmaMax Standard) */}
+      <div className="w-full bg-slate-900 text-slate-100 py-1.5 px-4 text-xs flex flex-wrap items-center justify-between gap-2 border-b border-slate-800">
+        <div className="flex items-center gap-2">
+          <FlaskConical className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+          <span className="font-medium tracking-wide">
+            {t("app.demoBannerText")}
+          </span>
+        </div>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            disabled={resetting}
+            onClick={handleResetDemo}
+            className="flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-white text-[11px] font-medium border border-slate-700 transition-colors"
+          >
+            <RefreshCw className={`w-3 h-3 ${resetting ? "animate-spin" : ""}`} />
+            <span>{t("app.resetDemo")}</span>
+          </button>
+          <a
+            href="https://sigmamaxaisolutions.com/contact"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-brand-600 hover:bg-brand-hover text-white text-[11px] font-medium transition-colors"
+          >
+            <Calendar className="w-3 h-3" />
+            <span>{t("app.bookCall")}</span>
+          </a>
+        </div>
+      </div>
+
       {/* Sandbox Banner */}
       {isSandboxMode && (
         <div className="w-full bg-slate-800 text-slate-100 py-1.5 px-4 text-xs flex items-center justify-center gap-2 sandbox-stripes border-b border-slate-700">
