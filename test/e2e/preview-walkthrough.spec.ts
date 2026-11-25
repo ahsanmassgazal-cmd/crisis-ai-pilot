@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import fs from "fs";
 import path from "path";
 
-const PREVIEW_URL = process.env.PREVIEW_URL || "https://crisis-ai-pilot-o52nqftt6-ahsanmassgazal-cmd.vercel.app";
+const PREVIEW_URL = process.env.PREVIEW_URL || "https://crisis-ai-pilot-5lup47s78-ahsanmassgazal-cmd.vercel.app";
 const BYPASS_TOKEN = "M0oSKZQZCih9xd68f59IhukSpylnPPxk";
 
 const VIEWPORTS = [
@@ -60,11 +60,13 @@ test.describe("Visitor Walkthrough on Preview", () => {
       await page.screenshot({ path: `audit/walkthrough/06_arabic_${vp.name}.png` });
 
       // Step 7: Sign In page (wrong password rejected)
-      await page.goto(`${PREVIEW_URL}/ar/login`, { waitUntil: "domcontentloaded" });
-      await page.fill('input[type="email"]', "wrong@example.com");
-      await page.fill('input[type="password"]', "WrongPassword123!");
+      await page.goto(`${PREVIEW_URL}/ar/login`);
+      const emailInput = page.locator('input[type="email"]');
+      await emailInput.waitFor({ state: "visible" });
+      await page.waitForTimeout(1500); // wait for React hydration
+      await emailInput.fill("wrong@example.com");
+      await page.locator('input[type="password"]').fill("WrongPassword123!");
       await page.click('button[type="submit"]');
-      await page.waitForTimeout(1000);
       await expect(page.locator(".bg-rose-50, [class*='rose']").first()).toBeVisible();
       await page.screenshot({ path: `audit/walkthrough/07_login_rejected_${vp.name}.png` });
     });
