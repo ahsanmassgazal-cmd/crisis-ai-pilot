@@ -89,9 +89,8 @@ export const TopBar: React.FC = () => {
                       setTenant(tid);
                       setTenantDropdownOpen(false);
                     }}
-                    className={`w-full text-start px-3 py-2 text-xs flex items-center gap-2 hover:bg-brand-50 hover:text-brand-600 transition-colors whitespace-nowrap ${
-                      currentTenant === tid ? "bg-brand-50 text-brand-600 font-bold" : "text-app-text"
-                    }`}
+                    className={`w-full text-start px-3 py-2 text-xs flex items-center gap-2 hover:bg-brand-50 hover:text-brand-600 transition-colors whitespace-nowrap ${currentTenant === tid ? "bg-brand-50 text-brand-600 font-bold" : "text-app-text"
+                      }`}
                   >
                     <Building2 className="w-3.5 h-3.5 shrink-0" />
                     <span className="truncate">{t(`tenants.${tid}`)}</span>
@@ -143,9 +142,8 @@ export const TopBar: React.FC = () => {
                     setAutomationMode(mode);
                     setModeDropdownOpen(false);
                   }}
-                  className={`w-full text-start px-3 py-1.5 text-xs font-medium hover:bg-brand-50 hover:text-brand-600 ${
-                    automationMode === mode ? "text-brand-600 font-bold" : "text-app-text"
-                  }`}
+                  className={`w-full text-start px-3 py-1.5 text-xs font-medium hover:bg-brand-50 hover:text-brand-600 ${automationMode === mode ? "text-brand-600 font-bold" : "text-app-text"
+                    }`}
                 >
                   {t(`topbar.mode${mode.charAt(0).toUpperCase() + mode.slice(1)}`)}
                 </button>

@@ -73,44 +73,40 @@ export default function SettingsPage() {
       <div className="flex items-center gap-1.5 p-1 bg-app-surface-subtle border border-app-border rounded-input text-xs w-fit">
         <button
           onClick={() => setActiveTab("branding")}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded font-medium transition-colors ${
-            activeTab === "branding"
-              ? "bg-app-surface text-brand-600 shadow-sm font-semibold"
-              : "text-app-muted hover:text-app-text"
-          }`}
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded font-medium transition-colors ${activeTab === "branding"
+            ? "bg-app-surface text-brand-600 shadow-sm font-semibold"
+            : "text-app-muted hover:text-app-text"
+            }`}
         >
           <Palette className="w-3.5 h-3.5" />
           <span>{t("settingsCenter.brandingTab")}</span>
         </button>
         <button
           onClick={() => setActiveTab("roles")}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded font-medium transition-colors ${
-            activeTab === "roles"
-              ? "bg-app-surface text-brand-600 shadow-sm font-semibold"
-              : "text-app-muted hover:text-app-text"
-          }`}
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded font-medium transition-colors ${activeTab === "roles"
+            ? "bg-app-surface text-brand-600 shadow-sm font-semibold"
+            : "text-app-muted hover:text-app-text"
+            }`}
         >
           <Shield className="w-3.5 h-3.5" />
           <span>{t("settingsCenter.rolesTab")}</span>
         </button>
         <button
           onClick={() => setActiveTab("notifications")}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded font-medium transition-colors ${
-            activeTab === "notifications"
-              ? "bg-app-surface text-brand-600 shadow-sm font-semibold"
-              : "text-app-muted hover:text-app-text"
-          }`}
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded font-medium transition-colors ${activeTab === "notifications"
+            ? "bg-app-surface text-brand-600 shadow-sm font-semibold"
+            : "text-app-muted hover:text-app-text"
+            }`}
         >
           <BellRing className="w-3.5 h-3.5" />
           <span>{t("settingsCenter.notificationsTab")}</span>
         </button>
         <button
           onClick={() => setActiveTab("sandbox")}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded font-medium transition-colors ${
-            activeTab === "sandbox"
-              ? "bg-app-surface text-brand-600 shadow-sm font-semibold"
-              : "text-app-muted hover:text-app-text"
-          }`}
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded font-medium transition-colors ${activeTab === "sandbox"
+            ? "bg-app-surface text-brand-600 shadow-sm font-semibold"
+            : "text-app-muted hover:text-app-text"
+            }`}
         >
           <Sliders className="w-3.5 h-3.5" />
           <span>{t("settingsCenter.sandboxTab")}</span>

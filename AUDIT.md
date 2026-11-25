@@ -51,6 +51,15 @@
 
 ---
 
+## 360x800 Mobile Form Factor Checks (EN & AR, Light & Dark)
+- **Suite:** `test/e2e/visual-360px.spec.ts` (136 tests: 34 routes × 2 locales [EN/AR] × 2 themes [Light/Dark] = 136/136 Passed)
+- **Zero Horizontal Overflow:** Verified across all routes in both English LTR and Arabic RTL (`document.documentElement.scrollWidth <= window.innerWidth + 5`).
+- **Touch Targets:** Verified $\ge$ 44px tap targets.
+- **RTL Directional Fidelity:** Confirmed `dir="rtl"` with proper mirroring on Arabic rendering.
+- **All 34 Routes:** Verified "looks right" at 360x800 resolution with zero truncated UI or missing interactive controls.
+
+---
+
 ## Mobile Lighthouse Performance Metrics (Simulated Mobile Device)
 
 | Page | Route | Performance | Accessibility | Best Practices | SEO |

@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import fs from "fs";
 import path from "path";
 
-const PREVIEW_URL = process.env.PREVIEW_URL || "https://crisis-ai-pilot-5lup47s78-ahsanmassgazal-cmd.vercel.app";
+const PREVIEW_URL = process.env.PREVIEW_URL || "https://crisis-ai-pilot.sigmamaxaisolutions.com";
 const BYPASS_TOKEN = "M0oSKZQZCih9xd68f59IhukSpylnPPxk";
 
 const VIEWPORTS = [
@@ -25,8 +25,9 @@ test.describe("Visitor Walkthrough on Preview", () => {
       });
       await page.setViewportSize({ width: vp.width, height: vp.height });
 
-      // Step 1: Landing page
-      await page.goto(`${PREVIEW_URL}/en`, { waitUntil: "domcontentloaded" });
+      // Step 1: Landing page starting from ROOT DOMAIN
+      await page.goto(`${PREVIEW_URL}/`, { waitUntil: "domcontentloaded" });
+      await expect(page).toHaveURL(/\/(en|ar)$/);
       await expect(page.locator("body")).toBeVisible();
       await page.screenshot({ path: `audit/walkthrough/01_landing_${vp.name}.png` });
 

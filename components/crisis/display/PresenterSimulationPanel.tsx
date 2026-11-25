@@ -208,11 +208,10 @@ export const PresenterSimulationPanel: React.FC = () => {
                         tone: "brand",
                       });
                     }}
-                    className={`py-2 px-3 rounded-input text-xs font-bold border flex items-center justify-center gap-1.5 transition-all ${
-                      simSpeed === s
-                        ? "bg-indigo-600 text-white border-indigo-600 shadow-sm"
-                        : "bg-app-surface-subtle border-app-border text-app-muted hover:text-app-text"
-                    }`}
+                    className={`py-2 px-3 rounded-input text-xs font-bold border flex items-center justify-center gap-1.5 transition-all ${simSpeed === s
+                      ? "bg-indigo-600 text-white border-indigo-600 shadow-sm"
+                      : "bg-app-surface-subtle border-app-border text-app-muted hover:text-app-text"
+                      }`}
                   >
                     <FastForward className="w-3.5 h-3.5" />
                     <span><Ltr>{s}x</Ltr></span>
@@ -230,11 +229,10 @@ export const PresenterSimulationPanel: React.FC = () => {
                 {/* 1: Break SMS A */}
                 <button
                   onClick={handleToggleSms}
-                  className={`p-2.5 rounded-input border text-start flex items-center justify-between font-medium transition ${
-                    failures.smsABroken
-                      ? "bg-rose-500/10 border-rose-500 text-rose-500 font-bold"
-                      : "bg-app-surface-subtle border-app-border text-app-text hover:bg-app-border/40"
-                  }`}
+                  className={`p-2.5 rounded-input border text-start flex items-center justify-between font-medium transition ${failures.smsABroken
+                    ? "bg-rose-500/10 border-rose-500 text-rose-500 font-bold"
+                    : "bg-app-surface-subtle border-app-border text-app-text hover:bg-app-border/40"
+                    }`}
                 >
                   <div className="flex items-center gap-2 truncate">
                     <Zap className="w-4 h-4 shrink-0 text-rose-500" />
@@ -246,11 +244,10 @@ export const PresenterSimulationPanel: React.FC = () => {
                 {/* 2: Delay Email 2m */}
                 <button
                   onClick={handleToggleEmail}
-                  className={`p-2.5 rounded-input border text-start flex items-center justify-between font-medium transition ${
-                    failures.emailDelayed
-                      ? "bg-amber-500/10 border-amber-500 text-amber-500 font-bold"
-                      : "bg-app-surface-subtle border-app-border text-app-text hover:bg-app-border/40"
-                  }`}
+                  className={`p-2.5 rounded-input border text-start flex items-center justify-between font-medium transition ${failures.emailDelayed
+                    ? "bg-amber-500/10 border-amber-500 text-amber-500 font-bold"
+                    : "bg-app-surface-subtle border-app-border text-app-text hover:bg-app-border/40"
+                    }`}
                 >
                   <div className="flex items-center gap-2 truncate">
                     <Mail className="w-4 h-4 shrink-0 text-amber-500" />
@@ -262,11 +259,10 @@ export const PresenterSimulationPanel: React.FC = () => {
                 {/* 3: Teams Error */}
                 <button
                   onClick={handleToggleTeams}
-                  className={`p-2.5 rounded-input border text-start flex items-center justify-between font-medium transition ${
-                    failures.teamsError
-                      ? "bg-rose-500/10 border-rose-500 text-rose-500 font-bold"
-                      : "bg-app-surface-subtle border-app-border text-app-text hover:bg-app-border/40"
-                  }`}
+                  className={`p-2.5 rounded-input border text-start flex items-center justify-between font-medium transition ${failures.teamsError
+                    ? "bg-rose-500/10 border-rose-500 text-rose-500 font-bold"
+                    : "bg-app-surface-subtle border-app-border text-app-text hover:bg-app-border/40"
+                    }`}
                 >
                   <div className="flex items-center gap-2 truncate">
                     <MessageSquare className="w-4 h-4 shrink-0 text-rose-500" />
@@ -278,11 +274,10 @@ export const PresenterSimulationPanel: React.FC = () => {
                 {/* 4: Responder Unresponsive */}
                 <button
                   onClick={handleToggleResponder}
-                  className={`p-2.5 rounded-input border text-start flex items-center justify-between font-medium transition ${
-                    failures.responderUnresponsive
-                      ? "bg-amber-500/10 border-amber-500 text-amber-500 font-bold"
-                      : "bg-app-surface-subtle border-app-border text-app-text hover:bg-app-border/40"
-                  }`}
+                  className={`p-2.5 rounded-input border text-start flex items-center justify-between font-medium transition ${failures.responderUnresponsive
+                    ? "bg-amber-500/10 border-amber-500 text-amber-500 font-bold"
+                    : "bg-app-surface-subtle border-app-border text-app-text hover:bg-app-border/40"
+                    }`}
                 >
                   <div className="flex items-center gap-2 truncate">
                     <UserX className="w-4 h-4 shrink-0 text-amber-500" />
@@ -294,11 +289,10 @@ export const PresenterSimulationPanel: React.FC = () => {
                 {/* 5: SCADA Spike */}
                 <button
                   onClick={handleToggleScada}
-                  className={`p-2.5 rounded-input border text-start flex items-center justify-between font-medium transition ${
-                    failures.scadaSpike
-                      ? "bg-rose-500/10 border-rose-500 text-rose-500 font-bold"
-                      : "bg-app-surface-subtle border-app-border text-app-text hover:bg-app-border/40"
-                  }`}
+                  className={`p-2.5 rounded-input border text-start flex items-center justify-between font-medium transition ${failures.scadaSpike
+                    ? "bg-rose-500/10 border-rose-500 text-rose-500 font-bold"
+                    : "bg-app-surface-subtle border-app-border text-app-text hover:bg-app-border/40"
+                    }`}
                 >
                   <div className="flex items-center gap-2 truncate">
                     <Radio className="w-4 h-4 shrink-0 text-rose-500" />
@@ -310,11 +304,10 @@ export const PresenterSimulationPanel: React.FC = () => {
                 {/* 6: Bit-flip Tamper */}
                 <button
                   onClick={handleToggleTamper}
-                  className={`p-2.5 rounded-input border text-start flex items-center justify-between font-medium transition ${
-                    failures.auditBitFlipped
-                      ? "bg-rose-500/10 border-rose-500 text-rose-500 font-bold"
-                      : "bg-app-surface-subtle border-app-border text-app-text hover:bg-app-border/40"
-                  }`}
+                  className={`p-2.5 rounded-input border text-start flex items-center justify-between font-medium transition ${failures.auditBitFlipped
+                    ? "bg-rose-500/10 border-rose-500 text-rose-500 font-bold"
+                    : "bg-app-surface-subtle border-app-border text-app-text hover:bg-app-border/40"
+                    }`}
                 >
                   <div className="flex items-center gap-2 truncate">
                     <Fingerprint className="w-4 h-4 shrink-0 text-rose-500" />

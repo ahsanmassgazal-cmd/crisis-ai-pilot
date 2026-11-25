@@ -42,6 +42,7 @@ const ROUTES = [
 const VIEWPORTS = [
   { name: "1366px", width: 1366, height: 768 },
   { name: "390px", width: 390, height: 844 },
+  { name: "360px", width: 360, height: 800 },
 ];
 
 const THEMES = ["light", "dark"] as const;

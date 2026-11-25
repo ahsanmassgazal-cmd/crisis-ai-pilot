@@ -180,22 +180,20 @@ export default function PlansPage() {
                 <div
                   key={plan.id}
                   onClick={() => setActivePlanId(plan.id)}
-                  className={`p-3 rounded-card border cursor-pointer transition text-xs space-y-1.5 ${
-                    isSelected
-                      ? "border-brand-600 bg-brand-50/30 dark:bg-brand-950/20 shadow-xs"
-                      : "border-app-border bg-app-surface hover:border-brand-600/40"
-                  }`}
+                  className={`p-3 rounded-card border cursor-pointer transition text-xs space-y-1.5 ${isSelected
+                    ? "border-brand-600 bg-brand-50/30 dark:bg-brand-950/20 shadow-xs"
+                    : "border-app-border bg-app-surface hover:border-brand-600/40"
+                    }`}
                 >
                   <div className="flex items-center justify-between">
                     <span className="font-mono font-bold text-xs text-brand-600">
                       <Ltr>{plan.code}</Ltr>
                     </span>
                     <span
-                      className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                        plan.status === "approved"
-                          ? "bg-emerald-50 text-emerald-800 dark:bg-emerald-950/20 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700"
-                          : "bg-amber-50 text-amber-800 dark:bg-amber-950/20 dark:text-amber-300 border border-amber-300 dark:border-amber-700"
-                      }`}
+                      className={`px-2 py-0.5 rounded text-[10px] font-bold ${plan.status === "approved"
+                        ? "bg-emerald-50 text-emerald-800 dark:bg-emerald-950/20 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700"
+                        : "bg-amber-50 text-amber-800 dark:bg-amber-950/20 dark:text-amber-300 border border-amber-300 dark:border-amber-700"
+                        }`}
                     >
                       {plan.status === "approved"
                         ? t("plansCenter.approved")
@@ -257,33 +255,30 @@ export default function PlansPage() {
             <button
               type="button"
               onClick={() => setActiveTab("steps")}
-              className={`px-3 py-1 rounded font-medium transition ${
-                activeTab === "steps"
-                  ? "bg-app-surface text-app-text font-bold shadow-xs"
-                  : "text-app-muted hover:text-app-text"
-              }`}
+              className={`px-3 py-1 rounded font-medium transition ${activeTab === "steps"
+                ? "bg-app-surface text-app-text font-bold shadow-xs"
+                : "text-app-muted hover:text-app-text"
+                }`}
             >
               {t("plansCenter.stepChecklistTitle")}
             </button>
             <button
               type="button"
               onClick={() => setActiveTab("triggers")}
-              className={`px-3 py-1 rounded font-medium transition ${
-                activeTab === "triggers"
-                  ? "bg-app-surface text-app-text font-bold shadow-xs"
-                  : "text-app-muted hover:text-app-text"
-              }`}
+              className={`px-3 py-1 rounded font-medium transition ${activeTab === "triggers"
+                ? "bg-app-surface text-app-text font-bold shadow-xs"
+                : "text-app-muted hover:text-app-text"
+                }`}
             >
               {t("plansCenter.automatedTriggersTitle")}
             </button>
             <button
               type="button"
               onClick={() => setActiveTab("diff")}
-              className={`px-3 py-1 rounded font-medium transition ${
-                activeTab === "diff"
-                  ? "bg-app-surface text-app-text font-bold shadow-xs"
-                  : "text-app-muted hover:text-app-text"
-              }`}
+              className={`px-3 py-1 rounded font-medium transition ${activeTab === "diff"
+                ? "bg-app-surface text-app-text font-bold shadow-xs"
+                : "text-app-muted hover:text-app-text"
+                }`}
             >
               {t("plansCenter.versionHistoryTitle")}
             </button>

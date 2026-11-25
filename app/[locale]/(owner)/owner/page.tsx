@@ -185,9 +185,8 @@ export default function OwnerConsoleOverview() {
                 {tenants.map((c) => (
                   <tr
                     key={c.id}
-                    className={`hover:bg-app-surface-subtle transition ${
-                      currentTenant === c.id ? "bg-brand-500/5 font-semibold" : ""
-                    }`}
+                    className={`hover:bg-app-surface-subtle transition ${currentTenant === c.id ? "bg-brand-500/5 font-semibold" : ""
+                      }`}
                   >
                     <td className="py-3 font-semibold text-app-text flex items-center gap-2">
                       <div
@@ -220,11 +219,10 @@ export default function OwnerConsoleOverview() {
                             tone: "brand",
                           });
                         }}
-                        className={`px-2.5 py-1 rounded text-xs font-semibold transition ${
-                          currentTenant === c.id
-                            ? "bg-brand-600 text-white"
-                            : "border border-app-border text-app-muted hover:text-app-text"
-                        }`}
+                        className={`px-2.5 py-1 rounded text-xs font-semibold transition ${currentTenant === c.id
+                          ? "bg-brand-600 text-white"
+                          : "border border-app-border text-app-muted hover:text-app-text"
+                          }`}
                       >
                         {currentTenant === c.id ? "Active Workspace" : "Switch To Tenant"}
                       </button>
@@ -384,19 +382,18 @@ export default function OwnerConsoleOverview() {
                         key={tier}
                         type="button"
                         onClick={() => setTierPackage(tier)}
-                        className={`p-3 rounded border text-start space-y-1 transition ${
-                          tierPackage === tier
-                            ? "border-brand-600 bg-brand-500/10 text-brand-600 font-bold"
-                            : "border-app-border bg-app-surface-subtle text-app-muted"
-                        }`}
+                        className={`p-3 rounded border text-start space-y-1 transition ${tierPackage === tier
+                          ? "border-brand-600 bg-brand-500/10 text-brand-600 font-bold"
+                          : "border-app-border bg-app-surface-subtle text-app-muted"
+                          }`}
                       >
                         <div className="text-xs font-bold text-app-text">{tier}</div>
                         <div className="text-[10px]">
                           {tier === "Enterprise"
                             ? "Unlimited responders, 24/7 SLA"
                             : tier === "Professional"
-                            ? "Up to 250 responders"
-                            : "Up to 50 responders (30-day)"}
+                              ? "Up to 250 responders"
+                              : "Up to 50 responders (30-day)"}
                         </div>
                       </button>
                     ))}
