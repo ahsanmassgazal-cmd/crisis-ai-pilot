@@ -508,7 +508,7 @@ export const SEED_RULES: AutomationRule[] = [
     conditions_json: { verified_channels_count: 0 },
     actions_json: { request_verification_sms: true },
     approval_mode: "none",
-    enabled: true,
+    enabled: false,
     success_rate: 92.5,
     last_run_at: "2026-11-22T04:00:00Z",
   },
