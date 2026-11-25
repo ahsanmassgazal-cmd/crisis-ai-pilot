@@ -7,62 +7,64 @@
   --font-sans: var(--font-inter), "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: var(--font-mono), "JetBrains Mono", monospace;
 
-  /* Brand & Neutrals (Light) */
-  --brand-600: #6D28D9;
-  --brand-hover: #5B21B6;
-  --brand-50: #F5F3FF;
-  --ai-gradient: linear-gradient(135deg, #7C3AED 0%, #C026D3 100%);
-  --bg: #F8FAFC;
+  /* Brand & Neutrals (Degree AI Style: Command Navy #1B2A41 -> Signal Orange #E8662C) */
+  --brand-600: #1B2A41;
+  --brand-hover: #121C2B;
+  --brand-50: #F0F4F8;
+  --signal-orange: #E8662C;
+  --signal-orange-hover: #D4541B;
+  --ai-gradient: linear-gradient(135deg, #1B2A41 0%, #E8662C 100%);
+  --bg: #F7F8FA;
   --surface: #FFFFFF;
-  --surface-subtle: #F1F5F9;
-  --border: #E2E8F0;
-  --text: #0F172A;
-  --text-muted: #64748B;
+  --surface-subtle: #ECEFF3;
+  --border: #DCE1E8;
+  --text: #1B2A41;
+  --text-muted: #5C6B7E;
 
-  /* Severity (Strong & Tint) */
-  --sev-critical: #991B1B;
+  /* Severity (Pure Red #DC2626 strictly reserved for Critical/P1 alerts) */
+  --sev-critical: #DC2626;
   --sev-critical-tint: #FEE2E2;
-  --sev-high: #EA580C;
+  --sev-high: #E8662C;
   --sev-high-tint: #FFEDD5;
   --sev-medium: #D97706;
   --sev-medium-tint: #FEF3C7;
   --sev-low: #2563EB;
   --sev-low-tint: #DBEAFE;
-  --sev-info: #64748B;
-  --sev-info-tint: #F1F5F9;
+  --sev-info: #5C6B7E;
+  --sev-info-tint: #ECEFF3;
 
   /* Status */
   --status-draft: #94A3B8;
   --status-active: #0284C7;
-  --status-inprogress: #4F46E5;
+  --status-inprogress: #1B2A41;
   --status-monitoring: #0D9488;
-  --status-blocked: #BE123C;
+  --status-blocked: #DC2626;
   --status-resolved: #16A34A;
   --status-closed: #475569;
 
   /* Priority */
   --priority-p1: #DC2626;
-  --priority-p2: #EA580C;
+  --priority-p2: #E8662C;
   --priority-p3: #D97706;
-  --priority-p4: #64748B;
+  --priority-p4: #5C6B7E;
 
   /* Channels */
   --channel-sms: #0891B2;
-  --channel-email: #4F46E5;
-  --channel-teams: #5B5FC7;
+  --channel-email: #1B2A41;
+  --channel-teams: #475569;
   --channel-whatsapp: #16A34A;
-  --channel-voice: #DB2777;
-  --channel-push: #7C3AED;
+  --channel-voice: #E8662C;
+  --channel-push: #2563EB;
 
   /* Categories */
-  --category-cyber: #4338CA;
-  --category-fire: #B91C1C;
-  --category-power: #B45309;
-  --category-weather: #0369A1;
-  --category-health: #BE185D;
-  --category-supply: #C2410C;
+  --category-cyber: #1B2A41;
+  --category-fire: #DC2626;
+  --category-power: #D97706;
+  --category-weather: #0284C7;
+  --category-health: #E8662C;
+  --category-supply: #78350F;
   --category-security: #334155;
-  --category-reputation: #A21CAF;
+  --category-reputation: #475569;
   --category-it: #0E7490;
   --category-environmental: #047857;
 
@@ -81,22 +83,24 @@
 }
 
 .dark {
-  /* Brand & Neutrals (Dark) */
-  --brand-600: #8B5CF6;
-  --brand-hover: #A78BFA;
-  --brand-50: #1E1533;
-  --ai-gradient: linear-gradient(135deg, #8B5CF6 0%, #D946EF 100%);
-  --bg: #0B0F19;
-  --surface: #111827;
-  --surface-subtle: #1F2937;
-  --border: #1F2937;
-  --text: #F1F5F9;
+  /* Brand & Neutrals (Dark: background #0B111C, surface #151F30, primary #F08A55, accent #7FA0CC) */
+  --brand-600: #F08A55;
+  --brand-hover: #F29A6B;
+  --brand-50: #261E22;
+  --signal-orange: #F08A55;
+  --signal-orange-hover: #F29A6B;
+  --ai-gradient: linear-gradient(135deg, #7FA0CC 0%, #F08A55 100%);
+  --bg: #0B111C;
+  --surface: #151F30;
+  --surface-subtle: #1C2940;
+  --border: #22334F;
+  --text: #F7F8FA;
   --text-muted: #94A3B8;
 
   /* Severity (Dark tints) */
   --sev-critical: #EF4444;
   --sev-critical-tint: #450A0A;
-  --sev-high: #F97316;
+  --sev-high: #F08A55;
   --sev-high-tint: #431407;
   --sev-medium: #F59E0B;
   --sev-medium-tint: #451A03;
@@ -110,10 +114,10 @@
 
 .command {
   /* Command Dark Mode (High-contrast control room) */
-  --brand-600: #A78BFA;
-  --brand-hover: #C4B5FD;
-  --brand-50: #251B42;
-  --ai-gradient: linear-gradient(135deg, #A78BFA 0%, #F472B6 100%);
+  --brand-600: #F08A55;
+  --brand-hover: #F29A6B;
+  --brand-50: #261E22;
+  --ai-gradient: linear-gradient(135deg, #7FA0CC 0%, #F08A55 100%);
   --bg: #030712;
   --surface: #0F172A;
   --surface-subtle: #1E293B;
@@ -121,13 +125,13 @@
   --text: #FFFFFF;
   --text-muted: #CBD5E1;
 
-  --sev-critical: #FF3B30;
+  --sev-critical: #EF4444;
   --sev-critical-tint: #581C1C;
-  --sev-high: #FF9500;
+  --sev-high: #F08A55;
   --sev-high-tint: #54280C;
-  --sev-medium: #FFCC00;
+  --sev-medium: #F59E0B;
   --sev-medium-tint: #523906;
-  --sev-low: #007AFF;
+  --sev-low: #38BDF8;
   --sev-low-tint: #0F3268;
   --sev-info: #A0AEC0;
   --sev-info-tint: #2D3748;
