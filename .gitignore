@@ -40,4 +40,9 @@ next-env.d.ts
 .env*
 ACCESS_CREDENTIALS.txt
 SigmaMax_ALL_Access_Credentials.txt
+_backups/
+audit/visual/*.png
+test-results/
+playwright-report/
+
 

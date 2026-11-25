@@ -521,7 +521,7 @@ export const SEED_RULES: AutomationRule[] = [
     conditions_json: {},
     actions_json: { load_plan_steps: true, assign_roles: true },
     approval_mode: "none",
-    enabled: true,
+    enabled: false,
     success_rate: 100,
     last_run_at: "2026-11-24T06:15:05Z",
   },

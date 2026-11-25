@@ -50,7 +50,7 @@ export default function SettingsPage() {
       setIsResetting(false);
       showToast({
         title: t("settingsCenter.sandboxResetData"),
-        description: "Sandbox seed state successfully restored to baseline.",
+        description: "Simulation state successfully restored to initial baseline.",
         tone: "brand",
       });
     }, 700);

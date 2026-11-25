@@ -137,7 +137,7 @@ export const AppSidebar: React.FC = () => {
 
         <button
           onClick={toggleSidebar}
-          className="text-app-muted hover:text-app-text p-1 rounded-input hover:bg-app-surface-subtle transition-colors"
+          className="text-app-muted hover:text-app-text p-2 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-input hover:bg-app-surface-subtle transition-colors"
           aria-label={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
         >
           {sidebarCollapsed ? (
@@ -169,7 +169,7 @@ export const AppSidebar: React.FC = () => {
                   <li key={iIdx}>
                     <Link
                       href={item.href}
-                      className={`flex items-center gap-3 px-3 py-2 min-h-[40px] sm:min-h-[36px] rounded-input transition-colors font-medium ${
+                      className={`flex items-center gap-3 px-3 py-2.5 min-h-[44px] rounded-input transition-colors font-medium ${
                         isActive
                           ? "bg-brand-50 text-brand-600 dark:bg-brand-50/20 font-bold"
                           : "text-app-text hover:bg-app-surface-subtle"
@@ -190,7 +190,7 @@ export const AppSidebar: React.FC = () => {
         <div className="pt-2 border-t border-app-border/60">
           <Link
             href="/app/wall"
-            className={`flex items-center gap-3 px-3 py-2 rounded-input text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-950/30 transition-colors font-medium ${
+            className={`flex items-center gap-3 px-3 py-2.5 min-h-[44px] rounded-input text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-950/30 transition-colors font-medium ${
               sidebarCollapsed ? "justify-center px-0" : ""
             }`}
             title={t("nav.wallMode")}

@@ -1,16 +1,30 @@
 "use client";
 
 import React, { useEffect } from "react";
+import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { PersistentBanners } from "./PersistentBanners";
 import { AppSidebar } from "./AppSidebar";
 import { TopBar } from "./TopBar";
-import { CommandPalette } from "./CommandPalette";
-import { RolePickerModal } from "./RolePickerModal";
-import { AiCopilotDrawer } from "@/components/crisis/ai/AiCopilotDrawer";
-import { PresenterSimulationPanel } from "@/components/crisis/display/PresenterSimulationPanel";
 import { useAppStore } from "@/lib/store/useAppStore";
 import { useRepo } from "@/lib/repo";
+
+const CommandPalette = dynamic(
+  () => import("./CommandPalette").then((mod) => mod.CommandPalette),
+  { ssr: false }
+);
+const RolePickerModal = dynamic(
+  () => import("./RolePickerModal").then((mod) => mod.RolePickerModal),
+  { ssr: false }
+);
+const AiCopilotDrawer = dynamic(
+  () => import("@/components/crisis/ai/AiCopilotDrawer").then((mod) => mod.AiCopilotDrawer),
+  { ssr: false }
+);
+const PresenterSimulationPanel = dynamic(
+  () => import("@/components/crisis/display/PresenterSimulationPanel").then((mod) => mod.PresenterSimulationPanel),
+  { ssr: false }
+);
 
 interface ShellProps {
   children: React.ReactNode;
@@ -40,7 +54,7 @@ export const Shell: React.FC<ShellProps> = ({ children }) => {
   }, [repo]);
 
   return (
-    <div className="min-h-screen bg-app-bg text-app-text flex flex-col font-sans transition-colors duration-200">
+    <div className="min-h-screen bg-app-bg text-app-text flex flex-col font-sans transition-colors duration-200 overflow-x-hidden">
       {/* Top Banners (Sandbox, Kill-Switch, SEV1) */}
       <PersistentBanners />
 

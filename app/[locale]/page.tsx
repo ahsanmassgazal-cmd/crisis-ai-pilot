@@ -51,7 +51,7 @@ export default function LandingPage() {
         <div className="flex items-center gap-3">
           <button
             onClick={toggleLanguage}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-app-border bg-app-surface text-app-text text-xs font-medium hover:bg-app-surface-subtle transition-colors"
+            className="flex items-center gap-1.5 px-3 py-2 min-h-[44px] min-w-[44px] justify-center rounded-lg border border-app-border bg-app-surface text-app-text text-xs font-medium hover:bg-app-surface-subtle transition-colors"
           >
             <Globe className="w-3.5 h-3.5 text-app-muted" />
             <span>{locale === "en" ? "العربية" : "English"}</span>
@@ -59,7 +59,7 @@ export default function LandingPage() {
 
           <Link
             href="/login"
-            className="px-3.5 py-1.5 rounded-lg bg-app-surface-subtle border border-app-border text-app-text text-xs font-medium hover:bg-app-border transition-colors"
+            className="px-3.5 py-2 min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-lg bg-app-surface-subtle border border-app-border text-app-text text-xs font-medium hover:bg-app-border transition-colors"
           >
             {t("landing.signInButton")}
           </Link>

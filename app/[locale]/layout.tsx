@@ -69,10 +69,10 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={dir}
-      className={`${fontVariables} ${activeFontClass}`}
+      className={`${fontVariables} ${activeFontClass} overflow-x-hidden max-w-full`}
       suppressHydrationWarning
     >
-      <body className="antialiased min-h-screen">
+      <body className="antialiased min-h-screen overflow-x-hidden max-w-full">
         <DirectionProvider dir={dir}>
           <NextIntlClientProvider locale={locale} messages={messages}>
             {children}

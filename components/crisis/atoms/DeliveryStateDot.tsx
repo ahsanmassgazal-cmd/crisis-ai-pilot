@@ -42,7 +42,7 @@ export const DeliveryStateDot: React.FC<DeliveryStateDotProps> = ({
     retrying: { label: "Retrying", icon: RotateCw, colorClass: "text-amber-500 animate-spin", bgClass: "bg-amber-50 dark:bg-amber-950/30" },
     failed_over: { label: "Failed Over (SMS B)", icon: Shuffle, colorClass: "text-purple-600", bgClass: "bg-purple-50 dark:bg-purple-950/30" },
     failed: { label: "Delivery Failed", icon: X, colorClass: "text-severity-critical", bgClass: "bg-severity-critical-tint" },
-    simulated: { label: "Simulated (Sandbox)", icon: FlaskConical, colorClass: "text-slate-500", bgClass: "bg-slate-100 dark:bg-slate-800 sandbox-stripes" },
+    simulated: { label: "Simulated", icon: FlaskConical, colorClass: "text-slate-500", bgClass: "bg-slate-100 dark:bg-slate-800 sandbox-stripes" },
   };
 
   const current = meta[state] || meta.queued;

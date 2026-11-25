@@ -97,10 +97,10 @@ export default function OwnerConsoleOverview() {
   };
 
   return (
-    <div className="min-h-screen bg-app-bg text-app-text flex flex-col font-sans">
+    <div className="min-h-screen bg-app-bg text-app-text flex flex-col font-sans overflow-x-hidden max-w-full">
       <PersistentBanners />
       <TopBar />
-      <main className="flex-1 p-6 max-w-[1600px] w-full mx-auto space-y-6">
+      <main className="flex-1 p-4 sm:p-6 max-w-[1600px] w-full mx-auto space-y-6 min-w-0 overflow-x-hidden">
         {/* Header */}
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="space-y-1">
@@ -169,7 +169,7 @@ export default function OwnerConsoleOverview() {
             </span>
           </div>
 
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto max-w-full">
             <table className="w-full text-xs text-start">
               <thead className="border-b border-app-border text-app-muted">
                 <tr>

@@ -244,7 +244,7 @@ export default function PlansPage() {
 
             <button
               type="button"
-              onClick={() => showToast(`Activated playbook ${activePlan.code} in sandbox incident.`)}
+              onClick={() => showToast(`Activated playbook ${activePlan.code} in simulated incident.`)}
               className="inline-flex items-center gap-1.5 rounded-input bg-brand-600 px-3.5 py-1.5 text-xs font-semibold text-white hover:bg-brand-hover shadow-sm transition"
             >
               <Zap className="w-3.5 h-3.5" />

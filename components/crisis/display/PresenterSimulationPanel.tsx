@@ -124,7 +124,7 @@ export const PresenterSimulationPanel: React.FC = () => {
     await repo.resetToSeed();
     showToast({
       title: t("presenterPanel.resetBaseline"),
-      description: "Sandbox seed state successfully restored to baseline in IndexedDB.",
+      description: "Simulation state successfully restored to initial baseline in client session.",
       tone: "brand",
     });
     window.location.href = "/en/app";

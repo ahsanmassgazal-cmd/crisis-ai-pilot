@@ -10,51 +10,68 @@ import {
   Globe,
   AlertCircle,
   Building2,
-  Radio,
-  User,
-  Eye,
 } from "lucide-react";
 import { useAppStore, RoleId } from "@/lib/store/useAppStore";
 import { showToast } from "@/lib/toast";
 
-interface RolePreset {
+interface RoleCard {
   role: RoleId;
   labelKey: string;
+}
+
+const ROLE_CARDS: RoleCard[] = [
+  { role: "superAdmin", labelKey: "login.roleOwner" },
+  { role: "commander", labelKey: "login.roleManager" },
+  { role: "responder", labelKey: "login.roleResponder" },
+  { role: "executive", labelKey: "login.roleStakeholder" },
+];
+
+interface AccountCredential {
   email: string;
-  pass: string;
+  passwordHash: string; // SHA-256 hex
+  role: RoleId;
+  labelKey: string;
   dest: string;
 }
 
-const ROLE_PRESETS: RolePreset[] = [
+// Passwords stored purely as SHA-256 hashes — plain text lives solely in ACCESS_CREDENTIALS.txt
+const AUTHORIZED_ACCOUNTS: AccountCredential[] = [
   {
+    email: "owner@sigmamaxaisolutions.com",
+    passwordHash: "84403415052ccf5ba8b006fc68e1c6779d12c64d7e86b8bab32de8c32650af92",
     role: "superAdmin",
     labelKey: "login.roleOwner",
-    email: "owner@sigmamaxaisolutions.com",
-    pass: "CrisisPilot2026!Owner",
     dest: "/owner",
   },
   {
+    email: "manager@sigmamaxaisolutions.com",
+    passwordHash: "36e0fb5abb38830d7590bb29b0e41d1c11c93e7300d460332df7608cdadd884c",
     role: "commander",
     labelKey: "login.roleManager",
-    email: "manager@sigmamaxaisolutions.com",
-    pass: "CrisisPilot2026!Mgr",
     dest: "/app",
   },
   {
+    email: "responder@sigmamaxaisolutions.com",
+    passwordHash: "2709b3f805b9164b7ef47f873d33c6da8322a921faf62f659d0fbd810fd513d1",
     role: "responder",
     labelKey: "login.roleResponder",
-    email: "responder@sigmamaxaisolutions.com",
-    pass: "CrisisPilot2026!Resp",
     dest: "/r",
   },
   {
+    email: "stakeholder@sigmamaxaisolutions.com",
+    passwordHash: "79838cf97ccd5438500f2e130c246ae02583e6d3d11e9e41739889f1e32c846d",
     role: "executive",
     labelKey: "login.roleStakeholder",
-    email: "stakeholder@sigmamaxaisolutions.com",
-    pass: "CrisisPilot2026!Stake",
     dest: "/portal",
   },
 ];
+
+async function sha256(str: string): Promise<string> {
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf))
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
+}
 
 export default function WorkspaceLoginPage() {
   const t = useTranslations();
@@ -63,8 +80,8 @@ export default function WorkspaceLoginPage() {
   const pathname = usePathname();
   const { setRole } = useAppStore();
 
-  const [email, setEmail] = useState("manager@sigmamaxaisolutions.com");
-  const [password, setPassword] = useState("CrisisPilot2026!Mgr");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -73,32 +90,34 @@ export default function WorkspaceLoginPage() {
     router.replace(pathname, { locale: nextLocale });
   };
 
-  const handleSelectPreset = (preset: RolePreset) => {
-    setEmail(preset.email);
-    setPassword(preset.pass);
-    setError(false);
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(false);
 
-    const match = ROLE_PRESETS.find(
-      (p) => p.email.toLowerCase() === email.trim().toLowerCase()
-    );
+    try {
+      const enteredHash = await sha256(password);
+      const match = AUTHORIZED_ACCOUNTS.find(
+        (a) =>
+          a.email.toLowerCase() === email.trim().toLowerCase() &&
+          a.passwordHash === enteredHash
+      );
 
-    if (match) {
-      setRole(match.role);
-      showToast({
-        title: t("login.authenticatedAs"),
-        description: t(match.labelKey as any),
-        tone: "emerald",
-      });
-      setTimeout(() => {
-        router.push(match.dest);
-      }, 300);
-    } else {
+      if (match) {
+        setRole(match.role);
+        showToast({
+          title: t("login.authenticatedAs"),
+          description: t(match.labelKey as any),
+          tone: "emerald",
+        });
+        setTimeout(() => {
+          router.push(match.dest);
+        }, 300);
+      } else {
+        setLoading(false);
+        setError(true);
+      }
+    } catch {
       setLoading(false);
       setError(true);
     }
@@ -121,7 +140,7 @@ export default function WorkspaceLoginPage() {
           <button
             type="button"
             onClick={toggleLanguage}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-app-border bg-app-surface text-app-text text-xs font-medium hover:bg-app-surface-subtle transition-colors"
+            className="flex items-center gap-1.5 px-3 py-2 min-h-[44px] min-w-[44px] justify-center rounded-lg border border-app-border bg-app-surface text-app-text text-xs font-medium hover:bg-app-surface-subtle transition-colors"
           >
             <Globe className="w-3.5 h-3.5 text-app-muted" />
             <span>{locale === "en" ? "العربية" : "English"}</span>
@@ -129,7 +148,7 @@ export default function WorkspaceLoginPage() {
 
           <Link
             href="/app"
-            className="text-xs text-brand-600 hover:text-brand-hover font-medium flex items-center gap-1"
+            className="text-xs text-brand-600 hover:text-brand-hover font-medium flex items-center gap-1 px-3 py-2 min-h-[44px] min-w-[44px] justify-center"
           >
             <span>{t("login.backToDemo")}</span>
             <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
@@ -152,25 +171,20 @@ export default function WorkspaceLoginPage() {
             </p>
           </div>
 
-          {/* Quick Role Selection Presets */}
+          {/* Role Informational Scope (No Auto-Fill) */}
           <div className="flex flex-col gap-2 pt-2 border-t border-app-border">
             <span className="text-xs font-semibold text-app-muted">
               {t("login.quickRoleTitle")}
             </span>
             <div className="grid grid-cols-2 gap-2">
-              {ROLE_PRESETS.map((preset) => (
-                <button
+              {ROLE_CARDS.map((preset) => (
+                <div
                   key={preset.role}
-                  type="button"
-                  onClick={() => handleSelectPreset(preset)}
-                  className={`text-start p-2.5 rounded-lg border text-xs transition-all ${
-                    email === preset.email
-                      ? "border-brand-600 bg-brand-50 text-brand-600 font-semibold"
-                      : "border-app-border bg-app-surface-subtle hover:bg-app-border text-app-text"
-                  }`}
+                  className="p-3 min-h-[44px] rounded-lg border border-app-border bg-app-surface-subtle text-app-text text-xs flex items-center justify-between"
                 >
-                  <span className="block truncate">{t(preset.labelKey as any)}</span>
-                </button>
+                  <span className="font-medium truncate">{t(preset.labelKey as any)}</span>
+                  <span className="text-[10px] text-app-muted uppercase font-mono">{preset.role.slice(0, 3)}</span>
+                </div>
               ))}
             </div>
           </div>
@@ -195,7 +209,7 @@ export default function WorkspaceLoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder={t("login.emailPlaceholder")}
-                className="w-full px-3.5 py-2 rounded-lg border border-app-border bg-app-surface text-app-text text-sm focus:outline-none focus:ring-2 focus:ring-brand-600"
+                className="w-full px-3.5 py-2.5 min-h-[44px] rounded-lg border border-app-border bg-app-surface text-app-text text-sm focus:outline-none focus:ring-2 focus:ring-brand-600"
               />
             </div>
 
@@ -209,14 +223,14 @@ export default function WorkspaceLoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder={t("login.passwordPlaceholder")}
-                className="w-full px-3.5 py-2 rounded-lg border border-app-border bg-app-surface text-app-text text-sm focus:outline-none focus:ring-2 focus:ring-brand-600"
+                className="w-full px-3.5 py-2.5 min-h-[44px] rounded-lg border border-app-border bg-app-surface text-app-text text-sm focus:outline-none focus:ring-2 focus:ring-brand-600"
               />
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full mt-2 py-2.5 px-4 rounded-xl bg-brand-600 hover:bg-brand-hover text-white text-sm font-semibold shadow-sm transition-colors flex items-center justify-center gap-2"
+              className="w-full mt-2 py-3 px-4 min-h-[44px] rounded-xl bg-brand-600 hover:bg-brand-hover text-white text-sm font-semibold shadow-sm transition-colors flex items-center justify-center gap-2"
             >
               <span>{t("login.submit")}</span>
               <ArrowRight className="w-4 h-4 rtl:rotate-180" />

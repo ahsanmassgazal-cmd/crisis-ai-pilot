@@ -7,7 +7,7 @@ export default defineConfig({
   testDir: "./test/e2e",
   fullyParallel: true,
   retries: 0,
-  timeout: 30000,
+  timeout: 60000,
   reporter: "list",
   use: {
     baseURL,
@@ -17,6 +17,14 @@ export default defineConfig({
     {
       name: "chromium",
       use: { ...devices["Desktop Chrome"] },
+    },
+    {
+      name: "firefox",
+      use: { ...devices["Desktop Firefox"] },
+    },
+    {
+      name: "webkit",
+      use: { ...devices["Desktop Safari"] },
     },
   ],
   webServer: {

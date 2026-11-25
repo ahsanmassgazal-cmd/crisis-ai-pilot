@@ -7,7 +7,7 @@ interface SandboxStripeProps {
 }
 
 export const SandboxStripe: React.FC<SandboxStripeProps> = ({
-  label = "Simulated / Sandbox",
+  label = "Simulated Mode",
   className = "",
 }) => {
   return (
