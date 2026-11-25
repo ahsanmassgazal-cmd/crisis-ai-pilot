@@ -169,7 +169,7 @@ export const AppSidebar: React.FC = () => {
                   <li key={iIdx}>
                     <Link
                       href={item.href}
-                      className={`flex items-center gap-3 px-3 py-2 rounded-input transition-colors font-medium ${
+                      className={`flex items-center gap-3 px-3 py-2 min-h-[40px] sm:min-h-[36px] rounded-input transition-colors font-medium ${
                         isActive
                           ? "bg-brand-50 text-brand-600 dark:bg-brand-50/20 font-bold"
                           : "text-app-text hover:bg-app-surface-subtle"
