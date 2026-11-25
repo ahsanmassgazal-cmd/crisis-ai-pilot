@@ -269,11 +269,10 @@ export default function IncidentRoomPage() {
                     key={lvl}
                     type="button"
                     onClick={() => setSeverity(lvl)}
-                    className={`rounded-lg border p-2 text-start capitalize font-semibold transition flex items-center justify-between ${
-                      severity === lvl
-                        ? "border-brand-500 bg-brand-500/10 text-brand-400"
-                        : "border-border-subtle bg-surface-base text-text-muted hover:text-text-main"
-                    }`}
+                    className={`rounded-lg border p-2 text-start capitalize font-semibold transition flex items-center justify-between ${severity === lvl
+                      ? "border-brand-500 bg-brand-500/10 text-brand-400"
+                      : "border-border-subtle bg-surface-base text-text-muted hover:text-text-main"
+                      }`}
                   >
                     <span>{lvl}</span>
                     {severity === lvl && <Check className="h-3.5 w-3.5 text-brand-500" />}
@@ -404,19 +403,17 @@ export default function IncidentRoomPage() {
                 key={tab.key}
                 type="button"
                 onClick={() => setActiveTab(tab.key)}
-                className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 font-medium whitespace-nowrap transition ${
-                  isActive
-                    ? "bg-brand-500 text-white shadow-xs font-semibold"
-                    : "text-text-muted hover:text-text-main hover:bg-surface-base"
-                }`}
+                className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 font-medium whitespace-nowrap transition ${isActive
+                  ? "bg-brand-500 text-white shadow-xs font-semibold"
+                  : "text-text-muted hover:text-text-main hover:bg-surface-base"
+                  }`}
               >
                 <Icon className="h-3.5 w-3.5" />
                 <span>{tab.label}</span>
                 {tab.badge !== undefined && (
                   <span
-                    className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
-                      isActive ? "bg-white/20 text-white" : "bg-surface-base text-text-muted"
-                    }`}
+                    className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${isActive ? "bg-white/20 text-white" : "bg-surface-base text-text-muted"
+                      }`}
                   >
                     <Ltr>{tab.badge}</Ltr>
                   </span>
@@ -600,9 +597,8 @@ export default function IncidentRoomPage() {
                 <button
                   type="button"
                   onClick={() => setTasksView("kanban")}
-                  className={`inline-flex items-center gap-1 px-2.5 py-1 rounded font-medium transition ${
-                    tasksView === "kanban" ? "bg-surface-elevated text-text-main shadow-xs" : "text-text-muted"
-                  }`}
+                  className={`inline-flex items-center gap-1 px-2.5 py-1 rounded font-medium transition ${tasksView === "kanban" ? "bg-surface-elevated text-text-main shadow-xs" : "text-text-muted"
+                    }`}
                 >
                   <LayoutGrid className="h-3.5 w-3.5" />
                   Kanban
@@ -610,9 +606,8 @@ export default function IncidentRoomPage() {
                 <button
                   type="button"
                   onClick={() => setTasksView("table")}
-                  className={`inline-flex items-center gap-1 px-2.5 py-1 rounded font-medium transition ${
-                    tasksView === "table" ? "bg-surface-elevated text-text-main shadow-xs" : "text-text-muted"
-                  }`}
+                  className={`inline-flex items-center gap-1 px-2.5 py-1 rounded font-medium transition ${tasksView === "table" ? "bg-surface-elevated text-text-main shadow-xs" : "text-text-muted"
+                    }`}
                 >
                   <List className="h-3.5 w-3.5" />
                   Table
@@ -620,9 +615,8 @@ export default function IncidentRoomPage() {
                 <button
                   type="button"
                   onClick={() => setTasksView("gantt")}
-                  className={`inline-flex items-center gap-1 px-2.5 py-1 rounded font-medium transition ${
-                    tasksView === "gantt" ? "bg-surface-elevated text-text-main shadow-xs" : "text-text-muted"
-                  }`}
+                  className={`inline-flex items-center gap-1 px-2.5 py-1 rounded font-medium transition ${tasksView === "gantt" ? "bg-surface-elevated text-text-main shadow-xs" : "text-text-muted"
+                    }`}
                 >
                   <CalendarDays className="h-3.5 w-3.5" />
                   Gantt
