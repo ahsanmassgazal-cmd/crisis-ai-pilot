@@ -1328,7 +1328,7 @@ export const EXPANDED_DRILLS: DrillItem[] = [
     "title_en": "Salalah Coastal Pumping Pipeline Rupture Response",
     "title_ar": "محاكاة انفجار خط أنابيب الضخ الساحلي بصلالة",
     "date": "2026-06-25",
-    "type": "functional",
+    "type": "full_scale",
     "participants_count": 40,
     "score_percent": 88,
     "status": "completed"
@@ -1372,7 +1372,7 @@ export const EXPANDED_DRILLS: DrillItem[] = [
     "title_en": "Barka Reverse Osmosis Membrane Failure Switchover",
     "title_ar": "اختبار التبديل الطارئ لأغشية محطة تحلية بركاء",
     "date": "2026-02-17",
-    "type": "functional",
+    "type": "full_scale",
     "participants_count": 34,
     "score_percent": 92,
     "status": "completed"
